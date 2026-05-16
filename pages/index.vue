@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import HeroSection from '~/features/hero/HeroSection.vue'
+import { useHeroContent } from '~/features/hero/useHeroContent'
+
 const hero = useHeroContent()
 
 useSeoMeta({

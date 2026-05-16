@@ -1,0 +1,41 @@
+{
+  "locale": {
+    "switchLabel": "Select language"
+  },
+  "hero": {
+    "brandLabel": "AI Product Engineer",
+    "nav": {
+      "work": "Work",
+      "systems": "Systems",
+      "contact": "Contact"
+    },
+    "availabilityLabel": "Available for builds",
+    "eyebrow": "AI-enabled full-stack engineer",
+    "systemLabel": "Vue/Nuxt + AI systems",
+    "headline": "I build modern AI-powered web products with Vue, Node.js and LLM integrations.",
+    "subheadline": "From product discovery to production infrastructure, I design and ship SaaS experiences that pair sharp Vue/Nuxt interfaces with reliable AI workflows, typed APIs, and scalable backend systems.",
+    "primaryCta": "Explore selected systems",
+    "secondaryCta": "Discuss a product build",
+    "metrics": [
+      {
+        "value": "10+",
+        "label": "years shipping product interfaces"
+      },
+      {
+        "value": "AI",
+        "label": "features designed around trust and latency"
+      },
+      {
+        "value": "SSR",
+        "label": "Nuxt, Nitro and production delivery"
+      }
+    ],
+    "visual": {
+      "ariaLabel": "Portrait-style AI product engineering interface mockup",
+      "roleTag": "Product engineer",
+      "buildTag": "AI SaaS builds",
+      "kicker": "Product-minded engineer",
+      "description": "Vue/Nuxt interfaces, AI-ready data layers, and SaaS systems shipped end to end."
+    }
+  }
+}

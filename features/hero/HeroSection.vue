@@ -4,7 +4,8 @@ import {
   Rocket,
   Sparkles
 } from 'lucide-vue-next'
-import type { HeroContent } from '~/types/hero'
+import LocaleSwitcher from '~/features/locale/LocaleSwitcher.vue'
+import type { HeroContent } from './types'
 
 defineProps<{
   content: HeroContent
@@ -29,24 +30,27 @@ defineProps<{
             <Sparkles class="size-4 text-secondary" />
             <span class="absolute inset-0 rounded-xl bg-secondary/20 blur-xl" />
           </span>
-          <span class="text-sm font-semibold text-white">AI Product Engineer</span>
+          <span class="text-sm font-semibold text-white">{{ content.brandLabel }}</span>
         </NuxtLink>
 
         <nav class="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-1 text-sm text-muted-foreground md:flex">
           <NuxtLink class="rounded-full px-4 py-2 transition hover:bg-white/[0.07] hover:text-white" to="#work">
-            Work
+            {{ content.nav.work }}
           </NuxtLink>
           <NuxtLink class="rounded-full px-4 py-2 transition hover:bg-white/[0.07] hover:text-white" to="#systems">
-            Systems
+            {{ content.nav.systems }}
           </NuxtLink>
           <NuxtLink class="rounded-full px-4 py-2 transition hover:bg-white/[0.07] hover:text-white" to="#contact">
-            Contact
+            {{ content.nav.contact }}
           </NuxtLink>
         </nav>
 
-        <UiButton href="mailto:hello@example.com" variant="secondary" class="hidden sm:inline-flex">
-          Available for builds
-        </UiButton>
+        <div class="flex items-center gap-2">
+          <LocaleSwitcher />
+          <UiButton href="mailto:hello@example.com" variant="secondary" class="hidden sm:inline-flex">
+            {{ content.availabilityLabel }}
+          </UiButton>
+        </div>
       </header>
 
       <div class="grid items-center gap-12 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-7 tall:lg:py-16">
@@ -63,7 +67,7 @@ defineProps<{
             </span>
             {{ content.eyebrow }}
             <span class="h-3 w-px bg-white/15" />
-            <span class="text-muted-foreground">Vue/Nuxt + AI systems</span>
+            <span class="text-muted-foreground">{{ content.systemLabel }}</span>
           </div>
 
           <h1
@@ -116,7 +120,7 @@ defineProps<{
           <div class="relative rounded-[30px] border border-white/10 bg-white/[0.045] p-3 shadow-glow">
             <div
               role="img"
-              aria-label="Placeholder portrait of an AI product engineer"
+              :aria-label="content.visual.ariaLabel"
               class="relative aspect-[4/5] overflow-hidden rounded-[22px] border border-white/10 bg-slate-950"
             >
               <div class="absolute inset-0 bg-[radial-gradient(circle_at_58%_20%,rgba(96,165,250,0.36),transparent_28%),radial-gradient(circle_at_78%_18%,rgba(251,146,60,0.22),transparent_24%),linear-gradient(145deg,#020617,#0b1220_54%,#111827)]" />
@@ -137,10 +141,10 @@ defineProps<{
               <div class="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
               <div class="absolute inset-x-4 top-4 flex items-center justify-between">
                 <div class="rounded-full border border-white/10 bg-black/45 px-3 py-1.5 text-xs font-semibold text-white">
-                  Product engineer
+                  {{ content.visual.roleTag }}
                 </div>
                 <div class="rounded-full border border-secondary/25 bg-secondary/15 px-3 py-1.5 text-xs font-semibold text-secondary">
-                  AI SaaS builds
+                  {{ content.visual.buildTag }}
                 </div>
               </div>
 
@@ -148,10 +152,10 @@ defineProps<{
                 <div class="flex items-start justify-between gap-4">
                   <div>
                     <p class="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">
-                      Product-minded engineer
+                      {{ content.visual.kicker }}
                     </p>
                     <p class="mt-2 text-base font-semibold leading-6 text-white">
-                      Vue/Nuxt interfaces, AI-ready data layers, and SaaS systems shipped end to end.
+                      {{ content.visual.description }}
                     </p>
                   </div>
                   <Rocket class="mt-1 size-5 shrink-0 text-secondary" />

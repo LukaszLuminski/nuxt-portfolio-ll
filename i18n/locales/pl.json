@@ -1,0 +1,41 @@
+{
+  "locale": {
+    "switchLabel": "Wybierz język"
+  },
+  "hero": {
+    "brandLabel": "AI Product Engineer",
+    "nav": {
+      "work": "Projekty",
+      "systems": "Systemy",
+      "contact": "Kontakt"
+    },
+    "availabilityLabel": "Dostępny do budowy produktów",
+    "eyebrow": "Full-stack engineer wspierany przez AI",
+    "systemLabel": "Vue/Nuxt + systemy AI",
+    "headline": "Buduję nowoczesne produkty webowe z AI, Vue, Node.js i integracjami LLM.",
+    "subheadline": "Od odkrywania produktu po infrastrukturę produkcyjną projektuję i wdrażam doświadczenia SaaS łączące dopracowane interfejsy Vue/Nuxt z niezawodnymi workflow AI, typowanymi API i skalowalnym backendem.",
+    "primaryCta": "Zobacz wybrane systemy",
+    "secondaryCta": "Porozmawiajmy o produkcie",
+    "metrics": [
+      {
+        "value": "10+",
+        "label": "lat budowania interfejsów produktowych"
+      },
+      {
+        "value": "AI",
+        "label": "funkcje projektowane wokół zaufania i opóźnień"
+      },
+      {
+        "value": "SSR",
+        "label": "Nuxt, Nitro i produkcyjne wdrożenia"
+      }
+    ],
+    "visual": {
+      "ariaLabel": "Portretowy mockup interfejsu inżynierii produktu AI",
+      "roleTag": "Product engineer",
+      "buildTag": "Budowa AI SaaS",
+      "kicker": "Engineer myślący produktem",
+      "description": "Interfejsy Vue/Nuxt, warstwy danych gotowe na AI i systemy SaaS dostarczane end to end."
+    }
+  }
+}
