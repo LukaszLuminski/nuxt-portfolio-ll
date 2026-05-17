@@ -28,16 +28,16 @@ const groupedSkills = computed(() =>
   }))
 )
 
+function getLucideIcon(skill: Skill) {
+  return skill.icon.type === 'lucide' ? lucideIcons[skill.icon.name] : null
+}
+
 function setCardGlow(event: MouseEvent) {
   const element = event.currentTarget as HTMLElement
   const { left, top } = element.getBoundingClientRect()
 
   element.style.setProperty('--spotlight-x', `${event.clientX - left}px`)
   element.style.setProperty('--spotlight-y', `${event.clientY - top}px`)
-}
-
-function getLucideIcon(skill: Skill) {
-  return skill.icon.type === 'lucide' ? lucideIcons[skill.icon.name] : null
 }
 </script>
 
@@ -84,44 +84,46 @@ function getLucideIcon(skill: Skill) {
               <article
                 v-for="skill in skills"
                 :key="skill.title"
-                class="group relative min-h-[244px] overflow-hidden rounded border border-white/10 bg-[radial-gradient(circle_at_var(--spotlight-x,50%)_var(--spotlight-y,0%),rgba(56,189,248,0.16),transparent_34%),rgba(255,255,255,0.04)] p-5 shadow-line transition duration-300 hover:bg-white/[0.06] hover:shadow-[0_24px_70px_rgba(3,7,18,0.48)]"
+                class="group relative flex min-h-[244px] overflow-hidden rounded border border-white/10 bg-[radial-gradient(circle_at_var(--spotlight-x,50%)_var(--spotlight-y,0%),rgba(56,189,248,0.16),transparent_34%),rgba(255,255,255,0.04)] shadow-line transition duration-300 hover:bg-white/[0.06] hover:shadow-[0_24px_70px_rgba(3,7,18,0.48)]"
                 @mousemove="setCardGlow"
               >
-                <div class="flex items-start gap-4">
-                  <div class="flex size-14 shrink-0 items-center justify-center rounded border border-white/10 bg-black/24">
-                    <img
-                      v-if="skill.icon.type === 'image'"
-                      :src="skill.icon.src"
-                      :alt="`${skill.title} logo`"
-                      class="size-9 object-contain"
-                      loading="lazy"
+                <div class="flex w-full flex-col bg-[#090c12]/85 p-5">
+                  <div class="flex items-start gap-4">
+                    <div class="flex size-14 shrink-0 items-center justify-center rounded border border-white/10 bg-black/24">
+                      <img
+                        v-if="skill.icon.type === 'image'"
+                        :src="skill.icon.src"
+                        :alt="`${skill.title} logo`"
+                        class="size-9 object-contain"
+                        loading="lazy"
+                      >
+                      <component
+                        :is="getLucideIcon(skill)"
+                        v-else
+                        class="size-7 text-sky-100/82"
+                        :stroke-width="1.6"
+                      />
+                    </div>
+
+                    <div class="min-w-0">
+                      <h4 class="text-xl font-semibold leading-snug text-white">
+                        {{ skill.title }}
+                      </h4>
+                      <p class="mt-2 text-sm leading-6 text-white/66">
+                        {{ skill.description }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="mt-5 flex flex-wrap gap-2">
+                    <span
+                      v-for="highlight in skill.highlights"
+                      :key="highlight"
+                      class="rounded border border-sky-100/12 bg-sky-100/[0.035] px-2.5 py-1 text-xs font-medium text-sky-50/68"
                     >
-                    <component
-                      :is="getLucideIcon(skill)"
-                      v-else
-                      class="size-7 text-sky-100/82"
-                      :stroke-width="1.6"
-                    />
+                      {{ highlight }}
+                    </span>
                   </div>
-
-                  <div class="min-w-0">
-                    <h4 class="text-xl font-semibold leading-snug text-white">
-                      {{ skill.title }}
-                    </h4>
-                    <p class="mt-2 text-sm leading-6 text-white/66">
-                      {{ skill.description }}
-                    </p>
-                  </div>
-                </div>
-
-                <div class="mt-5 flex flex-wrap gap-2">
-                  <span
-                    v-for="highlight in skill.highlights"
-                    :key="highlight"
-                    class="rounded border border-sky-100/12 bg-sky-100/[0.035] px-2.5 py-1 text-xs font-medium text-sky-50/68"
-                  >
-                    {{ highlight }}
-                  </span>
                 </div>
               </article>
             </div>
