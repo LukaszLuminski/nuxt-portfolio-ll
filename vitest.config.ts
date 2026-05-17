@@ -1,8 +1,14 @@
-import { defineVitestConfig } from '@nuxt/test-utils/config'
+import { fileURLToPath } from 'node:url'
+import { defineConfig } from 'vitest/config'
 
-export default defineVitestConfig({
+export default defineConfig({
+  resolve: {
+    alias: {
+      '~': fileURLToPath(new URL('.', import.meta.url))
+    }
+  },
   test: {
-    environment: 'nuxt',
+    environment: 'happy-dom',
     globals: true,
     include: [
       'components/**/*.test.ts',

@@ -1,11 +1,25 @@
 title: Euphoria Sports Therapy
+slug: euphoria-sports-therapy
 order: 20
 group: client
 summary: Early client website designed and built from scratch, then migrated to WordPress.
+image: /images/projects/euphoria-sports-therapy.png
+imageAlt: Euphoria Sports Therapy website homepage
 stack:
   - WordPress
   - HTML
   - CSS
+highlights:
+  - First client website
+  - Custom design and build
+  - Later WordPress migration
+details:
+  - This was an early client website for a local sports therapy clinic, designed and built from scratch in 2019.
+  - The project helped establish practical SEO habits and client-facing delivery experience.
+  - It was later migrated to WordPress so the client had a more flexible foundation for future updates.
+frontEnd: HTML5, jQuery, CSS3, Bootstrap
+backEnd: PHP
+database: MySQL
 links:
   - label: Live
     href: https://www.euphoriasportstherapy.com/

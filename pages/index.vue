@@ -2,15 +2,57 @@
 import HeroSection from '~/features/hero/HeroSection.vue'
 import { useHeroContent } from '~/features/hero/useHeroContent'
 import ProjectsSection from '~/features/projects/ProjectsSection.vue'
+import type { Project } from '~/features/projects/types'
 import { useProjectsContent } from '~/features/projects/useProjectsContent'
 
 const hero = useHeroContent()
 const projectsContent = useProjectsContent()
 const { data: projects } = await useAsyncData('projects', () =>
-  queryCollection('projects').order('order', 'ASC').all()
+  $fetch<Project[]>('/api/projects')
 )
+const isRestoringProjectScroll = ref(false)
+const resolvedProjects = computed(() => projects.value ?? [])
 const siteUrl = useRuntimeConfig().public.siteUrl
 const sameAs = hero.social.map(({ href }) => href)
+
+function restoreProjectScroll(slug: string) {
+  const target = document.getElementById(`project-${slug}`)
+
+  if (!target) {
+    isRestoringProjectScroll.value = false
+    return
+  }
+
+  window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - 104)
+  isRestoringProjectScroll.value = false
+}
+
+onBeforeMount(() => {
+  isRestoringProjectScroll.value = Boolean(sessionStorage.getItem('portfolio-return-project'))
+})
+
+onMounted(() => {
+  let stop: (() => void) | undefined
+
+  stop = watch(
+    resolvedProjects,
+    async ({ length }) => {
+      const slug = sessionStorage.getItem('portfolio-return-project')
+
+      if (!slug || !length) {
+        return
+      }
+
+      stop?.()
+      sessionStorage.removeItem('portfolio-return-project')
+      sessionStorage.removeItem('portfolio-scroll-y')
+
+      await nextTick()
+      requestAnimationFrame(() => restoreProjectScroll(slug))
+    },
+    { immediate: true }
+  )
+})
 
 const personJsonLd = {
   '@context': 'https://schema.org',
@@ -49,8 +91,8 @@ useHead({
 </script>
 
 <template>
-  <main>
+  <main :class="isRestoringProjectScroll ? 'opacity-0' : ''">
     <HeroSection :content="hero" />
-    <ProjectsSection :content="projectsContent" :projects="projects ?? []" />
+    <ProjectsSection :content="projectsContent" :projects="resolvedProjects" />
   </main>
 </template>

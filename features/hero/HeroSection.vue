@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import {
   Github,
-  Linkedin,
-  Menu
+  Linkedin
 } from 'lucide-vue-next'
 import TypedHeroLine from './TypedHeroLine.vue'
 import type { HeroContent } from './types'
@@ -11,18 +10,15 @@ const { content } = defineProps<{
   content: HeroContent
 }>()
 
-const isMobileNavOpen = ref(false)
-const [brandMain, brandAccent = ''] = content.brandLabel.split(/(?=Luminski$)/)
-
 const ctaLinks = [
-  { label: content.primaryCta, href: '#work' },
-  { label: content.secondaryCta, href: '#about' }
+  { label: content.primaryCta, sectionId: 'work' },
+  { label: content.secondaryCta, sectionId: 'about' }
 ]
 
 const socialIcons = [Github, Linkedin]
 
-function closeMobileNav() {
-  isMobileNavOpen.value = false
+function scrollToSection(sectionId: string) {
+  document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 </script>
 
@@ -36,64 +32,7 @@ function closeMobileNav() {
     <div class="absolute inset-0 bg-black/15" />
     <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,6,8,0)_0%,rgba(4,6,8,0.08)_44%,rgba(4,6,8,0.34)_100%)]" />
 
-    <div class="container relative flex min-h-screen flex-col">
-      <header
-        v-motion
-        :initial="{ opacity: 0, y: -16 }"
-        :enter="{ opacity: 1, y: 0, transition: { duration: 520 } }"
-        class="relative z-20 flex items-center justify-between py-6 sm:py-8"
-      >
-        <NuxtLink to="/" class="group flex items-center gap-3">
-          <span class="text-xl font-normal tracking-normal text-white sm:text-2xl">
-            {{ brandMain }}<span class="text-white/60">{{ brandAccent }}</span>
-          </span>
-        </NuxtLink>
-
-        <nav class="hidden items-center gap-8 md:flex">
-          <NuxtLink
-            v-for="item in content.nav"
-            :key="item.href"
-            :to="item.href"
-            class="group relative py-2 text-lg font-normal text-white transition duration-300"
-          >
-            <span class="transition duration-300 group-hover:text-white/75">
-              {{ item.label }}
-            </span>
-            <span class="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
-          </NuxtLink>
-        </nav>
-
-        <button
-          type="button"
-          class="inline-flex size-11 items-center justify-center rounded-full text-white md:hidden"
-          aria-label="Navigation menu"
-          :aria-expanded="isMobileNavOpen"
-          aria-controls="mobile-navigation"
-          @click="isMobileNavOpen = !isMobileNavOpen"
-        >
-          <Menu class="size-7" />
-        </button>
-      </header>
-
-      <nav
-        id="mobile-navigation"
-        v-motion
-        :initial="{ opacity: 0, y: -10 }"
-        :enter="{ opacity: 1, y: 0, transition: { duration: 220 } }"
-        class="absolute inset-x-4 top-[86px] z-20 rounded border border-white/15 bg-black/70 p-2 backdrop-blur md:hidden"
-        :class="isMobileNavOpen ? 'block' : 'hidden'"
-      >
-        <NuxtLink
-          v-for="item in content.nav"
-          :key="item.href"
-          :to="item.href"
-          class="block rounded px-4 py-3 text-base font-medium text-white transition hover:bg-white/10"
-          @click="closeMobileNav"
-        >
-          {{ item.label }}
-        </NuxtLink>
-      </nav>
-
+    <div class="container relative flex min-h-screen flex-col pt-20">
       <div class="flex flex-1 items-center justify-center pb-10 pt-6 text-center sm:pb-16 sm:pt-8">
         <div class="mx-auto flex w-full max-w-3xl min-w-0 flex-col items-center">
           <h1
@@ -135,12 +74,12 @@ function closeMobileNav() {
             class="mt-10 flex flex-wrap items-center justify-center gap-12 text-white/70 sm:mt-12"
           >
             <a
-              v-for="(item, index) in content.social"
-              :key="item.href"
-              :href="item.href"
+              v-for="({ href, label }, index) in content.social"
+              :key="href"
+              :href="href"
               target="_blank"
               rel="noreferrer"
-              :aria-label="item.label"
+              :aria-label="label"
               class="transition duration-300 hover:text-white"
             >
               <component :is="socialIcons[index]" class="size-12 sm:size-14" :stroke-width="1.5" />
@@ -153,21 +92,22 @@ function closeMobileNav() {
             :enter="{ opacity: 1, y: 0, transition: { duration: 520, delay: 4300 } }"
             class="mt-10 flex w-full max-w-[382px] flex-col gap-4 sm:mt-12"
           >
-            <NuxtLink
-              v-for="item in ctaLinks"
-              :key="item.href"
-              :to="item.href"
+            <button
+              v-for="{ label, sectionId } in ctaLinks"
+              :key="sectionId"
+              type="button"
               class="inline-flex h-[54px] w-full items-center justify-center rounded px-8 text-sm font-medium uppercase tracking-[0.18em] text-slate-950 transition duration-300 bg-white/70 hover:bg-white/90"
+              @click="scrollToSection(sectionId)"
             >
-              {{ item.label }}
-            </NuxtLink>
+              {{ label }}
+            </button>
           </div>
         </div>
       </div>
 
       <div class="sr-only">
-        <span v-for="metric in content.metrics" :key="metric.label">
-          {{ metric.value }} {{ metric.label }}.
+        <span v-for="{ label, value } in content.metrics" :key="label">
+          {{ value }} {{ label }}.
         </span>
         {{ content.positioning }}
         {{ content.technologies.join(', ') }}

@@ -1,10 +1,24 @@
 title: Portfolio
+slug: portfolio
 order: 50
 group: technical
 summary: The previous portfolio website, built with Nuxt.js and Vuetify.
+image: /images/projects/portfolio.jpg
+imageAlt: Previous portfolio website interface
 stack:
   - Nuxt.js
   - Vuetify
+highlights:
+  - Previous personal portfolio
+  - Nuxt and Vuetify build
+  - Netlify deployment
+details:
+  - The previous personal portfolio was built in 2020 with Nuxt.js and Vuetify.
+  - It was deployed to Netlify and used a serverless contact form.
+  - This new portfolio keeps the original visual spirit while moving the positioning toward AI-enabled full-stack product engineering.
+frontEnd: Nuxt.js, Vuetify, SCSS
+backEnd: Netlify Functions
+database:
 links:
   - label: Code
     href: https://github.com/LukaszLuminski/NuxtPortfolio

@@ -1,12 +1,26 @@
 title: Vue Currency Converter
+slug: vue-currency-converter
 order: 40
 group: technical
 summary: Vue.js currency converter built with Vuetify, Vuex, Vue Router, and REST API endpoints.
+image: /images/projects/vue-currency-converter.jpg
+imageAlt: Vue Currency Converter application interface
 stack:
   - Vue.js
   - Vuetify
   - Vuex
   - REST API
+highlights:
+  - REST API integration
+  - Persistent conversion history
+  - Validation and error handling
+details:
+  - A weekend Vue.js application inspired by simple currency conversion tools and deployed to Netlify.
+  - Vue Router provides page navigation with transitions, while Vuex persists conversion history in localStorage.
+  - The app consumes Float Rates data and includes validation and error handling around the conversion flow.
+frontEnd: Vue.js, Vuex, Vue Router, Vuetify, SCSS
+backEnd:
+database:
 links:
   - label: Live
     href: https://l-luminski-vue-currency-converter.netlify.app/

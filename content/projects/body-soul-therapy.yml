@@ -1,11 +1,25 @@
 title: Body & Soul Therapy website
+slug: body-soul-therapy
 order: 10
 group: client
 summary: Website for a local clinic, built with Nuxt.js and BootstrapVue, using Netlify functions.
+image: /images/projects/body-soul-therapy.jpg
+imageAlt: Body & Soul Therapy website homepage
 stack:
   - Nuxt.js
   - BootstrapVue
   - Netlify Functions
+highlights:
+  - Local clinic website
+  - Serverless contact form
+  - Mailchimp integration
+details:
+  - The website was deployed with Netlify and uses Netlify functions for integrations such as Mailchimp and the contact form.
+  - It represents a practical client build with a clear service business goal and a lightweight serverless backend.
+  - The project can later be revisited with a CMS and a more modern Nuxt implementation.
+frontEnd: Nuxt.js, BootstrapVue, SCSS
+backEnd: Netlify Functions
+database:
 links:
   - label: Live
     href: https://bodyandsoultherapypeterborough.com/

@@ -12,10 +12,8 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@nuxt/content": "^3.13.0",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@vueuse/motion": "^2.2.6",
-    "better-sqlite3": "^12.10.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.468.0",
@@ -25,7 +23,8 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.7.2",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
     "@nuxt/test-utils": "^3.15.4",

@@ -8,10 +8,18 @@ export interface ProjectLink {
 
 export interface Project {
   title: string
+  slug: string
   order: number
   group: ProjectGroup
   summary: string
+  image: string
+  imageAlt: string
   stack: string[]
+  highlights: string[]
+  details: string[]
+  frontEnd: string | null
+  backEnd: string | null
+  database: string | null
   links: ProjectLink[]
 }
 

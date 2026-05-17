@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxtjs/tailwindcss', '@vueuse/motion/nuxt'],
+  modules: ['@nuxtjs/tailwindcss', '@vueuse/motion/nuxt'],
   css: ['~/assets/css/main.css'],
   app: {
     head: {
@@ -19,9 +19,7 @@ export default defineNuxtConfig({
           href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap'
         }
       ]
-    },
-    pageTransition: { name: 'page', mode: 'out-in' },
-    layoutTransition: { name: 'layout', mode: 'out-in' }
+    }
   },
   runtimeConfig: {
     public: {
