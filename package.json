@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.12.2",
-    "@nuxtjs/i18n": "^10.3.0",
     "@vueuse/motion": "^2.2.6",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

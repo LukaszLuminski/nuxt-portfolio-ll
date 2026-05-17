@@ -1,25 +1,12 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/i18n', '@nuxtjs/tailwindcss', '@vueuse/motion/nuxt'],
+  modules: ['@nuxtjs/tailwindcss', '@vueuse/motion/nuxt'],
   css: ['~/assets/css/main.css'],
-  i18n: {
-    defaultLocale: 'en',
-    strategy: 'no_prefix',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'portfolio_locale',
-      redirectOn: 'root'
-    },
-    locales: [
-      { code: 'en', name: 'English', language: 'en-US', file: 'en.json' },
-      { code: 'pl', name: 'Polski', language: 'pl-PL', file: 'pl.json' }
-    ]
-  },
   app: {
     head: {
       htmlAttrs: { lang: 'en', class: 'dark' },
-      titleTemplate: '%s | AI Product Engineer',
+      titleTemplate: '%s | Lukasz Luminski',
       meta: [
         { name: 'theme-color', content: '#05070c' },
         { name: 'color-scheme', content: 'dark' }
@@ -38,7 +25,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      siteUrl: 'https://ai-product-engineer.dev'
+      siteUrl: 'https://lukaszluminski.com'
     }
   },
   typescript: {

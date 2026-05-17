@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {
-  ArrowRight,
-  Rocket,
-  Sparkles
+  Github,
+  Linkedin,
+  Menu
 } from 'lucide-vue-next'
-import LocaleSwitcher from '~/features/locale/LocaleSwitcher.vue'
+import TypedHeroLine from './TypedHeroLine.vue'
 import type { HeroContent } from './types'
 
 defineProps<{
@@ -13,77 +13,86 @@ defineProps<{
 </script>
 
 <template>
-  <section class="relative bg-hero-radial">
-    <div class="absolute inset-0 bg-grid bg-[length:42px_42px] opacity-35 [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
-    <div class="noise pointer-events-none absolute inset-0 opacity-[0.035]" />
-    <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+  <section class="relative min-h-screen overflow-hidden bg-[#060708] text-white">
+    <img
+      src="/images/legacy-hero-bg.jpg"
+      alt=""
+      class="absolute inset-0 h-full w-full object-cover"
+    >
+    <div class="absolute inset-0 bg-black/15" />
+    <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,6,8,0)_0%,rgba(4,6,8,0.08)_44%,rgba(4,6,8,0.34)_100%)]" />
 
-    <div class="container relative flex flex-col pb-3 pt-6 sm:py-8 lg:pb-3 lg:pt-8 tall:lg:pt-10">
+    <div class="container relative flex min-h-screen flex-col">
       <header
         v-motion
-        :initial="{ opacity: 0, y: -12 }"
-        :enter="{ opacity: 1, y: 0, transition: { duration: 500 } }"
-        class="flex items-center justify-between"
+        :initial="{ opacity: 0, y: -16 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 520 } }"
+        class="flex items-center justify-between py-6 sm:py-8"
       >
-        <NuxtLink to="/" class="flex items-center gap-3">
-          <span class="relative flex size-9 items-center justify-center rounded-xl border border-white/[0.12] bg-white/[0.06]">
-            <Sparkles class="size-4 text-secondary" />
-            <span class="absolute inset-0 rounded-xl bg-secondary/20 blur-xl" />
+        <NuxtLink to="/" class="group flex items-center gap-3">
+          <span class="text-xl font-normal tracking-normal text-white sm:text-2xl">
+            Lukasz<span class="text-white/60">Luminski</span>
           </span>
-          <span class="text-sm font-semibold text-white">{{ content.brandLabel }}</span>
         </NuxtLink>
 
-        <nav class="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-1 text-sm text-muted-foreground md:flex">
-          <NuxtLink class="rounded-full px-4 py-2 transition hover:bg-white/[0.07] hover:text-white" to="#work">
-            {{ content.nav.work }}
-          </NuxtLink>
-          <NuxtLink class="rounded-full px-4 py-2 transition hover:bg-white/[0.07] hover:text-white" to="#systems">
-            {{ content.nav.systems }}
-          </NuxtLink>
-          <NuxtLink class="rounded-full px-4 py-2 transition hover:bg-white/[0.07] hover:text-white" to="#contact">
-            {{ content.nav.contact }}
+        <nav class="hidden items-center gap-8 md:flex">
+          <NuxtLink
+            v-for="item in [
+              { label: content.nav.work, href: '#work' },
+              { label: content.nav.systems, href: '#skills' },
+              { label: content.nav.about, href: '#about' },
+              { label: content.nav.contact, href: '#contact' }
+            ]"
+            :key="item.href"
+            :to="item.href"
+            class="group relative py-2 text-lg font-normal text-white transition duration-300"
+          >
+            <span class="transition duration-300 group-hover:text-white/75">
+              {{ item.label }}
+            </span>
+            <span class="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
           </NuxtLink>
         </nav>
 
-        <div class="flex items-center gap-2">
-          <LocaleSwitcher />
-          <UiButton href="mailto:hello@example.com" variant="secondary" class="hidden sm:inline-flex">
-            {{ content.availabilityLabel }}
-          </UiButton>
-        </div>
+        <button
+          type="button"
+          class="inline-flex size-11 items-center justify-center rounded-full text-white md:hidden"
+          aria-label="Navigation menu"
+        >
+          <Menu class="size-7" />
+        </button>
       </header>
 
-      <div class="grid items-center gap-12 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-7 tall:lg:py-16">
-        <div class="max-w-3xl">
-          <div
-            v-motion
-            :initial="{ opacity: 0, y: 18 }"
-            :enter="{ opacity: 1, y: 0, transition: { duration: 620, delay: 120 } }"
-            class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.055] px-3 py-2 text-xs font-medium text-slate-200 tall:lg:mb-7"
-          >
-            <span class="relative flex size-2">
-              <span class="absolute inline-flex size-full animate-ping rounded-full bg-secondary opacity-60" />
-              <span class="relative inline-flex size-2 rounded-full bg-secondary" />
-            </span>
-            {{ content.eyebrow }}
-            <span class="h-3 w-px bg-white/15" />
-            <span class="text-muted-foreground">{{ content.systemLabel }}</span>
-          </div>
-
+      <div class="flex flex-1 items-center justify-center pb-12 pt-8 text-center sm:pb-16">
+        <div class="mx-auto flex w-full max-w-3xl flex-col items-center">
           <h1
             v-motion
-            :initial="{ opacity: 0, y: 22 }"
-            :enter="{ opacity: 1, y: 0, transition: { duration: 700, delay: 210 } }"
-            class="gradient-text max-w-5xl pb-3 text-balance text-5xl font-semibold leading-[0.98] sm:text-6xl lg:text-[3.55rem] tall:lg:text-[4.25rem]"
+            :initial="{ opacity: 0 }"
+            :enter="{ opacity: 1, transition: { duration: 620, delay: 320 } }"
+            class="w-full max-w-[560px] text-balance text-5xl font-light leading-tight tracking-normal text-white sm:text-6xl"
           >
-            {{ content.headline }}
+            <TypedHeroLine
+              :text="content.introLabel"
+              :delay="520"
+              :speed="48"
+              cursor-height-class="h-[0.9em]"
+            />
           </h1>
+
+          <div
+            v-motion
+            :initial="{ opacity: 0 }"
+            :enter="{ opacity: 1, transition: { duration: 520, delay: 1900 } }"
+            class="mt-4 min-h-[48px] w-full max-w-[560px] text-[2rem] font-normal leading-snug text-white sm:text-[2.33rem]"
+          >
+            <TypedHeroLine :text="content.headline" :delay="2200" :speed="42" />
+          </div>
 
           <p
             v-motion
             :initial="{ opacity: 0, y: 18 }"
-            :enter="{ opacity: 1, y: 0, transition: { duration: 650, delay: 330 } }"
-            class="mt-5 max-w-2xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg tall:lg:mt-7 tall:lg:leading-8"
+            :enter="{ opacity: 1, y: 0, transition: { duration: 520, delay: 3440 } }"
+            class="mt-4 max-w-[483px] text-pretty text-base leading-7 text-white/80 sm:text-lg"
           >
             {{ content.subheadline }}
           </p>
@@ -91,82 +100,56 @@ defineProps<{
           <div
             v-motion
             :initial="{ opacity: 0, y: 16 }"
-            :enter="{ opacity: 1, y: 0, transition: { duration: 620, delay: 430 } }"
-            class="mt-7 flex flex-col gap-3 sm:flex-row tall:lg:mt-9"
+            :enter="{ opacity: 1, y: 0, transition: { duration: 520, delay: 3900 } }"
+            class="mt-12 flex flex-wrap items-center justify-center gap-12 text-white/70"
           >
-            <UiButton href="#work" size="lg">
-              {{ content.primaryCta }}
-              <ArrowRight class="size-4 transition-transform group-hover:translate-x-0.5" />
-            </UiButton>
-            <UiButton href="mailto:hello@example.com" variant="secondary" size="lg">
-              {{ content.secondaryCta }}
-            </UiButton>
-          </div>
-
-          <div class="sr-only">
-            <span v-for="metric in content.metrics" :key="metric.label">
-              {{ metric.value }} {{ metric.label }}.
-            </span>
-          </div>
-        </div>
-
-        <div
-          v-motion
-          :initial="{ opacity: 0, scale: 0.96, y: 26 }"
-          :enter="{ opacity: 1, scale: 1, y: 0, transition: { duration: 780, delay: 280 } }"
-          class="relative mx-auto w-full max-w-[500px] lg:ml-auto"
-        >
-          <div class="absolute -inset-8 rounded-[36px] bg-primary/10 blur-3xl" />
-          <div class="relative rounded-[30px] border border-white/10 bg-white/[0.045] p-3 shadow-glow">
-            <div
-              role="img"
-              :aria-label="content.visual.ariaLabel"
-              class="relative aspect-[4/5] overflow-hidden rounded-[22px] border border-white/10 bg-slate-950"
+            <a
+              href="https://github.com/LukaszLuminski"
+              target="_blank"
+              rel="noreferrer"
+              :aria-label="content.social.github"
+              class="transition duration-300 hover:text-white"
             >
-              <div class="absolute inset-0 bg-[radial-gradient(circle_at_58%_20%,rgba(96,165,250,0.36),transparent_28%),radial-gradient(circle_at_78%_18%,rgba(251,146,60,0.22),transparent_24%),linear-gradient(145deg,#020617,#0b1220_54%,#111827)]" />
-              <div class="absolute inset-0 bg-grid bg-[length:34px_34px] opacity-[0.14]" />
-              <div class="absolute left-1/2 top-[12%] h-[230px] w-[230px] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
-              <div class="absolute left-1/2 top-[13%] h-[156px] w-[142px] -translate-x-1/2 rounded-[46%] bg-slate-200 shadow-[0_22px_70px_rgba(15,23,42,0.55)]" />
-              <div class="absolute left-1/2 top-[10%] h-[88px] w-[176px] -translate-x-1/2 rounded-t-[70px] rounded-b-[34px] bg-slate-950" />
-              <div class="absolute left-[44%] top-[24%] h-2 w-8 rounded-full bg-slate-700" />
-              <div class="absolute left-[55%] top-[24%] h-2 w-8 rounded-full bg-slate-700" />
-              <div class="absolute left-1/2 top-[34%] h-3 w-16 -translate-x-1/2 rounded-full bg-slate-500/70" />
-              <div class="absolute left-1/2 top-[43%] h-[280px] w-[360px] -translate-x-1/2 rounded-t-[120px] bg-gradient-to-b from-slate-700 via-slate-900 to-black" />
-              <div class="absolute left-1/2 top-[48%] h-[170px] w-[260px] -translate-x-1/2 rounded-t-[64px] bg-slate-950/85" />
-              <div class="absolute left-1/2 top-[54%] w-[220px] -translate-x-1/2 rounded-2xl border border-white/10 bg-slate-950/80 p-4">
-                <div class="h-2 w-24 rounded-full bg-secondary" />
-                <div class="mt-3 h-2 w-36 rounded-full bg-primary" />
-                <div class="mt-3 h-2 w-28 rounded-full bg-white/30" />
-              </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-              <div class="absolute inset-x-4 top-4 flex items-center justify-between">
-                <div class="rounded-full border border-white/10 bg-black/45 px-3 py-1.5 text-xs font-semibold text-white">
-                  {{ content.visual.roleTag }}
-                </div>
-                <div class="rounded-full border border-secondary/25 bg-secondary/15 px-3 py-1.5 text-xs font-semibold text-secondary">
-                  {{ content.visual.buildTag }}
-                </div>
-              </div>
+              <Github class="size-12 sm:size-14" :stroke-width="1.5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/lukasz-luminski"
+              target="_blank"
+              rel="noreferrer"
+              :aria-label="content.social.linkedin"
+              class="transition duration-300 hover:text-white"
+            >
+              <Linkedin class="size-12 sm:size-14" :stroke-width="1.5" />
+            </a>
+          </div>
 
-              <div class="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/10 bg-black/55 p-4">
-                <div class="flex items-start justify-between gap-4">
-                  <div>
-                    <p class="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">
-                      {{ content.visual.kicker }}
-                    </p>
-                    <p class="mt-2 text-base font-semibold leading-6 text-white">
-                      {{ content.visual.description }}
-                    </p>
-                  </div>
-                  <Rocket class="mt-1 size-5 shrink-0 text-secondary" />
-                </div>
-              </div>
-            </div>
+          <div
+            v-motion
+            :initial="{ opacity: 0, y: 16 }"
+            :enter="{ opacity: 1, y: 0, transition: { duration: 520, delay: 4300 } }"
+            class="mt-12 flex w-full max-w-[382px] flex-col gap-4"
+          >
+            <NuxtLink
+              to="#work"
+              class="inline-flex h-[54px] w-full items-center justify-center rounded px-8 text-sm font-medium uppercase tracking-[0.18em] text-slate-950 transition duration-300 bg-white/70 hover:bg-white/90"
+            >
+              {{ content.primaryCta }}
+            </NuxtLink>
+            <NuxtLink
+              to="#about"
+              class="inline-flex h-[54px] w-full items-center justify-center rounded px-8 text-sm font-medium uppercase tracking-[0.18em] text-slate-950 transition duration-300 bg-white/70 hover:bg-white/90"
+            >
+              {{ content.secondaryCta }}
+            </NuxtLink>
           </div>
         </div>
       </div>
 
       <div class="sr-only">
+        <span v-for="metric in content.metrics" :key="metric.label">
+          {{ metric.value }} {{ metric.label }}.
+        </span>
+        {{ content.positioning }}
         {{ content.technologies.join(', ') }}
       </div>
     </div>

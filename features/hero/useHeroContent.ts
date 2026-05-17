@@ -1,12 +1,4 @@
-import { computed, type ComputedRef } from 'vue'
-import { useI18n } from '#imports'
 import type { HeroContent } from './types'
-
-interface HeroTranslator {
-  t: (key: string) => string
-  tm: (key: string) => unknown
-  rt: (message: unknown) => string
-}
 
 const technologies = [
   'Vue 3',
@@ -23,61 +15,49 @@ const technologies = [
   'Realtime'
 ]
 
-function translateMetricMessages(translator: HeroTranslator): HeroContent['metrics'] {
-  const metrics = translator.tm('hero.metrics')
-
-  if (!Array.isArray(metrics)) {
-    return []
-  }
-
-  return metrics.map((metric) => {
-    const value = typeof metric === 'object' && metric !== null && 'value' in metric
-      ? metric.value
-      : ''
-    const label = typeof metric === 'object' && metric !== null && 'label' in metric
-      ? metric.label
-      : ''
-
-    return {
-      value: translator.rt(value),
-      label: translator.rt(label)
-    }
-  })
-}
-
-export function createHeroContent(translator: HeroTranslator): HeroContent {
-  return {
-    brandLabel: translator.t('hero.brandLabel'),
-    nav: {
-      work: translator.t('hero.nav.work'),
-      systems: translator.t('hero.nav.systems'),
-      contact: translator.t('hero.nav.contact')
-    },
-    availabilityLabel: translator.t('hero.availabilityLabel'),
-    eyebrow: translator.t('hero.eyebrow'),
-    systemLabel: translator.t('hero.systemLabel'),
-    headline: translator.t('hero.headline'),
-    subheadline: translator.t('hero.subheadline'),
-    primaryCta: translator.t('hero.primaryCta'),
-    secondaryCta: translator.t('hero.secondaryCta'),
-    metrics: translateMetricMessages(translator),
-    technologies,
-    visual: {
-      ariaLabel: translator.t('hero.visual.ariaLabel'),
-      roleTag: translator.t('hero.visual.roleTag'),
-      buildTag: translator.t('hero.visual.buildTag'),
-      kicker: translator.t('hero.visual.kicker'),
-      description: translator.t('hero.visual.description')
-    }
+const heroContent: HeroContent = {
+  brandLabel: 'LukaszLuminski',
+  name: 'Lukasz Luminski',
+  introLabel: "Hello, I'm Lukasz",
+  nav: {
+    work: 'Projects',
+    systems: 'Skills',
+    about: 'About me',
+    contact: 'Contact'
+  },
+  availabilityLabel: 'Available for product builds',
+  social: {
+    github: 'GitHub',
+    linkedin: 'LinkedIn'
+  },
+  eyebrow: 'Vue / Nuxt / Node.js / practical AI',
+  systemLabel: 'Product engineering',
+  headline: 'Vue/Nuxt product engineer',
+  subheadline: 'Building modern web apps, Node.js backends, and useful AI-powered workflows.',
+  positioning:
+    'Vue/Nuxt product engineer building modern web apps, Node.js backends, and useful AI-powered workflows.',
+  primaryCta: 'See my projects',
+  secondaryCta: 'Read more about me',
+  metrics: [
+    { value: '10+', label: 'years shipping product interfaces' },
+    { value: 'Vue', label: 'deep Nuxt ecosystem specialization' },
+    { value: 'Node', label: 'backends, APIs and AI integrations' }
+  ],
+  technologies,
+  visual: {
+    ariaLabel: 'Product engineering lab status panel',
+    status: 'Product lab',
+    title: 'Front-end craft, backend judgment, useful AI.',
+    description:
+      'A portfolio about complete product building: from the first screen, through API architecture, to LLM features when they make the product better.',
+    signals: ['Nuxt SSR', 'Vue interfaces', 'Node APIs', 'AI workflows']
   }
 }
 
-export function useHeroContent(): ComputedRef<HeroContent> {
-  const { t, tm, rt, locale } = useI18n()
+export function createHeroContent(): HeroContent {
+  return heroContent
+}
 
-  return computed(() => {
-    void locale.value
-
-    return createHeroContent({ t, tm, rt })
-  })
+export function useHeroContent(): HeroContent {
+  return createHeroContent()
 }
