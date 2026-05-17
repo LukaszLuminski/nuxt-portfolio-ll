@@ -11,6 +11,7 @@ const { content } = defineProps<{
   content: HeroContent
 }>()
 
+const isMobileNavOpen = ref(false)
 const [brandMain, brandAccent = ''] = content.brandLabel.split(/(?=Luminski$)/)
 
 const ctaLinks = [
@@ -19,6 +20,10 @@ const ctaLinks = [
 ]
 
 const socialIcons = [Github, Linkedin]
+
+function closeMobileNav() {
+  isMobileNavOpen.value = false
+}
 </script>
 
 <template>
@@ -36,7 +41,7 @@ const socialIcons = [Github, Linkedin]
         v-motion
         :initial="{ opacity: 0, y: -16 }"
         :enter="{ opacity: 1, y: 0, transition: { duration: 520 } }"
-        class="flex items-center justify-between py-6 sm:py-8"
+        class="relative z-20 flex items-center justify-between py-6 sm:py-8"
       >
         <NuxtLink to="/" class="group flex items-center gap-3">
           <span class="text-xl font-normal tracking-normal text-white sm:text-2xl">
@@ -62,18 +67,40 @@ const socialIcons = [Github, Linkedin]
           type="button"
           class="inline-flex size-11 items-center justify-center rounded-full text-white md:hidden"
           aria-label="Navigation menu"
+          :aria-expanded="isMobileNavOpen"
+          aria-controls="mobile-navigation"
+          @click="isMobileNavOpen = !isMobileNavOpen"
         >
           <Menu class="size-7" />
         </button>
       </header>
 
-      <div class="flex flex-1 items-center justify-center pb-12 pt-8 text-center sm:pb-16">
-        <div class="mx-auto flex w-full max-w-3xl flex-col items-center">
+      <nav
+        id="mobile-navigation"
+        v-motion
+        :initial="{ opacity: 0, y: -10 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 220 } }"
+        class="absolute inset-x-4 top-[86px] z-20 rounded border border-white/15 bg-black/70 p-2 backdrop-blur md:hidden"
+        :class="isMobileNavOpen ? 'block' : 'hidden'"
+      >
+        <NuxtLink
+          v-for="item in content.nav"
+          :key="item.href"
+          :to="item.href"
+          class="block rounded px-4 py-3 text-base font-medium text-white transition hover:bg-white/10"
+          @click="closeMobileNav"
+        >
+          {{ item.label }}
+        </NuxtLink>
+      </nav>
+
+      <div class="flex flex-1 items-center justify-center pb-10 pt-6 text-center sm:pb-16 sm:pt-8">
+        <div class="mx-auto flex w-full max-w-3xl min-w-0 flex-col items-center">
           <h1
             v-motion
             :initial="{ opacity: 0 }"
             :enter="{ opacity: 1, transition: { duration: 620, delay: 320 } }"
-            class="w-full max-w-[560px] text-balance text-5xl font-light leading-tight tracking-normal text-white sm:text-6xl"
+            class="w-full max-w-[560px] text-[2rem] font-light leading-tight tracking-normal text-white sm:text-6xl"
           >
             <TypedHeroLine
               :text="content.introLabel"
@@ -87,7 +114,7 @@ const socialIcons = [Github, Linkedin]
             v-motion
             :initial="{ opacity: 0 }"
             :enter="{ opacity: 1, transition: { duration: 520, delay: 1900 } }"
-            class="mt-4 min-h-[48px] w-full max-w-[560px] text-[2rem] font-normal leading-snug text-white sm:text-[2.33rem]"
+            class="mt-4 min-h-[30px] w-full max-w-[560px] text-xl font-normal leading-tight text-white sm:min-h-[48px] sm:text-[2.33rem]"
           >
             <TypedHeroLine :text="content.headline" :delay="2200" :speed="42" />
           </div>
@@ -96,7 +123,7 @@ const socialIcons = [Github, Linkedin]
             v-motion
             :initial="{ opacity: 0, y: 18 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 520, delay: 3440 } }"
-            class="mt-4 max-w-[483px] text-pretty text-base leading-7 text-white/80 sm:text-lg"
+            class="mt-4 max-w-[360px] text-pretty text-[0.95rem] font-medium leading-6 text-white/80 sm:max-w-[483px] sm:text-lg sm:leading-7"
           >
             {{ content.subheadline }}
           </p>
@@ -105,7 +132,7 @@ const socialIcons = [Github, Linkedin]
             v-motion
             :initial="{ opacity: 0, y: 16 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 520, delay: 3900 } }"
-            class="mt-12 flex flex-wrap items-center justify-center gap-12 text-white/70"
+            class="mt-10 flex flex-wrap items-center justify-center gap-12 text-white/70 sm:mt-12"
           >
             <a
               v-for="(item, index) in content.social"
@@ -124,7 +151,7 @@ const socialIcons = [Github, Linkedin]
             v-motion
             :initial="{ opacity: 0, y: 16 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 520, delay: 4300 } }"
-            class="mt-12 flex w-full max-w-[382px] flex-col gap-4"
+            class="mt-10 flex w-full max-w-[382px] flex-col gap-4 sm:mt-12"
           >
             <NuxtLink
               v-for="item in ctaLinks"

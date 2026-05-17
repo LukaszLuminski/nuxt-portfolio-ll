@@ -50,10 +50,10 @@ watch(() => props.text, startTyping)
 </script>
 
 <template>
-  <span class="relative inline-block whitespace-pre" :aria-label="text">
+  <span class="relative inline-block max-w-full overflow-hidden whitespace-nowrap" :aria-label="text">
     <span class="invisible" aria-hidden="true">{{ text }}</span>
     <span
-      class="absolute inset-0 inline-flex items-center whitespace-pre"
+      class="absolute inset-0 inline-flex items-center whitespace-nowrap"
       :class="align === 'center' ? 'justify-center' : 'justify-start'"
       aria-hidden="true"
     >
