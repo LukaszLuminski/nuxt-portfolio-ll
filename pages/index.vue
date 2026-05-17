@@ -4,9 +4,12 @@ import { useHeroContent } from '~/features/hero/useHeroContent'
 import ProjectsSection from '~/features/projects/ProjectsSection.vue'
 import type { Project } from '~/features/projects/types'
 import { useProjectsContent } from '~/features/projects/useProjectsContent'
+import SkillsSection from '~/features/skills/SkillsSection.vue'
+import { useSkillsContent } from '~/features/skills/useSkillsContent'
 
 const hero = useHeroContent()
 const projectsContent = useProjectsContent()
+const skillsContent = useSkillsContent()
 const { data: projects } = await useAsyncData('projects', () =>
   $fetch<Project[]>('/api/projects')
 )
@@ -94,5 +97,6 @@ useHead({
   <main :class="isRestoringProjectScroll ? 'opacity-0' : ''">
     <HeroSection :content="hero" />
     <ProjectsSection :content="projectsContent" :projects="resolvedProjects" />
+    <SkillsSection :content="skillsContent" />
   </main>
 </template>
