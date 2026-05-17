@@ -1,0 +1,12 @@
+title: Euphoria Sports Therapy
+order: 20
+group: client
+summary: Early client website designed and built from scratch, then migrated to WordPress.
+stack:
+  - WordPress
+  - HTML
+  - CSS
+links:
+  - label: Live
+    href: https://www.euphoriasportstherapy.com/
+    type: live

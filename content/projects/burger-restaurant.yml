@@ -1,0 +1,14 @@
+title: Burger Restaurant
+order: 60
+group: archive
+summary: Landing page for a fictional restaurant, developed mostly with Bootstrap and jQuery.
+stack:
+  - Bootstrap
+  - jQuery
+links:
+  - label: Live
+    href: https://lukaszluminski.github.io/BurgerRestaurant/
+    type: live
+  - label: Code
+    href: https://github.com/LukaszLuminski/BurgerRestaurant/
+    type: code

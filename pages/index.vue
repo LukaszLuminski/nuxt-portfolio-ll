@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import HeroSection from '~/features/hero/HeroSection.vue'
 import { useHeroContent } from '~/features/hero/useHeroContent'
+import ProjectsSection from '~/features/projects/ProjectsSection.vue'
+import { useProjectsContent } from '~/features/projects/useProjectsContent'
 
 const hero = useHeroContent()
+const projectsContent = useProjectsContent()
+const { data: projects } = await useAsyncData('projects', () =>
+  queryCollection('projects').order('order', 'ASC').all()
+)
 const siteUrl = useRuntimeConfig().public.siteUrl
 const sameAs = hero.social.map(({ href }) => href)
 
@@ -45,5 +51,6 @@ useHead({
 <template>
   <main>
     <HeroSection :content="hero" />
+    <ProjectsSection :content="projectsContent" :projects="projects ?? []" />
   </main>
 </template>

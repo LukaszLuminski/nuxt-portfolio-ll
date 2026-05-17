@@ -1,0 +1,12 @@
+title: Body & Soul Therapy website
+order: 10
+group: client
+summary: Website for a local clinic, built with Nuxt.js and BootstrapVue, using Netlify functions.
+stack:
+  - Nuxt.js
+  - BootstrapVue
+  - Netlify Functions
+links:
+  - label: Live
+    href: https://bodyandsoultherapypeterborough.com/
+    type: live

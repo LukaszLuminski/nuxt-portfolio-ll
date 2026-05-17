@@ -1,0 +1,16 @@
+title: Nuxt Blog
+order: 30
+group: technical
+summary: A simple Nuxt blog using Vue Router, Vuex, Storybook, Jest, and a mockapi.io API.
+stack:
+  - Nuxt.js
+  - Vuex
+  - Storybook
+  - Jest
+links:
+  - label: Live
+    href: https://ll-blog-task.netlify.app/
+    type: live
+  - label: Code
+    href: https://github.com/LukaszLuminski/NuxtBlog
+    type: code

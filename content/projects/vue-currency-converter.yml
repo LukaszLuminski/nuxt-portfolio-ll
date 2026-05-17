@@ -1,0 +1,16 @@
+title: Vue Currency Converter
+order: 40
+group: technical
+summary: Vue.js currency converter built with Vuetify, Vuex, Vue Router, and REST API endpoints.
+stack:
+  - Vue.js
+  - Vuetify
+  - Vuex
+  - REST API
+links:
+  - label: Live
+    href: https://l-luminski-vue-currency-converter.netlify.app/
+    type: live
+  - label: Code
+    href: https://github.com/LukaszLuminski/Vue-Currency-Converter/
+    type: code
