@@ -37,10 +37,11 @@ function rememberProjectPosition(slug: string) {
 <template>
   <section
     id="work"
-    class="relative overflow-hidden bg-[#07090d] py-20 text-white sm:py-28"
+    class="relative overflow-hidden bg-[#08090b] py-20 text-white sm:py-28"
   >
-    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.032)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.032)_1px,transparent_1px)] bg-[size:44px_44px]" />
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_16%_24%,rgba(14,165,233,0.16),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(245,158,11,0.12),transparent_26%),linear-gradient(180deg,rgba(7,9,13,0.2),rgba(7,9,13,0.96)_34%)]" />
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(210,230,236,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(210,230,236,0.03)_1px,transparent_1px)] bg-[size:44px_44px]" />
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_0%,rgba(71,112,122,0.28),transparent_42%),radial-gradient(ellipse_at_88%_0%,rgba(111,72,39,0.34),transparent_38%),radial-gradient(circle_at_16%_30%,rgba(14,165,233,0.12),transparent_30%),radial-gradient(circle_at_88%_26%,rgba(180,104,45,0.14),transparent_30%),linear-gradient(180deg,rgba(14,18,20,0.18),rgba(8,9,11,0.88)_30%,rgba(7,9,13,0.98)_58%)]" />
+    <div class="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#11110f]/28 via-[#0b0d0f]/70 to-transparent" />
 
     <div class="container relative">
       <div class="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:gap-16">
