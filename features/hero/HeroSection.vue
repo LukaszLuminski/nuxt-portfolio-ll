@@ -7,9 +7,18 @@ import {
 import TypedHeroLine from './TypedHeroLine.vue'
 import type { HeroContent } from './types'
 
-defineProps<{
+const { content } = defineProps<{
   content: HeroContent
 }>()
+
+const [brandMain, brandAccent = ''] = content.brandLabel.split(/(?=Luminski$)/)
+
+const ctaLinks = [
+  { label: content.primaryCta, href: '#work' },
+  { label: content.secondaryCta, href: '#about' }
+]
+
+const socialIcons = [Github, Linkedin]
 </script>
 
 <template>
@@ -31,18 +40,13 @@ defineProps<{
       >
         <NuxtLink to="/" class="group flex items-center gap-3">
           <span class="text-xl font-normal tracking-normal text-white sm:text-2xl">
-            Lukasz<span class="text-white/60">Luminski</span>
+            {{ brandMain }}<span class="text-white/60">{{ brandAccent }}</span>
           </span>
         </NuxtLink>
 
         <nav class="hidden items-center gap-8 md:flex">
           <NuxtLink
-            v-for="item in [
-              { label: content.nav.work, href: '#work' },
-              { label: content.nav.systems, href: '#skills' },
-              { label: content.nav.about, href: '#about' },
-              { label: content.nav.contact, href: '#contact' }
-            ]"
+            v-for="item in content.nav"
             :key="item.href"
             :to="item.href"
             class="group relative py-2 text-lg font-normal text-white transition duration-300"
@@ -104,22 +108,15 @@ defineProps<{
             class="mt-12 flex flex-wrap items-center justify-center gap-12 text-white/70"
           >
             <a
-              href="https://github.com/LukaszLuminski"
+              v-for="(item, index) in content.social"
+              :key="item.href"
+              :href="item.href"
               target="_blank"
               rel="noreferrer"
-              :aria-label="content.social.github"
+              :aria-label="item.label"
               class="transition duration-300 hover:text-white"
             >
-              <Github class="size-12 sm:size-14" :stroke-width="1.5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/lukasz-luminski"
-              target="_blank"
-              rel="noreferrer"
-              :aria-label="content.social.linkedin"
-              class="transition duration-300 hover:text-white"
-            >
-              <Linkedin class="size-12 sm:size-14" :stroke-width="1.5" />
+              <component :is="socialIcons[index]" class="size-12 sm:size-14" :stroke-width="1.5" />
             </a>
           </div>
 
@@ -130,16 +127,12 @@ defineProps<{
             class="mt-12 flex w-full max-w-[382px] flex-col gap-4"
           >
             <NuxtLink
-              to="#work"
+              v-for="item in ctaLinks"
+              :key="item.href"
+              :to="item.href"
               class="inline-flex h-[54px] w-full items-center justify-center rounded px-8 text-sm font-medium uppercase tracking-[0.18em] text-slate-950 transition duration-300 bg-white/70 hover:bg-white/90"
             >
-              {{ content.primaryCta }}
-            </NuxtLink>
-            <NuxtLink
-              to="#about"
-              class="inline-flex h-[54px] w-full items-center justify-center rounded px-8 text-sm font-medium uppercase tracking-[0.18em] text-slate-950 transition duration-300 bg-white/70 hover:bg-white/90"
-            >
-              {{ content.secondaryCta }}
+              {{ item.label }}
             </NuxtLink>
           </div>
         </div>

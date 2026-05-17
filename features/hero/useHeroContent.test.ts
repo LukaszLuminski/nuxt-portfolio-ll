@@ -57,11 +57,11 @@ describe('useHeroContent', () => {
 
     expect(hero.brandLabel).toBe('LukaszLuminski')
     expect(hero.name).toBe('Lukasz Luminski')
-    expect(hero.nav).toEqual({
-      work: 'Projects',
-      systems: 'Skills',
-      about: 'About me',
-      contact: 'Contact'
-    })
+    expect(hero.nav).toEqual([
+      { label: 'Projects', href: '#work' },
+      { label: 'Skills', href: '#skills' },
+      { label: 'About me', href: '#about' },
+      { label: 'Contact', href: '#contact' }
+    ])
   })
 })

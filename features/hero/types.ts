@@ -3,23 +3,17 @@ export interface HeroMetric {
   label: string
 }
 
+export interface HeroLink {
+  label: string
+  href: string
+}
+
 export interface HeroContent {
   brandLabel: string
   name: string
   introLabel: string
-  nav: {
-    work: string
-    systems: string
-    about: string
-    contact: string
-  }
-  availabilityLabel: string
-  social: {
-    github: string
-    linkedin: string
-  }
-  eyebrow: string
-  systemLabel: string
+  nav: HeroLink[]
+  social: HeroLink[]
   headline: string
   subheadline: string
   positioning: string
@@ -27,11 +21,4 @@ export interface HeroContent {
   secondaryCta: string
   metrics: HeroMetric[]
   technologies: string[]
-  visual: {
-    ariaLabel: string
-    status: string
-    title: string
-    description: string
-    signals: string[]
-  }
 }

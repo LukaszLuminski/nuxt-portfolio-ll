@@ -4,42 +4,27 @@ import { useHeroContent } from '~/features/hero/useHeroContent'
 
 const hero = useHeroContent()
 const siteUrl = useRuntimeConfig().public.siteUrl
+const sameAs = hero.social.map(({ href }) => href)
 
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   '@id': `${siteUrl}/#person`,
-  name: 'Lukasz Luminski',
-  alternateName: ['Łukasz Łumiński', 'LukaszLuminski'],
+  name: hero.name,
+  alternateName: ['Łukasz Łumiński', hero.brandLabel],
   url: siteUrl,
   jobTitle: 'Vue/Nuxt Product Engineer',
-  description:
-    'Vue/Nuxt product engineer building modern web apps, Node.js backends, and useful AI-powered workflows.',
-  knowsAbout: [
-    'Vue 3',
-    'Nuxt 3',
-    'Node.js',
-    'TypeScript',
-    'PostgreSQL',
-    'Prisma',
-    'OpenAI API',
-    'RAG',
-    'AI workflows'
-  ],
-  sameAs: [
-    'https://github.com/LukaszLuminski',
-    'https://www.linkedin.com/in/lukasz-luminski'
-  ]
+  description: hero.positioning,
+  knowsAbout: hero.technologies,
+  sameAs
 }
 
 useSeoMeta({
-  title: 'Lukasz Luminski Portfolio',
-  description:
-    'Portfolio of Lukasz Luminski, a Vue/Nuxt product engineer building modern web apps, Node.js backends, and useful AI-powered workflows.',
-  author: 'Lukasz Luminski',
-  ogTitle: 'Lukasz Luminski Portfolio',
-  ogDescription:
-    'Vue/Nuxt product engineering, Node.js backends, and practical AI-powered workflows.',
+  title: `${hero.name} Portfolio`,
+  description: hero.positioning,
+  author: hero.name,
+  ogTitle: `${hero.name} Portfolio`,
+  ogDescription: hero.positioning,
   ogType: 'website',
   twitterCard: 'summary_large_image'
 })

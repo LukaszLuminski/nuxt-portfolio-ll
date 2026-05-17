@@ -19,19 +19,16 @@ const heroContent: HeroContent = {
   brandLabel: 'LukaszLuminski',
   name: 'Lukasz Luminski',
   introLabel: "Hello, I'm Lukasz",
-  nav: {
-    work: 'Projects',
-    systems: 'Skills',
-    about: 'About me',
-    contact: 'Contact'
-  },
-  availabilityLabel: 'Available for product builds',
-  social: {
-    github: 'GitHub',
-    linkedin: 'LinkedIn'
-  },
-  eyebrow: 'Vue / Nuxt / Node.js / practical AI',
-  systemLabel: 'Product engineering',
+  nav: [
+    { label: 'Projects', href: '#work' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'About me', href: '#about' },
+    { label: 'Contact', href: '#contact' }
+  ],
+  social: [
+    { label: 'GitHub', href: 'https://github.com/LukaszLuminski' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/lukasz-luminski' }
+  ],
   headline: 'Vue/Nuxt product engineer',
   subheadline: 'Building modern web apps, Node.js backends, and useful AI-powered workflows.',
   positioning:
@@ -43,15 +40,7 @@ const heroContent: HeroContent = {
     { value: 'Vue', label: 'deep Nuxt ecosystem specialization' },
     { value: 'Node', label: 'backends, APIs and AI integrations' }
   ],
-  technologies,
-  visual: {
-    ariaLabel: 'Product engineering lab status panel',
-    status: 'Product lab',
-    title: 'Front-end craft, backend judgment, useful AI.',
-    description:
-      'A portfolio about complete product building: from the first screen, through API architecture, to LLM features when they make the product better.',
-    signals: ['Nuxt SSR', 'Vue interfaces', 'Node APIs', 'AI workflows']
-  }
+  technologies
 }
 
 export function createHeroContent(): HeroContent {

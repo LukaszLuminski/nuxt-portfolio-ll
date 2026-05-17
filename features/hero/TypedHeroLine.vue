@@ -20,10 +20,10 @@ const isComplete = ref(false)
 let timeoutId: ReturnType<typeof setTimeout> | undefined
 
 function clearTypingTimer() {
-  if (timeoutId) {
-    clearTimeout(timeoutId)
-    timeoutId = undefined
-  }
+  if (!timeoutId) return
+
+  clearTimeout(timeoutId)
+  timeoutId = undefined
 }
 
 function typeNextCharacter(index = 0) {
