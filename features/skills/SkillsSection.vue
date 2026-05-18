@@ -73,11 +73,11 @@ function setCardGlow(event: MouseEvent) {
             <div class="mb-4 flex items-center gap-4">
               <h3
                 :id="`${group}-skills-title`"
-                class="text-sm font-semibold uppercase tracking-[0.2em] text-amber-50/55"
+                class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-100/55"
               >
                 {{ label }}
               </h3>
-              <div class="h-px flex-1 bg-gradient-to-r from-amber-200/24 via-white/10 to-transparent" />
+              <div class="h-px flex-1 bg-gradient-to-r from-sky-300/25 via-white/10 to-transparent" />
             </div>
 
             <div class="grid gap-4 sm:grid-cols-2">

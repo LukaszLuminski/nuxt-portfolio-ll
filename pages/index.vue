@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AboutSection from '~/features/about/AboutSection.vue'
+import { useAboutContent } from '~/features/about/useAboutContent'
 import HeroSection from '~/features/hero/HeroSection.vue'
 import { useHeroContent } from '~/features/hero/useHeroContent'
 import ProjectsSection from '~/features/projects/ProjectsSection.vue'
@@ -10,6 +12,7 @@ import { useSkillsContent } from '~/features/skills/useSkillsContent'
 const hero = useHeroContent()
 const projectsContent = useProjectsContent()
 const skillsContent = useSkillsContent()
+const aboutContent = useAboutContent()
 const { data: projects } = await useAsyncData('projects', () =>
   $fetch<Project[]>('/api/projects')
 )
@@ -98,5 +101,6 @@ useHead({
     <HeroSection :content="hero" />
     <ProjectsSection :content="projectsContent" :projects="resolvedProjects" />
     <SkillsSection :content="skillsContent" />
+    <AboutSection :content="aboutContent" />
   </main>
 </template>
