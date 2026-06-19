@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { ArrowUpRight, Code2, ExternalLink } from 'lucide-vue-next'
-import type { Component } from 'vue'
 import SectionDivider from '~/components/portfolio/SectionDivider.vue'
-import SectionSplitLayout from '~/components/portfolio/SectionSplitLayout.vue'
+import SectionHeading from '~/components/portfolio/SectionHeading.vue'
 import { groupItems } from '~/utils/groupItems'
-import { rememberProjectPosition } from '~/utils/portfolioNavigation'
-import type { Project, ProjectLink, ProjectsContent } from './types'
+import ProjectCard from './ProjectCard.vue'
+import type { Project, ProjectsContent } from './types'
 
 const { content, projects } = defineProps<{
   content: ProjectsContent
@@ -13,13 +11,12 @@ const { content, projects } = defineProps<{
 }>()
 
 const groupedProjects = computed(() => groupItems(content.groups, projects))
-
-const linkIcons = {
-  live: ExternalLink,
-  code: Code2
-} satisfies Record<ProjectLink['type'], Component>
-
-const { setCardGlow } = useCardGlow()
+const clientProjects = computed(() =>
+  groupedProjects.value.find(({ group }) => group === 'client')
+)
+const remainingProjectGroups = computed(() =>
+  groupedProjects.value.filter(({ group }) => group !== 'client')
+)
 </script>
 
 <template>
@@ -37,15 +34,39 @@ const { setCardGlow } = useCardGlow()
       class="via-[#08090b]/82 absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#050608]/55 to-transparent"
     />
 
-    <SectionSplitLayout
-      :eyebrow="content.eyebrow"
-      :title="content.title"
-      :intro="content.intro"
-    >
-      <div class="space-y-14">
+    <div class="container relative">
+      <div class="grid gap-x-4 gap-y-14 lg:grid-cols-3">
+        <SectionHeading
+          class="lg:self-start lg:pt-16"
+          :eyebrow="content.eyebrow"
+          :title="content.title"
+          :intro="content.intro"
+        />
+
         <section
-          v-for="{ group, label, items } in groupedProjects"
+          v-if="clientProjects"
+          class="lg:col-span-2"
+          :aria-labelledby="`${clientProjects.group}-projects-title`"
+        >
+          <SectionDivider
+            class="mb-5"
+            :label="clientProjects.label"
+            :heading-id="`${clientProjects.group}-projects-title`"
+          />
+
+          <div class="grid gap-4 md:grid-cols-2">
+            <ProjectCard
+              v-for="project in clientProjects.items"
+              :key="project.slug"
+              :project="project"
+            />
+          </div>
+        </section>
+
+        <section
+          v-for="{ group, label, items } in remainingProjectGroups"
           :key="group"
+          class="lg:col-span-3"
           :aria-labelledby="`${group}-projects-title`"
         >
           <SectionDivider
@@ -54,86 +75,15 @@ const { setCardGlow } = useCardGlow()
             :heading-id="`${group}-projects-title`"
           />
 
-          <div class="grid gap-4 md:grid-cols-2">
-            <article
-              v-for="{
-                title,
-                slug,
-                summary,
-                image,
-                imageAlt,
-                stack,
-                links
-              } in items"
-              :id="`project-${slug}`"
-              :key="title"
-              class="group relative flex min-h-[420px] scroll-mt-28 overflow-hidden rounded border border-white/10 bg-[radial-gradient(circle_at_var(--spotlight-x,50%)_var(--spotlight-y,0%),rgba(56,189,248,0.16),transparent_34%),rgba(255,255,255,0.04)] shadow-line transition duration-300 hover:bg-white/[0.06] hover:shadow-[0_24px_70px_rgba(3,7,18,0.48)]"
-              @mousemove="setCardGlow"
-            >
-              <NuxtLink
-                :to="`/projects/${slug}`"
-                class="absolute inset-0 z-10"
-                :aria-label="`Read more about ${title}`"
-                @click="rememberProjectPosition(slug)"
-              />
-
-              <div class="flex w-full flex-col">
-                <div class="relative aspect-[16/10] overflow-hidden">
-                  <img
-                    :src="image"
-                    :alt="imageAlt"
-                    class="h-full w-full object-cover opacity-[0.86] transition duration-500 group-hover:scale-[1.035] group-hover:opacity-100"
-                  />
-                  <div
-                    class="absolute inset-0 bg-gradient-to-t from-[#080a0f] via-transparent to-transparent"
-                  />
-                </div>
-
-                <div class="flex flex-1 flex-col bg-[#090c12]/85 p-5 sm:p-6">
-                  <div>
-                    <h4 class="text-xl font-semibold leading-snug text-white">
-                      {{ title }}
-                    </h4>
-                    <p class="text-white/66 mt-3 text-sm leading-6">
-                      {{ summary }}
-                    </p>
-                  </div>
-
-                  <div class="mt-5 flex flex-wrap gap-2">
-                    <span
-                      v-for="item in stack"
-                      :key="item"
-                      class="border-sky-100/12 text-sky-50/68 rounded border bg-sky-100/[0.035] px-2.5 py-1 text-xs font-medium"
-                    >
-                      {{ item }}
-                    </span>
-                  </div>
-
-                  <div class="mt-auto flex flex-wrap items-center gap-3 pt-8">
-                    <span
-                      class="pointer-events-none relative z-20 inline-flex h-10 items-center gap-2 rounded bg-white px-3 text-sm font-semibold text-slate-950 shadow-[0_0_24px_rgba(255,255,255,0.10)] transition duration-300 group-hover:shadow-[0_0_34px_rgba(255,255,255,0.18)]"
-                    >
-                      Details
-                      <ArrowUpRight class="size-4" />
-                    </span>
-                    <a
-                      v-for="{ href, label: linkLabel, type } in links"
-                      :key="href"
-                      :href="href"
-                      target="_blank"
-                      rel="noreferrer"
-                      class="border-white/12 text-white/72 relative z-20 inline-flex h-10 items-center gap-2 rounded border bg-black/20 px-3 text-sm font-medium transition hover:border-amber-200/45 hover:text-white"
-                    >
-                      <component :is="linkIcons[type]" class="size-4" />
-                      {{ linkLabel }}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </article>
+          <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <ProjectCard
+              v-for="project in items"
+              :key="project.slug"
+              :project="project"
+            />
           </div>
         </section>
       </div>
-    </SectionSplitLayout>
+    </div>
   </section>
 </template>

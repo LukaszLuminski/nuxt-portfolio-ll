@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SectionDivider from '~/components/portfolio/SectionDivider.vue'
-import SectionSplitLayout from '~/components/portfolio/SectionSplitLayout.vue'
+import SectionHeading from '~/components/portfolio/SectionHeading.vue'
 import type { AboutContent } from './types'
 
 const { content } = defineProps<{
@@ -23,60 +23,69 @@ const { content } = defineProps<{
       class="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#05070c] to-transparent"
     />
 
-    <SectionSplitLayout
-      :eyebrow="content.eyebrow"
-      :title="content.title"
-      :intro="content.intro"
-    >
-      <div>
-        <SectionDivider label="Personal background" />
+    <div class="container relative">
+      <div
+        class="grid gap-x-14 gap-y-12 lg:grid-cols-[minmax(270px,0.58fr)_minmax(0,1.42fr)]"
+      >
+        <SectionHeading
+          class="lg:self-start lg:pl-2 lg:pt-16"
+          :eyebrow="content.eyebrow"
+          :title="content.title"
+          :intro="content.intro"
+        />
 
-        <article
-          class="mt-5 overflow-hidden rounded border border-white/10 bg-[radial-gradient(circle_at_18%_10%,rgba(56,189,248,0.12),transparent_34%),rgba(255,255,255,0.04)] shadow-line"
-        >
-          <div class="flow-root bg-[#090c12]/85 p-6 sm:p-8">
-            <figure
-              class="mx-auto mb-6 w-full max-w-[220px] overflow-hidden rounded border border-white/10 bg-black/30 shadow-[0_18px_45px_rgba(0,0,0,0.32)] sm:float-left sm:mb-4 sm:mr-7 sm:w-[190px] lg:w-[200px]"
-            >
-              <img
-                :src="content.image"
-                :alt="content.imageAlt"
-                class="aspect-[2/3] h-auto w-full object-cover object-[50%_18%] opacity-95"
-                loading="lazy"
-              />
-            </figure>
+        <div>
+          <SectionDivider label="Personal background" />
 
+          <article
+            class="mt-5 overflow-hidden rounded border border-white/10 bg-[radial-gradient(circle_at_18%_10%,rgba(56,189,248,0.12),transparent_34%),rgba(255,255,255,0.04)] shadow-line"
+          >
+            <div class="flow-root bg-[#090c12]/85 p-6 sm:p-8">
+              <figure
+                class="mx-auto mb-6 w-full max-w-[220px] overflow-hidden rounded border border-white/10 bg-black/30 shadow-[0_18px_45px_rgba(0,0,0,0.32)] sm:float-left sm:mb-4 sm:mr-7 sm:w-[190px] lg:w-[200px]"
+              >
+                <img
+                  :src="content.image"
+                  :alt="content.imageAlt"
+                  class="aspect-[2/3] h-auto w-full object-cover object-[50%_18%] opacity-95"
+                  loading="lazy"
+                />
+              </figure>
+
+              <div
+                class="text-white/68 space-y-5 text-sm leading-7 sm:text-base sm:leading-8"
+              >
+                <p v-for="paragraph in content.paragraphs" :key="paragraph">
+                  {{ paragraph }}
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <section class="lg:col-span-2">
+          <SectionDivider label="At a glance" />
+
+          <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div
-              class="text-white/68 space-y-5 text-sm leading-7 sm:text-base sm:leading-8"
+              v-for="{ label, value } in content.milestones"
+              :key="label"
+              class="rounded border border-white/10 bg-[#090c12]/85 px-5 py-6 shadow-line"
             >
-              <p v-for="paragraph in content.paragraphs" :key="paragraph">
-                {{ paragraph }}
+              <p
+                class="whitespace-nowrap text-lg font-semibold leading-none text-white"
+              >
+                {{ value }}
+              </p>
+              <p
+                class="text-sky-100/52 mt-3 text-xs font-semibold uppercase tracking-[0.18em]"
+              >
+                {{ label }}
               </p>
             </div>
           </div>
-        </article>
-
-        <SectionDivider class="mt-10" label="At a glance" />
-
-        <div class="mt-5 grid gap-4 sm:grid-cols-3">
-          <div
-            v-for="{ label, value } in content.milestones"
-            :key="label"
-            class="rounded border border-white/10 bg-[#090c12]/85 px-4 py-5 shadow-line"
-          >
-            <p
-              class="whitespace-nowrap text-lg font-semibold leading-none text-white"
-            >
-              {{ value }}
-            </p>
-            <p
-              class="text-sky-100/52 mt-3 text-xs font-semibold uppercase tracking-[0.18em]"
-            >
-              {{ label }}
-            </p>
-          </div>
-        </div>
+        </section>
       </div>
-    </SectionSplitLayout>
+    </div>
   </section>
 </template>

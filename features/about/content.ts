@@ -16,6 +16,7 @@ export const aboutContent = {
   milestones: [
     { label: 'Frontend experience', value: 'Since 2020' },
     { label: 'Core ecosystem', value: 'Vue and Nuxt' },
+    { label: 'Typed development', value: 'TypeScript and Pinia' },
     { label: 'Component workflow', value: 'Storybook and Vitest' }
   ]
 } as const satisfies AboutContent

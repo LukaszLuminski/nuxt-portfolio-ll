@@ -1,29 +1,21 @@
 <script setup lang="ts">
-import { BookOpen, Braces, FlaskConical, Store } from 'lucide-vue-next'
-import type { Component } from 'vue'
 import SectionDivider from '~/components/portfolio/SectionDivider.vue'
-import SectionSplitLayout from '~/components/portfolio/SectionSplitLayout.vue'
+import SectionHeading from '~/components/portfolio/SectionHeading.vue'
 import { groupItems } from '~/utils/groupItems'
-import type { Skill, SkillIcon, SkillsContent } from './types'
+import SkillCard from './SkillCard.vue'
+import type { SkillsContent } from './types'
 
 const { content } = defineProps<{
   content: SkillsContent
 }>()
 
-const lucideIcons = {
-  code: Braces,
-  store: Store,
-  storybook: BookOpen,
-  test: FlaskConical
-} satisfies Record<Extract<SkillIcon, { type: 'lucide' }>['name'], Component>
-
 const groupedSkills = computed(() => groupItems(content.groups, content.skills))
-
-function getLucideIcon(skill: Skill) {
-  return skill.icon.type === 'lucide' ? lucideIcons[skill.icon.name] : null
-}
-
-const { setCardGlow } = useCardGlow()
+const foundationSkills = computed(() =>
+  groupedSkills.value.find(({ group }) => group === 'foundations')
+)
+const remainingSkillGroups = computed(() =>
+  groupedSkills.value.filter(({ group }) => group !== 'foundations')
+)
 </script>
 
 <template>
@@ -41,16 +33,40 @@ const { setCardGlow } = useCardGlow()
       class="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#07090d] to-transparent"
     />
 
-    <SectionSplitLayout
-      :eyebrow="content.eyebrow"
-      :title="content.title"
-      :intro="content.intro"
-      eyebrow-class="text-amber-100/55"
-    >
-      <div class="space-y-12">
+    <div class="container relative">
+      <div class="grid gap-x-4 gap-y-12 lg:grid-cols-3">
+        <SectionHeading
+          class="lg:self-start lg:pt-24"
+          :eyebrow="content.eyebrow"
+          :title="content.title"
+          :intro="content.intro"
+          eyebrow-class="text-amber-100/55"
+        />
+
         <section
-          v-for="{ group, label, items } in groupedSkills"
+          v-if="foundationSkills"
+          class="lg:col-span-2"
+          :aria-labelledby="`${foundationSkills.group}-skills-title`"
+        >
+          <SectionDivider
+            class="mb-5"
+            :label="foundationSkills.label"
+            :heading-id="`${foundationSkills.group}-skills-title`"
+          />
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <SkillCard
+              v-for="skill in foundationSkills.items"
+              :key="skill.title"
+              :skill="skill"
+            />
+          </div>
+        </section>
+
+        <section
+          v-for="{ group, label, items } in remainingSkillGroups"
           :key="group"
+          class="lg:col-span-3"
           :aria-labelledby="`${group}-skills-title`"
         >
           <SectionDivider
@@ -59,57 +75,15 @@ const { setCardGlow } = useCardGlow()
             :heading-id="`${group}-skills-title`"
           />
 
-          <div class="grid gap-4 sm:grid-cols-2">
-            <article
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <SkillCard
               v-for="skill in items"
               :key="skill.title"
-              class="group relative flex min-h-[244px] overflow-hidden rounded border border-white/10 bg-[radial-gradient(circle_at_var(--spotlight-x,50%)_var(--spotlight-y,0%),rgba(56,189,248,0.16),transparent_34%),rgba(255,255,255,0.04)] shadow-line transition duration-300 hover:bg-white/[0.06] hover:shadow-[0_24px_70px_rgba(3,7,18,0.48)]"
-              @mousemove="setCardGlow"
-            >
-              <div class="flex w-full flex-col bg-[#090c12]/85 p-5">
-                <div class="flex items-start gap-4">
-                  <div
-                    class="bg-black/24 flex size-14 shrink-0 items-center justify-center rounded border border-white/10"
-                  >
-                    <img
-                      v-if="skill.icon.type === 'image'"
-                      :src="skill.icon.src"
-                      :alt="`${skill.title} logo`"
-                      class="size-9 object-contain"
-                      loading="lazy"
-                    />
-                    <component
-                      :is="getLucideIcon(skill)"
-                      v-else
-                      class="text-sky-100/82 size-7"
-                      :stroke-width="1.6"
-                    />
-                  </div>
-
-                  <div class="min-w-0">
-                    <h4 class="text-xl font-semibold leading-snug text-white">
-                      {{ skill.title }}
-                    </h4>
-                    <p class="text-white/66 mt-2 text-sm leading-6">
-                      {{ skill.description }}
-                    </p>
-                  </div>
-                </div>
-
-                <div class="mt-5 flex flex-wrap gap-2">
-                  <span
-                    v-for="highlight in skill.highlights"
-                    :key="highlight"
-                    class="border-sky-100/12 text-sky-50/68 rounded border bg-sky-100/[0.035] px-2.5 py-1 text-xs font-medium"
-                  >
-                    {{ highlight }}
-                  </span>
-                </div>
-              </div>
-            </article>
+              :skill="skill"
+            />
           </div>
         </section>
       </div>
-    </SectionSplitLayout>
+    </div>
   </section>
 </template>
