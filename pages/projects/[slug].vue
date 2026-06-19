@@ -2,7 +2,7 @@
 import { ArrowLeft, Code2, ExternalLink } from 'lucide-vue-next'
 import type { Component } from 'vue'
 import type { ProjectLink } from '~/features/projects/types'
-import { getReturnProjectSlug } from '~/utils/portfolioNavigation'
+import { getProjectReturnState } from '~/utils/portfolioNavigation'
 
 const route = useRoute()
 const slug = computed(() => String(route.params.slug))
@@ -14,8 +14,9 @@ const { data: projects } = await useProjects()
 const project = computed(() =>
   projects.value.find(({ slug: projectSlug }) => projectSlug === slug.value)
 )
-const isEnteringFromProjectCard = ref(false)
-
+const isEnteringFromProjectCard = ref(
+  import.meta.client && Boolean(getProjectReturnState())
+)
 if (!project.value) {
   throw createError({ statusCode: 404, statusMessage: 'Project not found' })
 }
@@ -25,16 +26,12 @@ const linkIcons = {
   code: Code2
 } satisfies Record<ProjectLink['type'], Component>
 
-onBeforeMount(() => {
-  isEnteringFromProjectCard.value = Boolean(getReturnProjectSlug())
-})
-
 onMounted(() => {
   if (!isEnteringFromProjectCard.value) {
     return
   }
 
-  window.scrollTo(0, 0)
+  window.scrollTo({ left: 0, top: 0, behavior: 'auto' })
   requestAnimationFrame(() => {
     isEnteringFromProjectCard.value = false
   })
@@ -57,7 +54,7 @@ useHead(() => ({
   <main
     v-if="project"
     class="min-h-screen bg-[#07090d] text-white"
-    :class="isEnteringFromProjectCard ? 'opacity-0' : ''"
+    :class="isEnteringFromProjectCard ? 'invisible' : ''"
   >
     <section class="relative overflow-hidden pb-20 pt-28 sm:pb-28">
       <div

@@ -29,6 +29,18 @@ describe('project content', () => {
     ).toThrow('Invalid project content in broken.yml')
   })
 
+  it.each([
+    ['stack', ['Vue', 3]],
+    [
+      'links',
+      [{ label: 'Code', href: 'https://example.com', type: 'download' }]
+    ]
+  ])('rejects malformed %s data', (field, value) => {
+    expect(() =>
+      parseProject({ ...validProject, [field]: value }, 'broken.yml')
+    ).toThrow('Invalid project content in broken.yml')
+  })
+
   it('loads the repository projects in display order with unique slugs', async () => {
     const projects = await readProjects()
     const orders = projects.map(({ order }) => order)

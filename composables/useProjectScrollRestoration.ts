@@ -1,52 +1,47 @@
-import type { Ref } from 'vue'
 import {
+  calculateProjectReturnScrollTop,
   clearProjectReturnState,
-  getReturnProjectSlug,
-  projectCardScrollOffset
+  getProjectReturnState,
+  type ProjectReturnState
 } from '~/utils/portfolioNavigation'
 
-export function useProjectScrollRestoration(projects: Ref<readonly unknown[]>) {
-  const isRestoringProjectScroll = ref(false)
+function getCardDocumentTop({ slug }: ProjectReturnState) {
+  const card = document.getElementById(`project-${slug}`)
 
-  function restoreProjectScroll(slug: string) {
-    const target = document.getElementById(`project-${slug}`)
+  if (!card) {
+    return null
+  }
 
-    if (!target) {
-      isRestoringProjectScroll.value = false
+  return window.scrollY + card.getBoundingClientRect().top
+}
+
+export function useProjectScrollRestoration() {
+  const returnState = import.meta.client ? getProjectReturnState() : null
+  const isRestoringProjectScroll = ref(Boolean(returnState))
+
+  function restorePosition(state: ProjectReturnState) {
+    const top = calculateProjectReturnScrollTop(
+      state,
+      getCardDocumentTop(state)
+    )
+
+    window.scrollTo({ left: 0, top, behavior: 'auto' })
+  }
+
+  onMounted(async () => {
+    if (!returnState) {
       return
     }
 
-    const top =
-      target.getBoundingClientRect().top +
-      window.scrollY -
-      projectCardScrollOffset
-
-    window.scrollTo(0, top)
-    isRestoringProjectScroll.value = false
-  }
-
-  onBeforeMount(() => {
-    isRestoringProjectScroll.value = Boolean(getReturnProjectSlug())
-  })
-
-  onMounted(() => {
-    const stopWatching = watch(
-      projects,
-      async ({ length }) => {
-        const slug = getReturnProjectSlug()
-
-        if (!slug || !length) {
-          return
-        }
-
+    await nextTick()
+    requestAnimationFrame(() => {
+      restorePosition(returnState)
+      requestAnimationFrame(() => {
+        restorePosition(returnState)
         clearProjectReturnState()
-
-        await nextTick()
-        stopWatching()
-        requestAnimationFrame(() => restoreProjectScroll(slug))
-      },
-      { immediate: true }
-    )
+        isRestoringProjectScroll.value = false
+      })
+    })
   })
 
   return { isRestoringProjectScroll }

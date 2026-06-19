@@ -11,7 +11,7 @@ import SkillsSection from '~/features/skills/SkillsSection.vue'
 import { skillsContent } from '~/features/skills/content'
 
 const { data: projects } = await useProjects()
-const { isRestoringProjectScroll } = useProjectScrollRestoration(projects)
+const { isRestoringProjectScroll } = useProjectScrollRestoration()
 const {
   public: { siteUrl }
 } = useRuntimeConfig()
@@ -52,7 +52,7 @@ useHead({
 </script>
 
 <template>
-  <main :class="isRestoringProjectScroll ? 'opacity-0' : ''">
+  <main :class="isRestoringProjectScroll ? 'invisible' : ''">
     <HeroSection :content="heroContent" />
     <ProjectsSection :content="projectsContent" :projects="projects" />
     <SkillsSection :content="skillsContent" />

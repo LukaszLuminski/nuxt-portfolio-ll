@@ -1,41 +1,22 @@
 <script setup lang="ts">
-import { Github, Linkedin, LoaderCircle, Send } from 'lucide-vue-next'
-import type { Component } from 'vue'
+import { LoaderCircle, Send } from 'lucide-vue-next'
+import BrandIcon from '~/components/icons/BrandIcon.vue'
 import SectionDivider from '~/components/portfolio/SectionDivider.vue'
 import SectionSplitLayout from '~/components/portfolio/SectionSplitLayout.vue'
-import { contactFieldConstraints, type ContactPayload } from '~/shared/contact'
-import type { ContactContent, ContactLink } from './types'
+import { contactFieldConstraints } from '~/shared/contact'
+import { createContactSubmission, createInitialContactForm } from './form'
+import type { ContactContent } from './types'
 
 const { content } = defineProps<{
   content: ContactContent
 }>()
 
-interface ContactFormState extends Required<Omit<ContactPayload, 'elapsedMs'>> {
-  startedAt: number
-}
-
-function createInitialForm(): ContactFormState {
-  return {
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-    company: '',
-    startedAt: Date.now()
-  }
-}
-
-const form = reactive(createInitialForm())
+const form = reactive(createInitialContactForm())
 const status = ref<'idle' | 'submitting' | 'success' | 'error'>('idle')
 const statusMessage = ref('')
 
-const linkIcons = {
-  github: Github,
-  linkedin: Linkedin
-} satisfies Record<ContactLink['type'], Component>
-
 function resetForm() {
-  Object.assign(form, createInitialForm())
+  Object.assign(form, createInitialContactForm())
 }
 
 async function submitContactForm() {
@@ -43,14 +24,9 @@ async function submitContactForm() {
   statusMessage.value = ''
 
   try {
-    const { startedAt, ...payload } = form
-
     await $fetch('/api/contact', {
       method: 'POST',
-      body: {
-        ...payload,
-        elapsedMs: Date.now() - startedAt
-      }
+      body: createContactSubmission(form)
     })
 
     status.value = 'success'
@@ -205,11 +181,7 @@ async function submitContactForm() {
               <span
                 class="bg-black/24 text-sky-100/82 flex size-12 shrink-0 items-center justify-center rounded border border-white/10"
               >
-                <component
-                  :is="linkIcons[type]"
-                  class="size-6"
-                  :stroke-width="1.7"
-                />
+                <BrandIcon :type="type" class="size-6" :stroke-width="1.7" />
               </span>
               <span class="min-w-0">
                 <span

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { Github, Linkedin } from 'lucide-vue-next'
-import type { Component } from 'vue'
+import BrandIcon from '~/components/icons/BrandIcon.vue'
 import TypedHeroLine from './TypedHeroLine.vue'
-import type { HeroContent, HeroSocialLink } from './types'
+import type { HeroContent } from './types'
 
 const { content } = defineProps<{
   content: HeroContent
@@ -12,11 +11,6 @@ const ctaLinks = [
   { label: content.primaryCta, sectionId: 'work' },
   { label: content.secondaryCta, sectionId: 'about' }
 ]
-
-const socialIcons = {
-  github: Github,
-  linkedin: Linkedin
-} satisfies Record<HeroSocialLink['type'], Component>
 
 function scrollToSection(sectionId: string) {
   document
@@ -101,8 +95,8 @@ function scrollToSection(sectionId: string) {
               :aria-label="label"
               class="transition duration-300 hover:text-white"
             >
-              <component
-                :is="socialIcons[type]"
+              <BrandIcon
+                :type="type"
                 class="size-12 sm:size-14"
                 :stroke-width="1.5"
               />

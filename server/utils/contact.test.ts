@@ -45,4 +45,22 @@ describe('validateContactPayload', () => {
       validateContactPayload({ ...validPayload, elapsedMs: 300 }).isSpam
     ).toBe(true)
   })
+
+  it('normalizes surrounding whitespace before validation', () => {
+    const result = validateContactPayload({
+      ...validPayload,
+      name: '  Lukasz  ',
+      email: '  lukasz@example.com  '
+    })
+
+    expect(result.data?.name).toBe('Lukasz')
+    expect(result.data?.email).toBe('lukasz@example.com')
+  })
+
+  it('rejects non-object input without throwing', () => {
+    const result = validateContactPayload(null)
+
+    expect(result.data).toBeNull()
+    expect(result.errors).toHaveLength(4)
+  })
 })
