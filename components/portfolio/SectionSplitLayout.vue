@@ -15,7 +15,7 @@ withDefaults(
 <template>
   <div class="container relative">
     <div
-      class="grid gap-10 lg:grid-cols-[minmax(250px,0.55fr)_minmax(0,1.45fr)] lg:gap-14"
+      class="grid gap-10 lg:grid-cols-[minmax(270px,0.58fr)_minmax(0,1.42fr)] lg:gap-14"
     >
       <div class="lg:sticky lg:top-28 lg:self-start lg:pl-2">
         <p
@@ -25,7 +25,7 @@ withDefaults(
           {{ eyebrow }}
         </p>
         <h2
-          class="mt-4 max-w-xl text-3xl font-semibold leading-tight text-white sm:text-5xl"
+          class="mt-4 max-w-xl text-3xl font-semibold leading-tight text-white sm:text-[2.3rem] lg:whitespace-nowrap"
         >
           {{ title }}
         </h2>

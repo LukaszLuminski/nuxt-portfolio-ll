@@ -14,7 +14,7 @@ export const aboutContent = {
     'These days I focus on frontend development with Vue, Nuxt, and TypeScript, building maintainable interfaces with thoughtful component architecture, state management, and testing. Away from the keyboard, I am a husband and father, and I still make time for drawing, books, travelling, the gym, cycling, and swimming.'
   ],
   milestones: [
-    { label: 'Professional frontend work', value: 'Since 2020' },
+    { label: 'Frontend experience', value: 'Since 2020' },
     { label: 'Core ecosystem', value: 'Vue and Nuxt' },
     { label: 'Component workflow', value: 'Storybook and Vitest' }
   ]

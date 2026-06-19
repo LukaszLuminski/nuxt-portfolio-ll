@@ -1,3 +1,9 @@
+const indexingEnabled =
+  process.env.NUXT_PUBLIC_ALLOW_INDEXING?.toLowerCase() === 'true'
+const robotsDirective = indexingEnabled
+  ? 'index, follow'
+  : 'noindex, nofollow, noarchive, nosnippet'
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
@@ -9,7 +15,9 @@ export default defineNuxtConfig({
       titleTemplate: '%s | Lukasz Luminski',
       meta: [
         { name: 'theme-color', content: '#05070c' },
-        { name: 'color-scheme', content: 'dark' }
+        { name: 'color-scheme', content: 'dark' },
+        { name: 'robots', content: robotsDirective },
+        { name: 'googlebot', content: robotsDirective }
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -30,7 +38,15 @@ export default defineNuxtConfig({
     contactFromEmail: process.env.CONTACT_FROM_EMAIL ?? '',
     resendApiKey: process.env.RESEND_API_KEY ?? '',
     public: {
-      siteUrl: 'https://lukaszluminski.com'
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? 'https://lukaszluminski.com',
+      indexingEnabled
+    }
+  },
+  routeRules: {
+    '/**': {
+      headers: {
+        'X-Robots-Tag': robotsDirective
+      }
     }
   },
   typescript: {
