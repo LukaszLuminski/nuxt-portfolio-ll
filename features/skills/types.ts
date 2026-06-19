@@ -9,13 +9,13 @@ export interface Skill {
   group: SkillGroup
   icon: SkillIcon
   description: string
-  highlights: string[]
+  highlights: readonly string[]
 }
 
 export interface SkillsContent {
   eyebrow: string
   title: string
   intro: string
-  groups: Record<SkillGroup, string>
-  skills: Skill[]
+  groups: Readonly<Record<SkillGroup, string>>
+  skills: readonly Skill[]
 }

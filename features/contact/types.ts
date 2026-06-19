@@ -14,5 +14,5 @@ export interface ContactContent {
   submitLabel: string
   successMessage: string
   errorMessage: string
-  links: ContactLink[]
+  links: readonly ContactLink[]
 }

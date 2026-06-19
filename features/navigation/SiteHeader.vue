@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Menu, X } from 'lucide-vue-next'
 import type { HeroContent } from '~/features/hero/types'
+import { storeTargetSection } from '~/utils/portfolioNavigation'
 
 const { content } = defineProps<{
   content: HeroContent
@@ -11,7 +12,9 @@ const isMobileNavOpen = ref(false)
 const isScrolled = ref(false)
 const activeSection = ref('')
 const [brandMain, brandAccent = ''] = content.brandLabel.split(/(?=Luminski$)/)
-const hasHeaderSurface = computed(() => route.path !== '/' || isScrolled.value || isMobileNavOpen.value)
+const hasHeaderSurface = computed(
+  () => route.path !== '/' || isScrolled.value || isMobileNavOpen.value
+)
 const navItems = computed(() =>
   content.nav.map(({ href, label }) => ({
     href,
@@ -20,8 +23,8 @@ const navItems = computed(() =>
   }))
 )
 const isMeasuredSection = (
-  section: { sectionId: string, top: number } | undefined
-): section is { sectionId: string, top: number } => Boolean(section)
+  section: { sectionId: string; top: number } | undefined
+): section is { sectionId: string; top: number } => Boolean(section)
 
 function updateScrollState() {
   isScrolled.value = window.scrollY > 16
@@ -38,7 +41,9 @@ function updateActiveSection() {
     .map(({ sectionId }) => {
       const element = document.getElementById(sectionId)
 
-      return element ? { sectionId, top: element.getBoundingClientRect().top } : undefined
+      return element
+        ? { sectionId, top: element.getBoundingClientRect().top }
+        : undefined
     })
     .filter(isMeasuredSection)
     .filter(({ top }) => top <= threshold)
@@ -56,12 +61,13 @@ function scrollToSection(id: string) {
   isMobileNavOpen.value = false
 
   if (route.path !== '/') {
-    sessionStorage.setItem('portfolio-target-section', id)
-    navigateTo('/')
-    return
+    storeTargetSection(id)
+    return navigateTo('/')
   }
 
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  document
+    .getElementById(id)
+    ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
 onMounted(() => {
@@ -73,20 +79,33 @@ onBeforeUnmount(() => {
   window.removeEventListener('scroll', updateHeaderState)
 })
 
-watch(() => route.path, async () => {
-  await nextTick()
-  updateHeaderState()
-})
+watch(
+  () => route.path,
+  async () => {
+    await nextTick()
+    updateHeaderState()
+  }
+)
 </script>
 
 <template>
   <header
     class="fixed inset-x-0 top-0 z-50 text-white transition duration-300"
-    :class="hasHeaderSurface ? 'border-b border-white/10 bg-[#05070c]/70 backdrop-blur-xl' : 'border-b border-transparent bg-transparent'"
+    :class="
+      hasHeaderSurface
+        ? 'border-b border-white/10 bg-[#05070c]/70 backdrop-blur-xl'
+        : 'border-b border-transparent bg-transparent'
+    "
   >
     <div class="container flex h-20 items-center justify-between">
-      <NuxtLink to="/" class="group flex items-center gap-3" @click="isMobileNavOpen = false">
-        <span class="text-xl font-normal tracking-normal text-white sm:text-2xl">
+      <NuxtLink
+        to="/"
+        class="group flex items-center gap-3"
+        @click="isMobileNavOpen = false"
+      >
+        <span
+          class="text-xl font-normal tracking-normal text-white sm:text-2xl"
+        >
           {{ brandMain }}<span class="text-white/60">{{ brandAccent }}</span>
         </span>
       </NuxtLink>

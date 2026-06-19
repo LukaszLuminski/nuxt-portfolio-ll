@@ -1,6 +1,6 @@
 import type { SkillsContent } from './types'
 
-const skillsContent: SkillsContent = {
+export const skillsContent = {
   eyebrow: 'Expertise',
   title: 'What I work with',
   intro:
@@ -18,7 +18,11 @@ const skillsContent: SkillsContent = {
       icon: { type: 'image', src: '/images/skills/html.png' },
       description:
         'Semantic structure, accessible document flow, forms, media, and markup that gives Nuxt pages a reliable foundation.',
-      highlights: ['Semantic layouts', 'Accessible forms', 'SEO-ready structure']
+      highlights: [
+        'Semantic layouts',
+        'Accessible forms',
+        'SEO-ready structure'
+      ]
     },
     {
       title: 'CSS3',
@@ -93,12 +97,4 @@ const skillsContent: SkillsContent = {
       highlights: ['Version control', 'Reviewable changes', 'Release hygiene']
     }
   ]
-}
-
-export function createSkillsContent(): SkillsContent {
-  return skillsContent
-}
-
-export function useSkillsContent(): SkillsContent {
-  return createSkillsContent()
-}
+} as const satisfies SkillsContent

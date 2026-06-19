@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import SiteHeader from '~/features/navigation/SiteHeader.vue'
-import { useHeroContent } from '~/features/hero/useHeroContent'
-
-const hero = useHeroContent()
+import { heroContent } from '~/features/hero/content'
 </script>
 
 <template>
   <div class="min-h-screen bg-background text-foreground">
-    <SiteHeader :content="hero" />
+    <SiteHeader :content="heroContent" />
     <slot />
   </div>
 </template>

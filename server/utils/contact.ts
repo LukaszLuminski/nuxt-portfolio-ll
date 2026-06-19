@@ -1,11 +1,6 @@
-export interface ContactPayload {
-  name: string
-  email: string
-  subject: string
-  message: string
-  company?: string
-  elapsedMs?: number
-}
+import { contactFieldConstraints, type ContactPayload } from '~/shared/contact'
+
+export type { ContactPayload } from '~/shared/contact'
 
 export interface ContactValidationResult {
   data: ContactPayload | null
@@ -16,6 +11,10 @@ export interface ContactValidationResult {
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const minimumSubmitTimeMs = 1200
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
+
 function normalize(value: unknown): string {
   return typeof value === 'string' ? value.trim() : ''
 }
@@ -24,50 +23,68 @@ function getElapsedMs(value: unknown): number | undefined {
   return typeof value === 'number' && Number.isFinite(value) ? value : undefined
 }
 
-export function validateContactPayload(input: unknown): ContactValidationResult {
-  const source = typeof input === 'object' && input !== null
-    ? input as Record<string, unknown>
-    : {}
+export function validateContactPayload(
+  input: unknown
+): ContactValidationResult {
+  const source = isRecord(input) ? input : {}
+  const { company, elapsedMs, email, message, name, subject } = source
   const data: ContactPayload = {
-    name: normalize(source.name),
-    email: normalize(source.email),
-    subject: normalize(source.subject),
-    message: normalize(source.message),
-    company: normalize(source.company),
-    elapsedMs: getElapsedMs(source.elapsedMs)
+    name: normalize(name),
+    email: normalize(email),
+    subject: normalize(subject),
+    message: normalize(message),
+    company: normalize(company),
+    elapsedMs: getElapsedMs(elapsedMs)
   }
   const errors: string[] = []
-  const isSpam = Boolean(data.company) ||
+  const isSpam =
+    Boolean(data.company) ||
     (typeof data.elapsedMs === 'number' && data.elapsedMs < minimumSubmitTimeMs)
 
-  if (data.name.length < 2 || data.name.length > 80) {
-    errors.push('Name must be between 2 and 80 characters.')
+  const {
+    name: nameLimits,
+    email: emailLimits,
+    subject: subjectLimits,
+    message: messageLimits
+  } = contactFieldConstraints
+
+  if (data.name.length < nameLimits.min || data.name.length > nameLimits.max) {
+    errors.push(
+      `Name must be between ${nameLimits.min} and ${nameLimits.max} characters.`
+    )
   }
 
-  if (!emailPattern.test(data.email) || data.email.length > 120) {
+  if (!emailPattern.test(data.email) || data.email.length > emailLimits.max) {
     errors.push('Email must be a valid email address.')
   }
 
-  if (data.subject.length < 3 || data.subject.length > 120) {
-    errors.push('Subject must be between 3 and 120 characters.')
+  if (
+    data.subject.length < subjectLimits.min ||
+    data.subject.length > subjectLimits.max
+  ) {
+    errors.push(
+      `Subject must be between ${subjectLimits.min} and ${subjectLimits.max} characters.`
+    )
   }
 
-  if (data.message.length < 20 || data.message.length > 4000) {
-    errors.push('Message must be between 20 and 4000 characters.')
+  if (
+    data.message.length < messageLimits.min ||
+    data.message.length > messageLimits.max
+  ) {
+    errors.push(
+      `Message must be between ${messageLimits.min} and ${messageLimits.max} characters.`
+    )
   }
 
   return {
-    data: errors.length || isSpam ? null : data,
+    data: errors.length > 0 || isSpam ? null : data,
     errors,
     isSpam
   }
 }
 
 export async function deliverContactMessage(payload: ContactPayload) {
-  const config = useRuntimeConfig()
-  const resendApiKey = String(config.resendApiKey || '')
-  const contactToEmail = String(config.contactToEmail || '')
-  const contactFromEmail = String(config.contactFromEmail || '')
+  const { contactFromEmail, contactToEmail, resendApiKey } = useRuntimeConfig()
 
   if (!resendApiKey || !contactToEmail || !contactFromEmail) {
     return {
@@ -75,6 +92,8 @@ export async function deliverContactMessage(payload: ContactPayload) {
       reason: 'Contact email delivery is not configured.'
     }
   }
+
+  const { email, message, name, subject } = payload
 
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -85,14 +104,14 @@ export async function deliverContactMessage(payload: ContactPayload) {
     body: JSON.stringify({
       from: contactFromEmail,
       to: [contactToEmail],
-      reply_to: payload.email,
-      subject: `Portfolio contact: ${payload.subject}`,
+      reply_to: email,
+      subject: `Portfolio contact: ${subject}`,
       text: [
-        `Name: ${payload.name}`,
-        `Email: ${payload.email}`,
-        `Subject: ${payload.subject}`,
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Subject: ${subject}`,
         '',
-        payload.message
+        message
       ].join('\n')
     })
   })

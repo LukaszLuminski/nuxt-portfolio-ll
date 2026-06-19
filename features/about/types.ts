@@ -9,6 +9,6 @@ export interface AboutContent {
   intro: string
   image: string
   imageAlt: string
-  paragraphs: string[]
-  milestones: AboutMilestone[]
+  paragraphs: readonly string[]
+  milestones: readonly AboutMilestone[]
 }

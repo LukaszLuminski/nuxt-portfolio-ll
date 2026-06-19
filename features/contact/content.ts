@@ -1,6 +1,6 @@
 import type { ContactContent } from './types'
 
-const contactContent: ContactContent = {
+export const contactContent = {
   eyebrow: 'Contact',
   title: "Let's talk",
   intro:
@@ -9,7 +9,8 @@ const contactContent: ContactContent = {
   linksLabel: 'Elsewhere',
   submitLabel: 'Send message',
   successMessage: 'Thanks, your message has been sent.',
-  errorMessage: 'Something went wrong. Please try again or use one of the links below.',
+  errorMessage:
+    'Something went wrong. Please try again or use one of the links below.',
   links: [
     {
       label: 'LinkedIn',
@@ -24,12 +25,4 @@ const contactContent: ContactContent = {
       type: 'github'
     }
   ]
-}
-
-export function createContactContent(): ContactContent {
-  return contactContent
-}
-
-export function useContactContent(): ContactContent {
-  return createContactContent()
-}
+} as const satisfies ContactContent

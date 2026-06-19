@@ -1,7 +1,6 @@
 import type { Config } from 'tailwindcss'
-import animate from 'tailwindcss-animate'
 
-export default <Partial<Config>>{
+export default {
   darkMode: ['class'],
   content: [
     './app.vue',
@@ -59,28 +58,9 @@ export default <Partial<Config>>{
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
       },
       boxShadow: {
-        glow: '0 0 80px rgba(72, 121, 255, 0.20)',
         line: 'inset 0 1px 0 rgba(255,255,255,0.08)'
-      },
-      backgroundImage: {
-        grid: 'linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px)',
-        'hero-radial': 'radial-gradient(circle at 46% 0%, rgba(94, 154, 255, 0.24), transparent 38%), radial-gradient(circle at 86% 18%, rgba(251, 146, 60, 0.14), transparent 30%)'
-      },
-      keyframes: {
-        'border-flow': {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' }
-        },
-        'pulse-line': {
-          '0%, 100%': { opacity: '0.32', transform: 'scaleX(0.72)' },
-          '50%': { opacity: '0.9', transform: 'scaleX(1)' }
-        }
-      },
-      animation: {
-        'border-flow': 'border-flow 8s ease infinite',
-        'pulse-line': 'pulse-line 3.8s ease-in-out infinite'
       }
     }
   },
-  plugins: [animate]
-}
+  plugins: []
+} satisfies Partial<Config>

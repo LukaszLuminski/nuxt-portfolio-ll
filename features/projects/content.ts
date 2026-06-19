@@ -1,6 +1,6 @@
 import type { ProjectsContent } from './types'
 
-const projectsContent: ProjectsContent = {
+export const projectsContent = {
   eyebrow: 'Portfolio',
   title: 'Selected work',
   intro:
@@ -10,12 +10,4 @@ const projectsContent: ProjectsContent = {
     technical: 'Technical projects',
     archive: 'Earlier experiments'
   }
-}
-
-export function createProjectsContent(): ProjectsContent {
-  return projectsContent
-}
-
-export function useProjectsContent(): ProjectsContent {
-  return createProjectsContent()
-}
+} as const satisfies ProjectsContent

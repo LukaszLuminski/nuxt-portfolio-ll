@@ -8,17 +8,21 @@ export interface HeroLink {
   href: string
 }
 
+export interface HeroSocialLink extends HeroLink {
+  type: 'github' | 'linkedin'
+}
+
 export interface HeroContent {
   brandLabel: string
   name: string
   introLabel: string
-  nav: HeroLink[]
-  social: HeroLink[]
+  nav: readonly HeroLink[]
+  social: readonly HeroSocialLink[]
   headline: string
   subheadline: string
   positioning: string
   primaryCta: string
   secondaryCta: string
-  metrics: HeroMetric[]
-  technologies: string[]
+  metrics: readonly HeroMetric[]
+  technologies: readonly string[]
 }

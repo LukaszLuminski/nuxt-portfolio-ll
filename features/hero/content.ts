@@ -1,19 +1,6 @@
 import type { HeroContent } from './types'
 
-const technologies = [
-  'HTML5',
-  'CSS3',
-  'JavaScript',
-  'TypeScript',
-  'Vue 3',
-  'Nuxt 3',
-  'Pinia',
-  'Storybook',
-  'Vitest',
-  'Git'
-]
-
-const heroContent: HeroContent = {
+export const heroContent = {
   brandLabel: 'LukaszLuminski',
   name: 'Lukasz Luminski',
   introLabel: "Hello, I'm Lukasz",
@@ -24,8 +11,16 @@ const heroContent: HeroContent = {
     { label: 'Contact', href: '#contact' }
   ],
   social: [
-    { label: 'GitHub', href: 'https://github.com/LukaszLuminski' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/lukasz-luminski' }
+    {
+      label: 'GitHub',
+      href: 'https://github.com/LukaszLuminski',
+      type: 'github'
+    },
+    {
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/lukasz-luminski',
+      type: 'linkedin'
+    }
   ],
   headline: 'Frontend Developer',
   subheadline:
@@ -39,13 +34,16 @@ const heroContent: HeroContent = {
     { value: 'Vue', label: 'core framework and component expertise' },
     { value: 'Nuxt', label: 'production-ready web experiences' }
   ],
-  technologies
-}
-
-export function createHeroContent(): HeroContent {
-  return heroContent
-}
-
-export function useHeroContent(): HeroContent {
-  return createHeroContent()
-}
+  technologies: [
+    'HTML5',
+    'CSS3',
+    'JavaScript',
+    'TypeScript',
+    'Vue 3',
+    'Nuxt 3',
+    'Pinia',
+    'Storybook',
+    'Vitest',
+    'Git'
+  ]
+} as const satisfies HeroContent

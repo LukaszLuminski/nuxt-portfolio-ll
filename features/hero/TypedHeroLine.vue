@@ -20,7 +20,9 @@ const isComplete = ref(false)
 let timeoutId: ReturnType<typeof setTimeout> | undefined
 
 function clearTypingTimer() {
-  if (!timeoutId) return
+  if (timeoutId === undefined) {
+    return
+  }
 
   clearTimeout(timeoutId)
   timeoutId = undefined
@@ -50,7 +52,10 @@ watch(() => props.text, startTyping)
 </script>
 
 <template>
-  <span class="relative inline-block max-w-full overflow-hidden whitespace-nowrap" :aria-label="text">
+  <span
+    class="relative inline-block max-w-full overflow-hidden whitespace-nowrap"
+    :aria-label="text"
+  >
     <span class="invisible" aria-hidden="true">{{ text }}</span>
     <span
       class="absolute inset-0 inline-flex items-center whitespace-nowrap"

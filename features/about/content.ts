@@ -1,6 +1,6 @@
 import type { AboutContent } from './types'
 
-const aboutContent: AboutContent = {
+export const aboutContent = {
   eyebrow: 'Background',
   title: 'My story',
   intro:
@@ -18,12 +18,4 @@ const aboutContent: AboutContent = {
     { label: 'Core ecosystem', value: 'Vue and Nuxt' },
     { label: 'Component workflow', value: 'Storybook and Vitest' }
   ]
-}
-
-export function createAboutContent(): AboutContent {
-  return aboutContent
-}
-
-export function useAboutContent(): AboutContent {
-  return createAboutContent()
-}
+} as const satisfies AboutContent

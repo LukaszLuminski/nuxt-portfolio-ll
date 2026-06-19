@@ -14,18 +14,18 @@ export interface Project {
   summary: string
   image: string
   imageAlt: string
-  stack: string[]
-  highlights: string[]
-  details: string[]
+  stack: readonly string[]
+  highlights: readonly string[]
+  details: readonly string[]
   frontEnd: string | null
   backEnd: string | null
   database: string | null
-  links: ProjectLink[]
+  links: readonly ProjectLink[]
 }
 
 export interface ProjectsContent {
   eyebrow: string
   title: string
   intro: string
-  groups: Record<ProjectGroup, string>
+  groups: Readonly<Record<ProjectGroup, string>>
 }

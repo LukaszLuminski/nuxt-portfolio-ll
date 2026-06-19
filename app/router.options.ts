@@ -1,10 +1,20 @@
 import type { RouterConfig } from '@nuxt/schema'
+import {
+  clearStoredScrollY,
+  clearTargetSection,
+  getReturnProjectSlug,
+  getStoredScrollY,
+  getTargetSection
+} from '~/utils/portfolioNavigation'
 
 export default {
   scrollBehavior(to, from, savedPosition) {
-    const returnProject = sessionStorage.getItem('portfolio-return-project')
+    const returnProject = getReturnProjectSlug()
 
-    if (returnProject && (to.path === '/' || to.path.startsWith('/projects/'))) {
+    if (
+      returnProject &&
+      (to.path === '/' || to.path.startsWith('/projects/'))
+    ) {
       return false
     }
 
@@ -12,15 +22,15 @@ export default {
       return { left: 0, top: 0, behavior: 'auto' }
     }
 
-    const targetSection = sessionStorage.getItem('portfolio-target-section')
-    const scrollY = sessionStorage.getItem('portfolio-scroll-y')
+    const targetSection = getTargetSection()
+    const scrollY = getStoredScrollY()
 
     if (returnProject) {
       return false
     }
 
     if (targetSection) {
-      sessionStorage.removeItem('portfolio-target-section')
+      clearTargetSection()
 
       return {
         el: `#${targetSection}`,
@@ -30,7 +40,7 @@ export default {
     }
 
     if (scrollY) {
-      sessionStorage.removeItem('portfolio-scroll-y')
+      clearStoredScrollY()
 
       return {
         left: 0,

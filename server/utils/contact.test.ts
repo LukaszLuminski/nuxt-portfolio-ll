@@ -38,7 +38,11 @@ describe('validateContactPayload', () => {
   })
 
   it('flags honeypot and too-fast submissions as spam', () => {
-    expect(validateContactPayload({ ...validPayload, company: 'bot' }).isSpam).toBe(true)
-    expect(validateContactPayload({ ...validPayload, elapsedMs: 300 }).isSpam).toBe(true)
+    expect(
+      validateContactPayload({ ...validPayload, company: 'bot' }).isSpam
+    ).toBe(true)
+    expect(
+      validateContactPayload({ ...validPayload, elapsedMs: 300 }).isSpam
+    ).toBe(true)
   })
 })
