@@ -4,6 +4,7 @@ import { aboutContent } from '~/features/about/content'
 import ContactSection from '~/features/contact/ContactSection.vue'
 import { contactContent } from '~/features/contact/content'
 import HeroSection from '~/features/hero/HeroSection.vue'
+import IntroScreen from '~/features/hero/IntroScreen.vue'
 import { heroContent } from '~/features/hero/content'
 import ProjectsSection from '~/features/projects/ProjectsSection.vue'
 import { projectsContent } from '~/features/projects/content'
@@ -12,10 +13,15 @@ import { skillsContent } from '~/features/skills/content'
 
 const { data: projects } = await useProjects()
 const { isRestoringProjectScroll } = useProjectScrollRestoration()
+const hasPlayedIntro = useState('has-played-intro', () => false)
 const {
   public: { siteUrl }
 } = useRuntimeConfig()
 const sameAs = heroContent.social.map(({ href }) => href)
+
+function finishIntro() {
+  hasPlayedIntro.value = true
+}
 
 const personJsonLd = {
   '@context': 'https://schema.org',
@@ -52,11 +58,19 @@ useHead({
 </script>
 
 <template>
-  <main :class="isRestoringProjectScroll ? 'invisible' : ''">
-    <HeroSection :content="heroContent" />
-    <ProjectsSection :content="projectsContent" :projects="projects" />
-    <SkillsSection :content="skillsContent" />
-    <AboutSection :content="aboutContent" />
-    <ContactSection :content="contactContent" />
-  </main>
+  <div class="contents">
+    <IntroScreen
+      v-if="!hasPlayedIntro"
+      :name="heroContent.name"
+      @finished="finishIntro"
+    />
+
+    <main :class="isRestoringProjectScroll ? 'invisible' : ''">
+      <HeroSection :content="heroContent" />
+      <ProjectsSection :content="projectsContent" :projects="projects" />
+      <SkillsSection :content="skillsContent" />
+      <AboutSection :content="aboutContent" />
+      <ContactSection :content="contactContent" />
+    </main>
+  </div>
 </template>

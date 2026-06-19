@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import BrandIcon from '~/components/icons/BrandIcon.vue'
-import TypedHeroLine from './TypedHeroLine.vue'
 import type { HeroContent } from './types'
 
 const { content } = defineProps<{
@@ -26,6 +25,8 @@ function scrollToSection(sectionId: string) {
     <img
       src="/images/legacy-hero-bg.jpg"
       alt=""
+      data-hero-image
+      fetchpriority="high"
       class="absolute inset-0 h-full w-full object-cover"
     />
     <div class="absolute inset-0 bg-black/30" />
@@ -41,49 +42,24 @@ function scrollToSection(sectionId: string) {
           class="mx-auto flex w-full min-w-0 max-w-3xl flex-col items-center"
         >
           <h1
-            v-motion
-            :initial="{ opacity: 0 }"
-            :enter="{ opacity: 1, transition: { duration: 620, delay: 320 } }"
             class="w-full max-w-[620px] text-[2rem] font-light leading-[1.08] tracking-normal text-white sm:text-[3.25rem]"
           >
-            <TypedHeroLine
-              :text="content.introLabel"
-              :delay="520"
-              :speed="48"
-              cursor-height-class="h-[0.9em]"
-            />
+            {{ content.introLabel }}
           </h1>
 
           <div
-            v-motion
-            :initial="{ opacity: 0 }"
-            :enter="{ opacity: 1, transition: { duration: 520, delay: 1900 } }"
-            class="mt-3 min-h-[34px] w-full max-w-[620px] text-[1.75rem] font-normal leading-[1.12] text-white sm:min-h-[50px] sm:text-[2.77rem]"
+            class="mt-3 w-full max-w-[620px] text-[1.75rem] font-normal leading-[1.12] text-white sm:text-[2.77rem]"
           >
-            <TypedHeroLine :text="content.headline" :delay="2200" :speed="42" />
+            {{ content.headline }}
           </div>
 
           <p
-            v-motion
-            :initial="{ opacity: 0, y: 18 }"
-            :enter="{
-              opacity: 1,
-              y: 0,
-              transition: { duration: 520, delay: 3440 }
-            }"
             class="mt-6 max-w-[420px] text-balance text-center text-[0.95rem] font-medium leading-6 text-white/80 sm:max-w-[620px] sm:text-lg sm:leading-7"
           >
             {{ content.subheadline }}
           </p>
 
           <div
-            v-motion
-            :initial="{ opacity: 0, y: 16 }"
-            :enter="{
-              opacity: 1,
-              y: 0,
-              transition: { duration: 520, delay: 3900 }
-            }"
             class="mt-10 flex flex-wrap items-center justify-center gap-12 text-white/70 sm:mt-12"
           >
             <a
@@ -103,16 +79,7 @@ function scrollToSection(sectionId: string) {
             </a>
           </div>
 
-          <div
-            v-motion
-            :initial="{ opacity: 0, y: 16 }"
-            :enter="{
-              opacity: 1,
-              y: 0,
-              transition: { duration: 520, delay: 4300 }
-            }"
-            class="mt-10 flex w-full max-w-[382px] flex-col gap-4 sm:mt-12"
-          >
+          <div class="mt-10 flex w-full max-w-[382px] flex-col gap-4 sm:mt-12">
             <button
               v-for="{ label, sectionId } in ctaLinks"
               :key="sectionId"
