@@ -2,31 +2,32 @@
 
 ## Positioning
 
-The site positions an experienced Vue 3 developer as an AI-enabled full-stack product engineer: someone who can define, design, build, and operate complete AI SaaS products.
+The site positions an experienced frontend developer who specialises in Vue and Nuxt and builds responsive, accessible, maintainable interfaces.
 
 ## Homepage Flow
 
 1. Hero
-   - Promise: modern AI-powered web products with Vue, Node.js, and LLM integrations.
-   - Proof signals: years of product engineering, faster prototype-to-production loops, SSR/Nitro delivery.
-   - Visual metaphor: AI product runtime showing prompt, retrieval, model, and typed action layers.
+   - Promise: thoughtful frontend development with Vue, Nuxt, and TypeScript.
+   - Proof signals: professional frontend work since 2020, a focused Vue ecosystem, and delivered project experience.
+   - Visual direction: confident interface craft with clear typography, restrained motion, and accessible interaction.
 
 2. Selected Projects
-   - Three fictional premium case studies presented as SaaS product systems.
-   - Each project should include overview, stack, architecture highlights, challenges, outcomes, and product mockups.
+   - Real client work, Vue and Nuxt builds, and earlier projects presented in proportion.
+   - Each project includes its purpose, stack, implementation details, and relevant links.
 
-3. AI Engineering Capabilities
-   - RAG, embeddings, eval loops, tool calling, streaming UX, AI agent orchestration, observability.
+3. Frontend Skills
+   - HTML, CSS, JavaScript, TypeScript, Vue, Nuxt, Pinia, Storybook, Vitest, and Git.
+   - Skills are grounded in professional experience and demonstrated project work.
 
-4. Full-Stack Architecture
-   - Nuxt SSR, Nitro APIs, Node services, PostgreSQL/Prisma, Redis queues, realtime systems, Dockerized delivery.
+4. Frontend Practice
+   - Component architecture, state management, responsive layouts, accessibility, testing, and maintainable delivery.
 
 5. About / Philosophy
-   - Product-minded engineering, taste for interface quality, pragmatic AI adoption, maintainable systems.
+   - A career path shaped by teaching, creativity, curiosity, and care for usable interfaces.
 
 6. Contact CTA
-   - A focused invitation for AI SaaS builds, prototypes, modernization, or fractional product engineering.
+   - A focused invitation to discuss frontend roles and web projects.
 
 ## Current Implementation Scope
 
-Only the homepage hero is implemented in this iteration. The folder structure, content model, UI primitive, SEO foundation, Tailwind theme, and motion setup are ready for progressive implementation of the remaining sections.
+The homepage includes hero, selected projects, skills, about, and contact sections, supported by project detail pages and content-driven project data.

@@ -16,7 +16,7 @@ const { content } = defineProps<{
     <div class="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#05070c] to-transparent" />
 
     <div class="container relative">
-      <div class="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
+      <div class="grid gap-10 lg:grid-cols-[minmax(250px,0.55fr)_minmax(0,1.45fr)] lg:gap-12">
         <div class="lg:sticky lg:top-28 lg:self-start">
           <p class="text-sm font-semibold uppercase tracking-[0.22em] text-sky-200/55">
             {{ content.eyebrow }}
@@ -29,7 +29,7 @@ const { content } = defineProps<{
           </p>
         </div>
 
-        <div class="grid gap-5">
+        <div>
           <div class="flex items-center gap-4">
             <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-100/55">
               Personal background
@@ -37,49 +37,44 @@ const { content } = defineProps<{
             <div class="h-px flex-1 bg-gradient-to-r from-sky-300/25 via-white/10 to-transparent" />
           </div>
 
-          <article class="overflow-hidden rounded border border-white/10 bg-[radial-gradient(circle_at_18%_10%,rgba(56,189,248,0.12),transparent_34%),rgba(255,255,255,0.04)] shadow-line">
-            <div class="grid md:grid-cols-[220px_1fr] lg:grid-cols-[260px_1fr]">
-              <div class="bg-[#090c12]/85 px-6 pt-6 md:bg-black/30 md:p-0">
-                <div class="relative mx-auto aspect-[9/16] w-full max-w-[240px] overflow-hidden rounded border border-white/10 bg-black/30 md:h-full md:min-h-full md:max-w-none md:rounded-none md:border-0">
-                  <img
-                    :src="content.image"
-                    :alt="content.imageAlt"
-                    class="absolute inset-0 h-full w-full object-cover object-[50%_18%] opacity-90 md:object-[50%_22%] lg:object-center"
-                    loading="lazy"
-                  >
-                  <div class="absolute inset-0 bg-gradient-to-t from-[#090c12] via-transparent to-transparent md:bg-gradient-to-r" />
-                </div>
-              </div>
+          <article class="mt-5 overflow-hidden rounded border border-white/10 bg-[radial-gradient(circle_at_18%_10%,rgba(56,189,248,0.12),transparent_34%),rgba(255,255,255,0.04)] shadow-line">
+            <div class="flow-root bg-[#090c12]/85 p-6 sm:p-8">
+            <figure class="mx-auto mb-6 w-full max-w-[220px] overflow-hidden rounded border border-white/10 bg-black/30 shadow-[0_18px_45px_rgba(0,0,0,0.32)] sm:float-left sm:mb-4 sm:mr-7 sm:w-[190px] lg:w-[200px]">
+              <img
+                :src="content.image"
+                :alt="content.imageAlt"
+                class="aspect-[2/3] h-auto w-full object-cover object-[50%_18%] opacity-95"
+                loading="lazy"
+              >
+            </figure>
 
-              <div class="bg-[#090c12]/85 p-6 sm:p-8">
-                <div class="space-y-5 text-sm leading-7 text-white/68 sm:text-base sm:leading-8">
-                  <p v-for="paragraph in content.paragraphs" :key="paragraph">
-                    {{ paragraph }}
-                  </p>
-                </div>
-              </div>
+            <div class="space-y-5 text-sm leading-7 text-white/68 sm:text-base sm:leading-8">
+              <p v-for="paragraph in content.paragraphs" :key="paragraph">
+                {{ paragraph }}
+              </p>
+            </div>
             </div>
           </article>
 
-          <div class="flex items-center gap-4 pt-5">
-            <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-100/55">
-              At a glance
-            </h3>
-            <div class="h-px flex-1 bg-gradient-to-r from-sky-300/25 via-white/10 to-transparent" />
+          <div class="mt-10 flex items-center gap-4">
+          <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-100/55">
+            At a glance
+          </h3>
+          <div class="h-px flex-1 bg-gradient-to-r from-sky-300/25 via-white/10 to-transparent" />
           </div>
 
-          <div class="grid gap-4 sm:grid-cols-3">
+          <div class="mt-5 grid gap-4 sm:grid-cols-3">
             <div
               v-for="{ label, value } in content.milestones"
               :key="label"
-              class="rounded border border-white/10 bg-[#090c12]/85 p-5 shadow-line"
+              class="rounded border border-white/10 bg-[#090c12]/85 px-4 py-5 shadow-line"
             >
-              <p class="text-2xl font-semibold leading-none text-white">
-                {{ value }}
-              </p>
-              <p class="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-sky-100/52">
-                {{ label }}
-              </p>
+            <p class="whitespace-nowrap text-lg font-semibold leading-none text-white">
+              {{ value }}
+            </p>
+            <p class="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-sky-100/52">
+              {{ label }}
+            </p>
             </div>
           </div>
         </div>

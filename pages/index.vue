@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import AboutSection from '~/features/about/AboutSection.vue'
 import { useAboutContent } from '~/features/about/useAboutContent'
+import ContactSection from '~/features/contact/ContactSection.vue'
+import { useContactContent } from '~/features/contact/useContactContent'
 import HeroSection from '~/features/hero/HeroSection.vue'
 import { useHeroContent } from '~/features/hero/useHeroContent'
 import ProjectsSection from '~/features/projects/ProjectsSection.vue'
@@ -13,6 +15,7 @@ const hero = useHeroContent()
 const projectsContent = useProjectsContent()
 const skillsContent = useSkillsContent()
 const aboutContent = useAboutContent()
+const contactContent = useContactContent()
 const { data: projects } = await useAsyncData('projects', () =>
   $fetch<Project[]>('/api/projects')
 )
@@ -67,7 +70,7 @@ const personJsonLd = {
   name: hero.name,
   alternateName: ['Łukasz Łumiński', hero.brandLabel],
   url: siteUrl,
-  jobTitle: 'Vue/Nuxt Product Engineer',
+  jobTitle: 'Frontend Developer',
   description: hero.positioning,
   knowsAbout: hero.technologies,
   sameAs
@@ -102,5 +105,6 @@ useHead({
     <ProjectsSection :content="projectsContent" :projects="resolvedProjects" />
     <SkillsSection :content="skillsContent" />
     <AboutSection :content="aboutContent" />
+    <ContactSection :content="contactContent" />
   </main>
 </template>

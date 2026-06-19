@@ -1,10 +1,10 @@
 import type { ProjectsContent } from './types'
 
 const projectsContent: ProjectsContent = {
-  eyebrow: 'Selected work',
-  title: 'Projects with real delivery context',
+  eyebrow: 'Portfolio',
+  title: 'Selected work',
   intro:
-    'A first pass at the existing portfolio projects: client work, Vue/Nuxt builds, and older experiments kept in proportion while the next AI and Node.js projects take shape.',
+    'A selection of client work, Vue and Nuxt builds, and earlier projects that show how my frontend skills have developed in practice.',
   groups: {
     client: 'Client work',
     technical: 'Technical projects',

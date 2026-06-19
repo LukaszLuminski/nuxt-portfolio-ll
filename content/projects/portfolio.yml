@@ -15,7 +15,7 @@ highlights:
 details:
   - The previous personal portfolio was built in 2020 with Nuxt.js and Vuetify.
   - It was deployed to Netlify and used a serverless contact form.
-  - This new portfolio keeps the original visual spirit while moving the positioning toward AI-enabled full-stack product engineering.
+  - This new portfolio keeps the original visual spirit while presenting a clearer focus on frontend development with Vue and Nuxt.
 frontEnd: Nuxt.js, Vuetify, SCSS
 backEnd: Netlify Functions
 database:

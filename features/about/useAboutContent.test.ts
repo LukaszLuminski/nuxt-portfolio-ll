@@ -5,8 +5,8 @@ describe('useAboutContent', () => {
   it('adapts the legacy about story for the current portfolio', () => {
     const about = createAboutContent()
 
-    expect(about.eyebrow).toBe('About me')
-    expect(about.title).toContain('teaching')
+    expect(about.eyebrow).toBe('Background')
+    expect(about.title).toBe('My story')
     expect(about.intro).toContain('English teacher')
     expect(about.image).toBe('/images/about/lukasz.jpg')
     expect(about.paragraphs).toHaveLength(4)
@@ -19,9 +19,9 @@ describe('useAboutContent', () => {
     expect(milestones).toEqual([
       { label: 'Professional frontend work', value: 'Since 2020' },
       { label: 'Core ecosystem', value: 'Vue and Nuxt' },
-      { label: 'Current direction', value: 'Node.js and AI' }
+      { label: 'Component workflow', value: 'Storybook and Vitest' }
     ])
-    expect(paragraphs.join(' ')).toContain('Node.js backends')
-    expect(paragraphs.join(' ')).toContain('AI-powered workflows')
+    expect(paragraphs.join(' ')).toContain('Vue, Nuxt, and TypeScript')
+    expect(paragraphs.join(' ')).toContain('state management, and testing')
   })
 })

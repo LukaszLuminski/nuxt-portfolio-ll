@@ -1,18 +1,16 @@
 import type { HeroContent } from './types'
 
 const technologies = [
+  'HTML5',
+  'CSS3',
+  'JavaScript',
+  'TypeScript',
   'Vue 3',
   'Nuxt 3',
-  'Node.js',
-  'PostgreSQL',
-  'Prisma',
-  'OpenAI API',
-  'AI SDK',
-  'RAG',
-  'Vector DBs',
-  'Docker',
-  'Redis',
-  'Realtime'
+  'Pinia',
+  'Storybook',
+  'Vitest',
+  'Git'
 ]
 
 const heroContent: HeroContent = {
@@ -29,16 +27,17 @@ const heroContent: HeroContent = {
     { label: 'GitHub', href: 'https://github.com/LukaszLuminski' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/lukasz-luminski' }
   ],
-  headline: 'Vue/Nuxt product engineer',
-  subheadline: 'Building modern web apps, Node.js backends, and useful AI-powered workflows.',
+  headline: 'Frontend Developer',
+  subheadline:
+    'Specialising in Vue, Nuxt, and TypeScript, I build responsive, accessible interfaces with careful attention to usability and detail.',
   positioning:
-    'Vue/Nuxt product engineer building modern web apps, Node.js backends, and useful AI-powered workflows.',
+    'Frontend Developer specialising in Vue and Nuxt, building responsive, accessible web interfaces with TypeScript and a careful eye for usability and detail.',
   primaryCta: 'See my projects',
   secondaryCta: 'Read more about me',
   metrics: [
-    { value: '10+', label: 'years shipping product interfaces' },
-    { value: 'Vue', label: 'deep Nuxt ecosystem specialization' },
-    { value: 'Node', label: 'backends, APIs and AI integrations' }
+    { value: '2020', label: 'working professionally in frontend development' },
+    { value: 'Vue', label: 'core framework and component expertise' },
+    { value: 'Nuxt', label: 'production-ready web experiences' }
   ],
   technologies
 }

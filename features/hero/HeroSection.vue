@@ -29,8 +29,8 @@ function scrollToSection(sectionId: string) {
       alt=""
       class="absolute inset-0 h-full w-full object-cover"
     >
-    <div class="absolute inset-0 bg-black/15" />
-    <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,6,8,0)_0%,rgba(4,6,8,0.08)_44%,rgba(4,6,8,0.34)_100%)]" />
+    <div class="absolute inset-0 bg-black/30" />
+    <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,6,8,0.05)_0%,rgba(4,6,8,0.16)_44%,rgba(4,6,8,0.58)_100%)]" />
 
     <div class="container relative flex min-h-screen flex-col pt-20">
       <div class="flex flex-1 items-center justify-center pb-10 pt-6 text-center sm:pb-16 sm:pt-8">
@@ -39,7 +39,7 @@ function scrollToSection(sectionId: string) {
             v-motion
             :initial="{ opacity: 0 }"
             :enter="{ opacity: 1, transition: { duration: 620, delay: 320 } }"
-            class="w-full max-w-[560px] text-[2rem] font-light leading-tight tracking-normal text-white sm:text-6xl"
+            class="w-full max-w-[620px] text-[2rem] font-light leading-[1.08] tracking-normal text-white sm:text-[3.25rem]"
           >
             <TypedHeroLine
               :text="content.introLabel"
@@ -53,7 +53,7 @@ function scrollToSection(sectionId: string) {
             v-motion
             :initial="{ opacity: 0 }"
             :enter="{ opacity: 1, transition: { duration: 520, delay: 1900 } }"
-            class="mt-4 min-h-[30px] w-full max-w-[560px] text-xl font-normal leading-tight text-white sm:min-h-[48px] sm:text-[2.33rem]"
+            class="mt-3 min-h-[34px] w-full max-w-[620px] text-[1.75rem] font-normal leading-[1.12] text-white sm:min-h-[50px] sm:text-[2.77rem]"
           >
             <TypedHeroLine :text="content.headline" :delay="2200" :speed="42" />
           </div>
@@ -62,7 +62,7 @@ function scrollToSection(sectionId: string) {
             v-motion
             :initial="{ opacity: 0, y: 18 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 520, delay: 3440 } }"
-            class="mt-4 max-w-[360px] text-pretty text-[0.95rem] font-medium leading-6 text-white/80 sm:max-w-[483px] sm:text-lg sm:leading-7"
+            class="mt-6 max-w-[420px] text-balance text-center text-[0.95rem] font-medium leading-6 text-white/80 sm:max-w-[620px] sm:text-lg sm:leading-7"
           >
             {{ content.subheadline }}
           </p>

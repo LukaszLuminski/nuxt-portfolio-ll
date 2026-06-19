@@ -13,6 +13,7 @@ export default defineConfig({
     include: [
       'components/**/*.test.ts',
       'features/**/*.test.ts',
+      'server/**/*.test.ts',
       'utils/**/*.test.ts'
     ],
     setupFiles: ['tests/setup/vitest.ts']

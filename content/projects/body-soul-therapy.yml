@@ -15,7 +15,7 @@ highlights:
   - Mailchimp integration
 details:
   - The website was deployed with Netlify and uses Netlify functions for integrations such as Mailchimp and the contact form.
-  - It represents a practical client build with a clear service business goal and a lightweight serverless backend.
+  - It represents a practical client build with a clear service business goal and lightweight serverless integrations.
   - The project can later be revisited with a CMS and a more modern Nuxt implementation.
 frontEnd: Nuxt.js, BootstrapVue, SCSS
 backEnd: Netlify Functions

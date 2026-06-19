@@ -5,30 +5,34 @@ describe('useSkillsContent', () => {
   it('provides grouped skills content for the homepage section', () => {
     const { eyebrow, groups, intro, skills, title } = createSkillsContent()
 
-    expect(eyebrow).toBe('Skills')
-    expect(title).toContain('AI')
-    expect(intro).toContain('Node.js services')
+    expect(eyebrow).toBe('Expertise')
+    expect(title).toBe('What I work with')
+    expect(intro).toContain('Vue ecosystem')
     expect(groups).toEqual({
-      frontend: 'Interface engineering',
-      backend: 'Backend foundations',
-      ai: 'AI workflows',
+      foundations: 'Frontend foundations',
+      ecosystem: 'Vue ecosystem',
+      quality: 'Component quality',
       delivery: 'Delivery habits'
     })
-    expect(skills).toHaveLength(14)
+    expect(skills).toHaveLength(10)
   })
 
-  it('includes the Node.js and AI skills needed for the new positioning', () => {
+  it('includes the frontend skills supported by professional experience', () => {
     const { skills } = createSkillsContent()
     const titles = skills.map(({ title }) => title)
 
     expect(titles).toEqual(
       expect.arrayContaining([
-        'Node.js',
-        'API Design',
-        'PostgreSQL & Prisma',
-        'OpenAI API',
-        'AI SDK',
-        'RAG Systems'
+        'HTML5',
+        'CSS3',
+        'JavaScript',
+        'TypeScript',
+        'Vue.js',
+        'Nuxt',
+        'Pinia',
+        'Storybook',
+        'Vitest',
+        'Git'
       ])
     )
     expect(new Set(titles).size).toBe(titles.length)

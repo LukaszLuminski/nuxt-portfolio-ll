@@ -22,6 +22,9 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
+    contactToEmail: process.env.CONTACT_TO_EMAIL || '',
+    contactFromEmail: process.env.CONTACT_FROM_EMAIL || '',
+    resendApiKey: process.env.RESEND_API_KEY || '',
     public: {
       siteUrl: 'https://lukaszluminski.com'
     }

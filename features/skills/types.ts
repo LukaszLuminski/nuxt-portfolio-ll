@@ -1,8 +1,8 @@
 export type SkillIcon =
   | { type: 'image'; src: string }
-  | { type: 'lucide'; name: 'bot' | 'brain' | 'database' | 'server' | 'workflow' }
+  | { type: 'lucide'; name: 'code' | 'store' | 'storybook' | 'test' }
 
-export type SkillGroup = 'frontend' | 'backend' | 'ai' | 'delivery'
+export type SkillGroup = 'foundations' | 'ecosystem' | 'quality' | 'delivery'
 
 export interface Skill {
   title: string
