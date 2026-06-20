@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowUp } from 'lucide-vue-next'
+import { ArrowUp } from '@lucide/vue'
 
 const { name } = defineProps<{
   name: string

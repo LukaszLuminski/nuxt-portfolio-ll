@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowUpRight, Code2, ExternalLink } from 'lucide-vue-next'
+import { ArrowUpRight, Code2, ExternalLink } from '@lucide/vue'
 import type { Component } from 'vue'
 import { rememberProjectPosition } from '~/utils/portfolioNavigation'
 import type { Project, ProjectLink } from './types'

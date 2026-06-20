@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowLeft, Code2, ExternalLink } from 'lucide-vue-next'
+import { ArrowLeft, Code2, ExternalLink } from '@lucide/vue'
 import type { Component } from 'vue'
 import type { ProjectLink } from '~/features/projects/types'
 import { getProjectReturnState } from '~/utils/portfolioNavigation'

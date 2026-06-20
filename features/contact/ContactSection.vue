@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LoaderCircle, Send } from 'lucide-vue-next'
+import { LoaderCircle, Send } from '@lucide/vue'
 import BrandIcon from '~/components/icons/BrandIcon.vue'
 import SectionDivider from '~/components/portfolio/SectionDivider.vue'
 import SectionSplitLayout from '~/components/portfolio/SectionSplitLayout.vue'
@@ -48,7 +48,7 @@ async function submitContactForm() {
       class="absolute inset-0 bg-[linear-gradient(rgba(214,231,236,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(214,231,236,0.035)_1px,transparent_1px)] bg-[size:44px_44px]"
     />
     <div
-      class="absolute inset-0 bg-[radial-gradient(ellipse_at_10%_0%,rgba(14,165,233,0.13),transparent_34%),radial-gradient(ellipse_at_88%_8%,rgba(245,158,11,0.11),transparent_34%),linear-gradient(180deg,rgba(6,8,13,1),rgba(5,7,12,0.99)_52%,rgba(3,5,9,1))]"
+      class="absolute inset-0 bg-[radial-gradient(ellipse_at_10%_0%,rgba(245,158,11,0.11),transparent_34%),radial-gradient(ellipse_at_88%_8%,rgba(14,165,233,0.13),transparent_34%),linear-gradient(180deg,rgba(6,8,13,1),rgba(5,7,12,0.99)_52%,rgba(3,5,9,1))]"
     />
     <div
       class="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#06080d] to-transparent"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Menu, X } from 'lucide-vue-next'
+import { Menu, X } from '@lucide/vue'
 import type { HeroContent } from '~/features/hero/types'
 import { storeTargetSection } from '~/utils/portfolioNavigation'
 

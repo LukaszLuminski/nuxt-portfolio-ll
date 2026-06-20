@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BookOpen, Braces, FlaskConical, Store } from 'lucide-vue-next'
+import { BookOpen, Braces, FlaskConical, Store } from '@lucide/vue'
 import type { Component } from 'vue'
 import type { Skill, SkillIcon } from './types'
 

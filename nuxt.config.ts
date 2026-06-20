@@ -6,6 +6,7 @@ const robotsDirective = indexingEnabled
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
+  srcDir: '.',
   devtools: { enabled: true },
   modules: ['@nuxt/eslint', '@nuxtjs/tailwindcss', '@vueuse/motion/nuxt'],
   css: ['~/assets/css/main.css'],
