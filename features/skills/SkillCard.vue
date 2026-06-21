@@ -34,8 +34,11 @@ const { setCardGlow } = useCardGlow()
             v-if="skill.icon.type === 'image'"
             :src="skill.icon.src"
             :alt="`${skill.title} logo`"
+            width="36"
+            height="36"
             class="size-9 object-contain"
             loading="lazy"
+            decoding="async"
           />
           <component
             :is="lucideIcon"

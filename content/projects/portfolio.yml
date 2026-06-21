@@ -3,7 +3,7 @@ slug: portfolio
 order: 50
 group: technical
 summary: The previous portfolio website, built with Nuxt.js and Vuetify.
-image: /images/projects/portfolio.jpg
+image: /images/projects/portfolio.webp
 imageAlt: Previous portfolio website interface
 stack:
   - Nuxt.js

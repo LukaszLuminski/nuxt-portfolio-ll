@@ -1,15 +1,24 @@
 <script setup lang="ts">
-import AboutSection from '~/features/about/AboutSection.vue'
 import { aboutContent } from '~/features/about/content'
-import ContactSection from '~/features/contact/ContactSection.vue'
 import { contactContent } from '~/features/contact/content'
 import HeroSection from '~/features/hero/HeroSection.vue'
 import IntroScreen from '~/features/hero/IntroScreen.vue'
 import { heroContent } from '~/features/hero/content'
-import ProjectsSection from '~/features/projects/ProjectsSection.vue'
 import { projectsContent } from '~/features/projects/content'
-import SkillsSection from '~/features/skills/SkillsSection.vue'
 import { skillsContent } from '~/features/skills/content'
+
+const ProjectsSection = defineLazyHydrationComponent('visible', () =>
+  import('~/features/projects/ProjectsSection.vue')
+)
+const SkillsSection = defineLazyHydrationComponent('visible', () =>
+  import('~/features/skills/SkillsSection.vue')
+)
+const AboutSection = defineLazyHydrationComponent('visible', () =>
+  import('~/features/about/AboutSection.vue')
+)
+const ContactSection = defineLazyHydrationComponent('visible', () =>
+  import('~/features/contact/ContactSection.vue')
+)
 
 const { data: projects } = await useProjects()
 const { isRestoringProjectScroll } = useProjectScrollRestoration()

@@ -46,7 +46,11 @@ async function waitForOpeningAssets() {
 }
 
 async function playIntro() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (
+    window.matchMedia(
+      '(max-width: 639px), (prefers-reduced-motion: reduce)'
+    ).matches
+  ) {
     emit('finished')
     return
   }
@@ -160,7 +164,7 @@ onBeforeUnmount(() => {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 639px), (prefers-reduced-motion: reduce) {
   .intro-screen {
     display: none;
   }

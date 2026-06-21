@@ -34,6 +34,10 @@ const { setCardGlow } = useCardGlow()
         <img
           :src="project.image"
           :alt="project.imageAlt"
+          width="800"
+          height="500"
+          loading="lazy"
+          decoding="async"
           class="h-full w-full object-cover opacity-[0.86] transition duration-500 group-hover:scale-[1.035] group-hover:opacity-100"
         />
         <div

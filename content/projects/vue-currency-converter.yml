@@ -3,7 +3,7 @@ slug: vue-currency-converter
 order: 40
 group: technical
 summary: Vue.js currency converter built with Vuetify, Vuex, Vue Router, and REST API endpoints.
-image: /images/projects/vue-currency-converter.jpg
+image: /images/projects/vue-currency-converter.webp
 imageAlt: Vue Currency Converter application interface
 stack:
   - Vue.js

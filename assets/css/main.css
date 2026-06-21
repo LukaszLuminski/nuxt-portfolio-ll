@@ -35,6 +35,11 @@
     letter-spacing: 0;
   }
 
+  section[id]:not(:first-child) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+
   ::selection {
     background: rgba(104, 168, 255, 0.28);
     color: white;

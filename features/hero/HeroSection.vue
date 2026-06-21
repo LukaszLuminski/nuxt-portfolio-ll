@@ -22,13 +22,22 @@ function scrollToSection(sectionId: string) {
   <section
     class="relative min-h-screen overflow-hidden bg-[#060708] text-white"
   >
-    <img
-      src="/images/legacy-hero-bg.jpg"
-      alt=""
-      data-hero-image
-      fetchpriority="high"
-      class="absolute inset-0 h-full w-full object-cover"
-    />
+    <picture>
+      <source
+        media="(max-width: 639px)"
+        srcset="/images/hero-mobile.webp"
+        type="image/webp"
+      />
+      <img
+        src="/images/legacy-hero-bg.jpg"
+        alt=""
+        width="2000"
+        height="1324"
+        data-hero-image
+        fetchpriority="high"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+    </picture>
     <div class="absolute inset-0 bg-black/30" />
     <div
       class="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,6,8,0.05)_0%,rgba(4,6,8,0.16)_44%,rgba(4,6,8,0.58)_100%)]"

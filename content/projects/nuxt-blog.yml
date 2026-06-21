@@ -3,7 +3,7 @@ slug: nuxt-blog
 order: 30
 group: technical
 summary: A simple Nuxt blog using Vue Router, Vuex, Storybook, Jest, and a mockapi.io API.
-image: /images/projects/nuxt-blog.jpg
+image: /images/projects/nuxt-blog.webp
 imageAlt: Nuxt Blog project interface
 stack:
   - Nuxt.js

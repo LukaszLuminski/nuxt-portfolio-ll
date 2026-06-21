@@ -3,7 +3,7 @@ slug: body-soul-therapy
 order: 10
 group: client
 summary: Website for a local clinic, built with Nuxt.js and BootstrapVue, using Netlify functions.
-image: /images/projects/body-soul-therapy.jpg
+image: /images/projects/body-soul-therapy.webp
 imageAlt: Body & Soul Therapy website homepage
 stack:
   - Nuxt.js

@@ -55,7 +55,7 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+        sans: ['ui-sans-serif', 'system-ui', 'sans-serif']
       },
       boxShadow: {
         line: 'inset 0 1px 0 rgba(255,255,255,0.08)'

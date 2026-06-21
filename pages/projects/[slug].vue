@@ -110,6 +110,9 @@ useHead(() => ({
             <img
               :src="project.image"
               :alt="project.imageAlt"
+              width="800"
+              height="500"
+              fetchpriority="high"
               class="aspect-[16/10] w-full object-cover"
             />
           </figure>

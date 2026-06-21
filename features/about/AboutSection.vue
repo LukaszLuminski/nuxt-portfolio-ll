@@ -47,8 +47,11 @@ const { content } = defineProps<{
                 <img
                   :src="content.image"
                   :alt="content.imageAlt"
+                  width="440"
+                  height="660"
                   class="aspect-[2/3] h-auto w-full object-cover object-[50%_18%] opacity-95"
                   loading="lazy"
+                  decoding="async"
                 />
               </figure>
 

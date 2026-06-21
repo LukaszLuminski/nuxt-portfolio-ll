@@ -3,7 +3,7 @@ slug: burger-restaurant
 order: 60
 group: archive
 summary: Landing page for a fictional restaurant, developed mostly with Bootstrap and jQuery.
-image: /images/projects/burger-restaurant.jpg
+image: /images/projects/burger-restaurant.webp
 imageAlt: Fictional burger restaurant landing page
 stack:
   - Bootstrap

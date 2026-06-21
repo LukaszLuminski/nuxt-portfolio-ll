@@ -5,7 +5,7 @@ export const aboutContent = {
   title: 'My story',
   intro:
     'Before becoming a web developer, I was an English teacher in Poland. The common thread has always been the same: understanding people, explaining complex things clearly, and caring about the details that make work feel human.',
-  image: '/images/about/lukasz.jpg',
+  image: '/images/about/lukasz.webp',
   imageAlt: 'Lukasz Luminski portrait',
   paragraphs: [
     'I have always been interested in IT and art, although for years I treated both as hobbies. Professionally, I started as an English teacher in Poland, then began looking for a more sustainable path where technical problem-solving and creativity could meet.',
