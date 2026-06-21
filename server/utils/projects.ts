@@ -1,5 +1,3 @@
-import { readFile, readdir } from 'node:fs/promises'
-import { join } from 'node:path'
 import { parse } from 'yaml'
 import type {
   Project,
@@ -9,7 +7,6 @@ import type {
 
 type UnknownRecord = Record<string, unknown>
 
-const projectsDirectory = join(process.cwd(), 'content', 'projects')
 const projectGroups = [
   'client',
   'technical',
@@ -181,13 +178,15 @@ function ensureUniqueSlugs(projects: readonly Project[]) {
   }
 }
 
-export async function readProjects() {
-  const filenames = await readdir(projectsDirectory)
+export async function readProjects(
+  filenames: readonly string[],
+  readSource: (filename: string) => Promise<string>
+) {
   const projects = await Promise.all(
     filenames
       .filter((filename) => filename.endsWith('.yml'))
       .map(async (filename) => {
-        const source = await readFile(join(projectsDirectory, filename), 'utf8')
+        const source = await readSource(filename)
 
         return parseProject(parse(source), filename)
       })

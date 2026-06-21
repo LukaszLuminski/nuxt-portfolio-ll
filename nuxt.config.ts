@@ -1,3 +1,8 @@
+import { fileURLToPath } from 'node:url'
+
+const projectsDirectory = fileURLToPath(
+  new URL('./content/projects', import.meta.url)
+)
 const indexingEnabled =
   process.env.NUXT_PUBLIC_ALLOW_INDEXING?.toLowerCase() === 'true'
 const robotsDirective = indexingEnabled
@@ -10,6 +15,17 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/eslint', '@nuxtjs/tailwindcss', '@vueuse/motion/nuxt'],
   css: ['~/assets/css/main.css'],
+  nitro: {
+    externals: {
+      inline: ['@vue/shared']
+    },
+    serverAssets: [
+      {
+        baseName: 'projects',
+        dir: projectsDirectory
+      }
+    ]
+  },
   app: {
     head: {
       htmlAttrs: { lang: 'en', class: 'dark' },

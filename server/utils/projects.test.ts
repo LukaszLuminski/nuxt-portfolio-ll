@@ -1,5 +1,9 @@
+import { readFile, readdir } from 'node:fs/promises'
+import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { parseProject, readProjects } from './projects'
+
+const projectsDirectory = join(process.cwd(), 'content', 'projects')
 
 const validProject = {
   title: 'Example project',
@@ -42,7 +46,10 @@ describe('project content', () => {
   })
 
   it('loads the repository projects in display order with unique slugs', async () => {
-    const projects = await readProjects()
+    const filenames = await readdir(projectsDirectory)
+    const projects = await readProjects(filenames, (filename) =>
+      readFile(join(projectsDirectory, filename), 'utf8')
+    )
     const orders = projects.map(({ order }) => order)
     const slugs = projects.map(({ slug }) => slug)
 
