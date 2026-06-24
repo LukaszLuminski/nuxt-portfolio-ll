@@ -3,6 +3,12 @@ export default defineEventHandler((event) => {
     return
   }
 
+  const pathname = getRequestURL(event).pathname
+
+  if (pathname.startsWith('/api/') || pathname.startsWith('/_nuxt/')) {
+    return
+  }
+
   const {
     public: { siteUrl }
   } = useRuntimeConfig(event)

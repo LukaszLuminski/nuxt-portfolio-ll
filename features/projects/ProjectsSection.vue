@@ -10,7 +10,14 @@ const { content, projects } = defineProps<{
   projects: readonly Project[]
 }>()
 
-const groupedProjects = computed(() => groupItems(content.groups, projects))
+const projectItems = computed(() => {
+  const value = unref(projects)
+
+  return Array.isArray(value) ? value : []
+})
+const groupedProjects = computed(() =>
+  groupItems(content.groups, projectItems.value)
+)
 const clientProjects = computed(() =>
   groupedProjects.value.find(({ group }) => group === 'client')
 )

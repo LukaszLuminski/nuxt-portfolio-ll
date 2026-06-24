@@ -5,7 +5,11 @@ const projectsEndpoint: string = '/api/projects'
 export function useProjects() {
   return useAsyncData<Project[]>(
     'projects',
-    () => $fetch<Project[]>(projectsEndpoint),
+    async () => {
+      const projects = await $fetch<unknown>(projectsEndpoint)
+
+      return Array.isArray(projects) ? (projects as Project[]) : []
+    },
     { default: () => [] }
   )
 }
