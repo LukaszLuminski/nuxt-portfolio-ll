@@ -9,8 +9,7 @@ type UnknownRecord = Record<string, unknown>
 
 const projectGroups = [
   'client',
-  'technical',
-  'archive'
+  'technical'
 ] as const satisfies readonly ProjectGroup[]
 const projectLinkTypes = [
   'live',

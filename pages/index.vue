@@ -27,6 +27,8 @@ const {
   public: { siteUrl }
 } = useRuntimeConfig()
 const sameAs = heroContent.social.map(({ href }) => href)
+const accentedPersonName = 'Łukasz Łumiński'
+const personSearchNames = [heroContent.name, accentedPersonName]
 
 function finishIntro() {
   hasPlayedIntro.value = true
@@ -37,7 +39,7 @@ const personJsonLd = {
   '@type': 'Person',
   '@id': `${siteUrl}/#person`,
   name: heroContent.name,
-  alternateName: ['Łukasz Łumiński', heroContent.brandLabel],
+  alternateName: [accentedPersonName, heroContent.brandLabel],
   url: siteUrl,
   jobTitle: 'Frontend Developer',
   description: heroContent.positioning,
@@ -49,6 +51,7 @@ useSeoMeta({
   title: `${heroContent.name} Portfolio`,
   description: heroContent.positioning,
   author: heroContent.name,
+  keywords: [...personSearchNames, heroContent.brandLabel].join(', '),
   ogTitle: `${heroContent.name} Portfolio`,
   ogDescription: heroContent.positioning,
   ogType: 'website',

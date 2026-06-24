@@ -1,4 +1,4 @@
-export type ProjectGroup = 'client' | 'technical' | 'archive'
+export type ProjectGroup = 'client' | 'technical'
 
 export interface ProjectLink {
   label: string

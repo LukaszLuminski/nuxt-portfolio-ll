@@ -1,7 +1,7 @@
 title: Burger Restaurant
 slug: burger-restaurant
-order: 60
-group: archive
+order: 30
+group: technical
 summary: Landing page for a fictional restaurant, developed mostly with Bootstrap and jQuery.
 image: /images/projects/burger-restaurant.webp
 imageAlt: Fictional burger restaurant landing page
@@ -15,7 +15,6 @@ highlights:
 details:
   - This landing page was built for a technical task while applying for an early frontend developer role.
   - The brief was to design and build a fictional restaurant landing page using Bootstrap.
-  - It remains useful as an archive piece because it marks an early career milestone, but it should not lead the new portfolio.
 frontEnd: HTML5, JavaScript ES6+, jQuery, Bootstrap, SCSS
 backEnd:
 database:

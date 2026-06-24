@@ -37,7 +37,7 @@ export const skillsContent = {
       group: 'foundations',
       icon: { type: 'image', src: '/images/skills/javascript.png' },
       description:
-        'Modern browser behaviour, async flows, stateful interfaces, and careful DOM work where a framework is not the whole answer.',
+        'Modern browser behaviour, async flows, stateful interfaces, and careful DOM work beyond framework defaults.',
       highlights: ['ES modules', 'Async flows', 'Browser APIs']
     },
     {

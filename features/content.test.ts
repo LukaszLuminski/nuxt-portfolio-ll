@@ -46,8 +46,7 @@ describe('portfolio content contracts', () => {
   it('defines complete project, about, and contact section data', () => {
     expect(Object.keys(projectsContent.groups)).toEqual([
       'client',
-      'technical',
-      'archive'
+      'technical'
     ])
     expect(aboutContent.paragraphs.length).toBeGreaterThan(0)
     expect(

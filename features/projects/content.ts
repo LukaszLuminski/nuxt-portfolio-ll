@@ -7,7 +7,6 @@ export const projectsContent = {
     'A selection of client work, Vue and Nuxt builds, and earlier projects that show how my frontend skills have developed in practice.',
   groups: {
     client: 'Client work',
-    technical: 'Technical projects',
-    archive: 'Earlier experiments'
+    technical: 'Technical projects'
   }
 } as const satisfies ProjectsContent
