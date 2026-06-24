@@ -74,7 +74,7 @@ useHead(() => ({
         class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.032)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.032)_1px,transparent_1px)] bg-[size:44px_44px]"
       />
       <div
-        class="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(14,165,233,0.18),transparent_30%),radial-gradient(circle_at_82%_12%,rgba(245,158,11,0.14),transparent_26%),linear-gradient(180deg,rgba(7,9,13,0.28),rgba(7,9,13,0.98)_42%)]"
+        class="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(14,165,233,0.16),transparent_30%),radial-gradient(circle_at_82%_12%,rgba(245,158,11,0.09),transparent_26%),linear-gradient(180deg,rgba(7,9,13,0.42),rgba(7,9,13,0.98)_42%)] sm:bg-[radial-gradient(circle_at_16%_18%,rgba(14,165,233,0.18),transparent_30%),radial-gradient(circle_at_82%_12%,rgba(245,158,11,0.14),transparent_26%),linear-gradient(180deg,rgba(7,9,13,0.28),rgba(7,9,13,0.98)_42%)]"
       />
 
       <div class="container relative">
@@ -94,7 +94,7 @@ useHead(() => ({
               Project detail
             </p>
             <h1
-              class="mt-4 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-6xl"
+              class="mt-4 max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-[2.3rem]"
             >
               {{ project.title }}
             </h1>
