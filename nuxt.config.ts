@@ -3,8 +3,13 @@ import { fileURLToPath } from 'node:url'
 const projectsDirectory = fileURLToPath(
   new URL('./content/projects', import.meta.url)
 )
-const indexingEnabled =
-  process.env.NUXT_PUBLIC_ALLOW_INDEXING?.toLowerCase() === 'true'
+const productionSiteUrl = 'https://lukaszluminski.dev'
+const indexingOverride = process.env.NUXT_PUBLIC_ALLOW_INDEXING
+const indexingEnabled = indexingOverride
+  ? indexingOverride.toLowerCase() === 'true'
+  : process.env.VERCEL_ENV
+    ? process.env.VERCEL_ENV === 'production'
+    : true
 const robotsDirective = indexingEnabled
   ? 'index, follow'
   : 'noindex, nofollow, noarchive, nosnippet'
@@ -15,6 +20,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/eslint', '@nuxtjs/tailwindcss'],
   css: ['~/assets/css/main.css'],
+  vite: {
+    optimizeDeps: {
+      include: ['@lucide/vue', '@vue/devtools-core', '@vue/devtools-kit']
+    }
+  },
   nitro: {
     externals: {
       inline: ['@vue/shared']
@@ -30,6 +40,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: { lang: 'en', class: 'dark' },
       titleTemplate: '%s | Lukasz Luminski',
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
       meta: [
         { name: 'theme-color', content: '#05070c' },
         { name: 'color-scheme', content: 'dark' },
@@ -43,7 +54,7 @@ export default defineNuxtConfig({
     contactFromEmail: process.env.CONTACT_FROM_EMAIL ?? '',
     resendApiKey: process.env.RESEND_API_KEY ?? '',
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? 'https://lukaszluminski.com',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? productionSiteUrl,
       indexingEnabled
     }
   },

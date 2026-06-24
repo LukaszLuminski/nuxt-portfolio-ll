@@ -9,6 +9,7 @@ const slug = computed(() => String(route.params.slug))
 const {
   public: { siteUrl }
 } = useRuntimeConfig()
+const canonicalSiteUrl = siteUrl.replace(/\/$/, '')
 const { data: projects } = await useProjects()
 
 const project = computed(() =>
@@ -26,6 +27,14 @@ const linkIcons = {
   code: Code2
 } satisfies Record<ProjectLink['type'], Component>
 
+function absoluteSiteUrl(path: string) {
+  if (/^https?:\/\//.test(path)) {
+    return path
+  }
+
+  return `${canonicalSiteUrl}${path.startsWith('/') ? path : `/${path}`}`
+}
+
 onMounted(() => {
   if (!isEnteringFromProjectCard.value) {
     return
@@ -42,11 +51,15 @@ useSeoMeta({
   description: () => project.value?.summary ?? '',
   ogTitle: () => `${project.value?.title} Project`,
   ogDescription: () => project.value?.summary ?? '',
-  ogImage: () => project.value?.image
+  ogUrl: () => `${canonicalSiteUrl}/projects/${slug.value}`,
+  ogImage: () =>
+    project.value?.image ? absoluteSiteUrl(project.value.image) : undefined
 })
 
 useHead(() => ({
-  link: [{ rel: 'canonical', href: `${siteUrl}/projects/${slug.value}` }]
+  link: [
+    { rel: 'canonical', href: `${canonicalSiteUrl}/projects/${slug.value}` }
+  ]
 }))
 </script>
 

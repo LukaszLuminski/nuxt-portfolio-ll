@@ -7,17 +7,21 @@ import { heroContent } from '~/features/hero/content'
 import { projectsContent } from '~/features/projects/content'
 import { skillsContent } from '~/features/skills/content'
 
-const ProjectsSection = defineLazyHydrationComponent('visible', () =>
-  import('~/features/projects/ProjectsSection.vue')
+const ProjectsSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('~/features/projects/ProjectsSection.vue')
 )
-const SkillsSection = defineLazyHydrationComponent('visible', () =>
-  import('~/features/skills/SkillsSection.vue')
+const SkillsSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('~/features/skills/SkillsSection.vue')
 )
-const AboutSection = defineLazyHydrationComponent('visible', () =>
-  import('~/features/about/AboutSection.vue')
+const AboutSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('~/features/about/AboutSection.vue')
 )
-const ContactSection = defineLazyHydrationComponent('visible', () =>
-  import('~/features/contact/ContactSection.vue')
+const ContactSection = defineLazyHydrationComponent(
+  'visible',
+  () => import('~/features/contact/ContactSection.vue')
 )
 
 const { data: projects } = await useProjects()
@@ -26,8 +30,10 @@ const hasPlayedIntro = useState('has-played-intro', () => false)
 const {
   public: { siteUrl }
 } = useRuntimeConfig()
+const canonicalSiteUrl = siteUrl.replace(/\/$/, '')
+const homeOgImage = `${canonicalSiteUrl}/images/legacy-hero-bg.jpg`
 const sameAs = heroContent.social.map(({ href }) => href)
-const accentedPersonName = 'Łukasz Łumiński'
+const accentedPersonName = '\u0141ukasz \u0141umi\u0144ski'
 const personSearchNames = [heroContent.name, accentedPersonName]
 
 function finishIntro() {
@@ -37,10 +43,10 @@ function finishIntro() {
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  '@id': `${siteUrl}/#person`,
+  '@id': `${canonicalSiteUrl}/#person`,
   name: heroContent.name,
   alternateName: [accentedPersonName, heroContent.brandLabel],
-  url: siteUrl,
+  url: canonicalSiteUrl,
   jobTitle: 'Frontend Developer',
   description: heroContent.positioning,
   knowsAbout: heroContent.technologies,
@@ -55,11 +61,13 @@ useSeoMeta({
   ogTitle: `${heroContent.name} Portfolio`,
   ogDescription: heroContent.positioning,
   ogType: 'website',
+  ogUrl: canonicalSiteUrl,
+  ogImage: homeOgImage,
   twitterCard: 'summary_large_image'
 })
 
 useHead({
-  link: [{ rel: 'canonical', href: siteUrl }],
+  link: [{ rel: 'canonical', href: canonicalSiteUrl }],
   script: [
     {
       type: 'application/ld+json',
