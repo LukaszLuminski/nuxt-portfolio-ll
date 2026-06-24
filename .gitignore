@@ -16,6 +16,9 @@ dist/
 .env.*
 !.env.example
 
+# Content
+content/drafts/**
+
 # OS
 .DS_Store
 Thumbs.db

@@ -10,7 +10,9 @@ describe('portfolio content contracts', () => {
     const sectionIds = heroContent.nav.map(({ href }) => href)
     const socialTypes = heroContent.social.map(({ type }) => type)
 
-    expect(sectionIds.every((href) => href.startsWith('#'))).toBe(true)
+    expect(
+      sectionIds.every((href) => href.startsWith('#') || href.startsWith('/'))
+    ).toBe(true)
     expect(new Set(sectionIds).size).toBe(sectionIds.length)
     expect(new Set(socialTypes).size).toBe(socialTypes.length)
     expect(heroContent.technologies).toEqual(
@@ -44,10 +46,7 @@ describe('portfolio content contracts', () => {
   })
 
   it('defines complete project, about, and contact section data', () => {
-    expect(Object.keys(projectsContent.groups)).toEqual([
-      'client',
-      'technical'
-    ])
+    expect(Object.keys(projectsContent.groups)).toEqual(['client', 'technical'])
     expect(aboutContent.paragraphs.length).toBeGreaterThan(0)
     expect(
       new Set(aboutContent.milestones.map(({ label }) => label)).size

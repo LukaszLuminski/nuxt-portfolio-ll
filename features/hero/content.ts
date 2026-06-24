@@ -8,7 +8,8 @@ export const heroContent = {
     { label: 'Projects', href: '#work' },
     { label: 'Skills', href: '#skills' },
     { label: 'About me', href: '#about' },
-    { label: 'Contact', href: '#contact' }
+    { label: 'Contact', href: '#contact' },
+    { label: 'Blog', href: '/blog' }
   ],
   social: [
     {

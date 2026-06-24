@@ -26,6 +26,7 @@ const ContactSection = defineLazyHydrationComponent(
 
 const { data: projects } = await useProjects()
 const { isRestoringProjectScroll } = useProjectScrollRestoration()
+useTargetSectionNavigation()
 const hasPlayedIntro = useState('has-played-intro', () => false)
 const {
   public: { siteUrl }

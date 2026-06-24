@@ -3,7 +3,7 @@ export default defineEventHandler((event) => {
     return
   }
 
-  const pathname = getRequestURL(event).pathname
+  const { pathname } = getRequestURL(event)
 
   if (pathname.startsWith('/api/') || pathname.startsWith('/_nuxt/')) {
     return

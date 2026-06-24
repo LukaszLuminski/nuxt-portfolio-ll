@@ -9,9 +9,9 @@
   font-display: swap;
   src: url('../fonts/inter-latin.woff2') format('woff2');
   unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
-    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
 }
 
 @layer base {
@@ -50,6 +50,62 @@
   ::selection {
     background: rgba(104, 168, 255, 0.28);
     color: white;
+  }
+}
+
+@layer components {
+  .article-content {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 1rem;
+    line-height: 1.9;
+  }
+
+  .article-content > * + * {
+    margin-top: 1.15rem;
+  }
+
+  .article-content h2 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 650;
+    line-height: 1.25;
+    margin-top: 2.2rem;
+  }
+
+  .article-content h2:first-child {
+    margin-top: 0;
+  }
+
+  .article-content p {
+    max-width: 72ch;
+  }
+
+  .article-content ul {
+    display: grid;
+    gap: 0.65rem;
+    list-style: disc;
+    max-width: 68ch;
+    padding-left: 1.3rem;
+  }
+
+  .article-content li::marker {
+    color: rgba(125, 211, 252, 0.75);
+  }
+
+  .article-content a {
+    color: rgb(186, 230, 253);
+    text-decoration: underline;
+    text-decoration-color: rgba(186, 230, 253, 0.38);
+    text-underline-offset: 0.22em;
+  }
+
+  .article-content code {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgb(224, 242, 254);
+    font-size: 0.92em;
+    padding: 0.1rem 0.3rem;
   }
 }
 

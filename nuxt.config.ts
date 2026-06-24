@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'node:url'
 
+const blogDirectory = fileURLToPath(new URL('./content/blog', import.meta.url))
 const projectsDirectory = fileURLToPath(
   new URL('./content/projects', import.meta.url)
 )
@@ -13,16 +14,33 @@ const indexingEnabled = indexingOverride
 const robotsDirective = indexingEnabled
   ? 'index, follow'
   : 'noindex, nofollow, noarchive, nosnippet'
+const blogEnabled =
+  process.env.NUXT_PUBLIC_BLOG_ENABLED?.toLowerCase() === 'true'
+const hiddenBlogRobotsDirective = 'noindex, nofollow, noarchive, nosnippet'
+const hiddenBlogRouteRules = blogEnabled
+  ? {}
+  : {
+      '/blog': {
+        headers: {
+          'X-Robots-Tag': hiddenBlogRobotsDirective
+        }
+      },
+      '/blog/**': {
+        headers: {
+          'X-Robots-Tag': hiddenBlogRobotsDirective
+        }
+      }
+    }
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   srcDir: '.',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxt/eslint', '@nuxt/content', '@nuxtjs/tailwindcss'],
   css: ['~/assets/css/main.css'],
   vite: {
     optimizeDeps: {
-      include: ['@lucide/vue', '@vue/devtools-core', '@vue/devtools-kit']
+      include: ['@lucide/vue']
     }
   },
   nitro: {
@@ -30,10 +48,8 @@ export default defineNuxtConfig({
       inline: ['@vue/shared']
     },
     serverAssets: [
-      {
-        baseName: 'projects',
-        dir: projectsDirectory
-      }
+      { baseName: 'projects', dir: projectsDirectory },
+      { baseName: 'blog', dir: blogDirectory }
     ]
   },
   app: {
@@ -59,7 +75,8 @@ export default defineNuxtConfig({
     resendApiKey: process.env.RESEND_API_KEY ?? '',
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL ?? productionSiteUrl,
-      indexingEnabled
+      indexingEnabled,
+      blogEnabled
     }
   },
   routeRules: {
@@ -73,7 +90,8 @@ export default defineNuxtConfig({
       headers: {
         'X-Robots-Tag': robotsDirective
       }
-    }
+    },
+    ...hiddenBlogRouteRules
   },
   typescript: {
     strict: true,

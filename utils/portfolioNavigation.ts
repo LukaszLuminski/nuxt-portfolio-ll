@@ -95,13 +95,7 @@ export function resolvePortfolioScroll(
   const targetSection = getTargetSection()
 
   if (path === '/' && targetSection) {
-    clearTargetSection()
-
-    return {
-      el: `#${targetSection}`,
-      top: 0,
-      behavior: 'auto'
-    } as const
+    return false
   }
 
   const isProjectRoundTrip =

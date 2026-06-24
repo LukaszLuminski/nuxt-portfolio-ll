@@ -61,11 +61,7 @@ describe('portfolio navigation state', () => {
     storeTargetSection('skills')
 
     expect(getProjectReturnState()).toBeNull()
-    expect(resolvePortfolioScroll('/', null)).toEqual({
-      el: '#skills',
-      top: 0,
-      behavior: 'auto'
-    })
-    expect(getTargetSection()).toBeNull()
+    expect(resolvePortfolioScroll('/', null)).toBe(false)
+    expect(getTargetSection()).toBe('skills')
   })
 })

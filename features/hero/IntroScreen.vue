@@ -47,9 +47,8 @@ async function waitForOpeningAssets() {
 
 async function playIntro() {
   if (
-    window.matchMedia(
-      '(max-width: 639px), (prefers-reduced-motion: reduce)'
-    ).matches
+    window.matchMedia('(max-width: 639px), (prefers-reduced-motion: reduce)')
+      .matches
   ) {
     emit('finished')
     return

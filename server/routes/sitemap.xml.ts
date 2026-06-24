@@ -9,23 +9,18 @@ function escapeXml(value: string) {
 
 export default defineEventHandler(async (event) => {
   const {
-    public: { siteUrl }
+    public: { blogEnabled, siteUrl }
   } = useRuntimeConfig(event)
   const canonicalSiteUrl = siteUrl.replace(/\/$/, '')
-  const projectsStorage = useStorage<string>('assets:projects')
-  const filenames = await projectsStorage.getKeys()
-  const projects = await readProjects(filenames, async (filename) => {
-    const source = await projectsStorage.getItem(filename)
-
-    if (typeof source !== 'string') {
-      throw new Error(`Unable to read bundled project content: ${filename}`)
-    }
-
-    return source
-  })
+  const [projects, posts] = await Promise.all([
+    readBundledProjects(),
+    blogEnabled ? readPublishedBlogPosts() : []
+  ])
   const urls = [
     canonicalSiteUrl,
-    ...projects.map(({ slug }) => `${canonicalSiteUrl}/projects/${slug}`)
+    ...(blogEnabled ? [`${canonicalSiteUrl}/blog`] : []),
+    ...projects.map(({ slug }) => `${canonicalSiteUrl}/projects/${slug}`),
+    ...posts.map(({ path }) => `${canonicalSiteUrl}${path}`)
   ]
 
   setHeader(event, 'Content-Type', 'application/xml; charset=utf-8')
