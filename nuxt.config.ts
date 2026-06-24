@@ -45,7 +45,11 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#05070c' },
         { name: 'color-scheme', content: 'dark' },
         { name: 'robots', content: robotsDirective },
-        { name: 'googlebot', content: robotsDirective }
+        { name: 'googlebot', content: robotsDirective },
+        {
+          name: 'google-site-verification',
+          content: 'tDx0YulXOyWOZ6L1ztLpmByTP56mrJbNLJbOmZKDQMQ'
+        }
       ]
     }
   },
