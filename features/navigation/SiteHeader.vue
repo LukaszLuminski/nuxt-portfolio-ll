@@ -108,7 +108,7 @@ watch(
         : 'border-b border-transparent bg-transparent'
     "
   >
-    <div class="container flex h-20 items-center justify-between">
+    <div class="container flex h-14 items-center justify-between md:h-20">
       <NuxtLink
         to="/"
         class="group flex items-center gap-3"
@@ -167,14 +167,14 @@ watch(
 
       <button
         type="button"
-        class="inline-flex size-11 items-center justify-center rounded-full text-white md:hidden"
+        class="inline-flex size-10 items-center justify-center rounded-full text-white md:hidden"
         aria-label="Navigation menu"
         :aria-expanded="isMobileNavOpen"
         aria-controls="mobile-navigation"
         @click="isMobileNavOpen = !isMobileNavOpen"
       >
-        <X v-if="isMobileNavOpen" class="size-7" />
-        <Menu v-else class="size-7" />
+        <X v-if="isMobileNavOpen" class="size-6" />
+        <Menu v-else class="size-6" />
       </button>
     </div>
 
