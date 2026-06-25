@@ -3,6 +3,7 @@ import type { HeroContent } from './types'
 export const heroContent = {
   brandLabel: 'LukaszLuminski',
   name: 'Lukasz Luminski',
+  accentedName: '\u0141ukasz \u0141umi\u0144ski',
   introLabel: "Hello, I'm Lukasz",
   nav: [
     { label: 'Projects', href: '#work' },

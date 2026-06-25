@@ -10,6 +10,7 @@ const {
 } = useRuntimeConfig()
 const canonicalSiteUrl = siteUrl.replace(/\/$/, '')
 const blogUrl = `${canonicalSiteUrl}/blog`
+const blogPageTitle = `Blog | ${heroContent.name}`
 const { data: posts } = await useAsyncData('blog-posts', () =>
   $fetch<BlogPost[]>('/api/blog')
 )
@@ -35,9 +36,9 @@ const blogJsonLd = computed(() => ({
 }))
 
 useSeoMeta({
-  title: 'Blog',
+  title: blogPageTitle,
   description: blogContent.intro,
-  ogTitle: `${heroContent.name} Blog`,
+  ogTitle: blogPageTitle,
   ogDescription: blogContent.intro,
   ogType: 'website',
   ogUrl: blogUrl,

@@ -15,6 +15,7 @@ export interface HeroSocialLink extends HeroLink {
 export interface HeroContent {
   brandLabel: string
   name: string
+  accentedName: string
   introLabel: string
   nav: readonly HeroLink[]
   social: readonly HeroSocialLink[]

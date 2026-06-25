@@ -34,8 +34,9 @@ const {
 const canonicalSiteUrl = siteUrl.replace(/\/$/, '')
 const homeOgImage = `${canonicalSiteUrl}/images/legacy-hero-bg.jpg`
 const sameAs = heroContent.social.map(({ href }) => href)
-const accentedPersonName = '\u0141ukasz \u0141umi\u0144ski'
-const personSearchNames = [heroContent.name, accentedPersonName]
+const homeTitle = `${heroContent.name} | Portfolio`
+const homeDescription = `Portfolio of ${heroContent.name}, also written as ${heroContent.accentedName}. Frontend Developer specialising in Vue, Nuxt, and accessible TypeScript interfaces.`
+const personSearchNames = [heroContent.name, heroContent.accentedName]
 
 function finishIntro() {
   hasPlayedIntro.value = true
@@ -46,21 +47,21 @@ const personJsonLd = {
   '@type': 'Person',
   '@id': `${canonicalSiteUrl}/#person`,
   name: heroContent.name,
-  alternateName: [accentedPersonName, heroContent.brandLabel],
+  alternateName: [heroContent.accentedName, heroContent.brandLabel],
   url: canonicalSiteUrl,
   jobTitle: 'Frontend Developer',
-  description: heroContent.positioning,
+  description: homeDescription,
   knowsAbout: heroContent.technologies,
   sameAs
 }
 
 useSeoMeta({
-  title: `${heroContent.name} Portfolio`,
-  description: heroContent.positioning,
+  title: homeTitle,
+  description: homeDescription,
   author: heroContent.name,
   keywords: [...personSearchNames, heroContent.brandLabel].join(', '),
-  ogTitle: `${heroContent.name} Portfolio`,
-  ogDescription: heroContent.positioning,
+  ogTitle: homeTitle,
+  ogDescription: homeDescription,
   ogType: 'website',
   ogUrl: canonicalSiteUrl,
   ogImage: homeOgImage,
@@ -68,6 +69,7 @@ useSeoMeta({
 })
 
 useHead({
+  titleTemplate: '%s',
   link: [{ rel: 'canonical', href: canonicalSiteUrl }],
   script: [
     {

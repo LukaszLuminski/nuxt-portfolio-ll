@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ArrowLeft, Code2, ExternalLink } from '@lucide/vue'
 import type { Component } from 'vue'
+import { heroContent } from '~/features/hero/content'
 import type { ProjectLink } from '~/features/projects/types'
 import { getProjectReturnState } from '~/utils/portfolioNavigation'
 
@@ -47,9 +48,9 @@ onMounted(() => {
 })
 
 useSeoMeta({
-  title: () => `${project.value?.title} Project`,
+  title: () => `${project.value?.title} Project | ${heroContent.name}`,
   description: () => project.value?.summary ?? '',
-  ogTitle: () => `${project.value?.title} Project`,
+  ogTitle: () => `${project.value?.title} Project | ${heroContent.name}`,
   ogDescription: () => project.value?.summary ?? '',
   ogUrl: () => `${canonicalSiteUrl}/projects/${slug.value}`,
   ogImage: () =>

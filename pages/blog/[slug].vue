@@ -24,6 +24,9 @@ if (!post.value) {
 
 const article = computed(() => post.value as BlogArticle)
 const canonicalUrl = computed(() => `${canonicalSiteUrl}${article.value.path}`)
+const articlePageTitle = computed(
+  () => `${article.value.title} | ${heroContent.name}`
+)
 const publishedDate = computed(() =>
   new Intl.DateTimeFormat('en', {
     day: 'numeric',
@@ -47,9 +50,9 @@ const articleJsonLd = computed(() => ({
 }))
 
 useSeoMeta({
-  title: () => article.value.title,
+  title: () => articlePageTitle.value,
   description: () => article.value.description,
-  ogTitle: () => article.value.title,
+  ogTitle: () => articlePageTitle.value,
   ogDescription: () => article.value.description,
   ogType: 'article',
   ogUrl: () => canonicalUrl.value,
