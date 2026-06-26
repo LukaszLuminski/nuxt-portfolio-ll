@@ -17,7 +17,7 @@ export const skillsContent = {
       group: 'foundations',
       icon: {
         type: 'image',
-        src: '/images/skills/html.svg',
+        src: '/images/skills/html.svg?v=shield',
         displaySize: 'large'
       },
       description:
@@ -33,7 +33,7 @@ export const skillsContent = {
       group: 'foundations',
       icon: {
         type: 'image',
-        src: '/images/skills/css.svg',
+        src: '/images/skills/css.svg?v=shield',
         displaySize: 'large'
       },
       description:

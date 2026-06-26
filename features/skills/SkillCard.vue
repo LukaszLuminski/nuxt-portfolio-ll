@@ -24,7 +24,7 @@ const { setCardGlow } = useCardGlow()
             width="36"
             height="36"
             class="object-contain"
-            :class="skill.icon.displaySize === 'large' ? 'h-11 w-auto' : 'size-9'"
+            :class="skill.icon.displaySize === 'large' ? 'h-10 w-auto' : 'size-9'"
             loading="lazy"
             decoding="async"
           />
