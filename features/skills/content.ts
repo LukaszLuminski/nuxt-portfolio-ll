@@ -15,7 +15,11 @@ export const skillsContent = {
     {
       title: 'HTML5',
       group: 'foundations',
-      icon: { type: 'image', src: '/images/skills/html.png' },
+      icon: {
+        type: 'image',
+        src: '/images/skills/html.svg',
+        displaySize: 'large'
+      },
       description:
         'Semantic structure, accessible document flow, forms, media, and markup that gives Nuxt pages a reliable foundation.',
       highlights: [
@@ -27,7 +31,11 @@ export const skillsContent = {
     {
       title: 'CSS3',
       group: 'foundations',
-      icon: { type: 'image', src: '/images/skills/css.png' },
+      icon: {
+        type: 'image',
+        src: '/images/skills/css.svg',
+        displaySize: 'large'
+      },
       description:
         'Responsive layouts with grid and flexbox, polished interaction states, and design systems that stay consistent across screens.',
       highlights: ['Responsive UI', 'Grid and flexbox', 'Motion details']
@@ -35,7 +43,7 @@ export const skillsContent = {
     {
       title: 'JavaScript',
       group: 'foundations',
-      icon: { type: 'image', src: '/images/skills/javascript.png' },
+      icon: { type: 'image', src: '/images/skills/javascript.svg' },
       description:
         'Modern browser behaviour, async flows, stateful interfaces, and careful DOM work beyond framework defaults.',
       highlights: ['ES modules', 'Async flows', 'Browser APIs']
@@ -43,7 +51,7 @@ export const skillsContent = {
     {
       title: 'TypeScript',
       group: 'foundations',
-      icon: { type: 'lucide', name: 'code' },
+      icon: { type: 'image', src: '/images/skills/typescript.svg' },
       description:
         'Typed models and contracts for safer components, composables, API responses, and content-driven portfolio data.',
       highlights: ['Typed contracts', 'Reusable composables', 'Safer refactors']
@@ -51,7 +59,7 @@ export const skillsContent = {
     {
       title: 'Vue.js',
       group: 'ecosystem',
-      icon: { type: 'image', src: '/images/skills/vue.png' },
+      icon: { type: 'image', src: '/images/skills/vue.svg' },
       description:
         'Composition API, component architecture, stateful UI patterns, and ergonomic interfaces built around real user tasks.',
       highlights: ['Composition API', 'Component systems', 'Interaction design']
@@ -59,7 +67,7 @@ export const skillsContent = {
     {
       title: 'Nuxt',
       group: 'ecosystem',
-      icon: { type: 'image', src: '/images/skills/nuxt.png' },
+      icon: { type: 'image', src: '/images/skills/nuxt.svg' },
       description:
         'Production Nuxt apps with routing, server endpoints, SEO metadata, content loading, and clean project structure.',
       highlights: ['SSR and routing', 'Server API routes', 'SEO metadata']
@@ -67,7 +75,7 @@ export const skillsContent = {
     {
       title: 'Pinia',
       group: 'ecosystem',
-      icon: { type: 'lucide', name: 'store' },
+      icon: { type: 'image', src: '/images/skills/pinia.svg' },
       description:
         'Predictable, typed state management for Vue applications, with stores designed around clear responsibilities and maintainable data flows.',
       highlights: ['Typed stores', 'Shared state', 'Composable patterns']
@@ -75,7 +83,7 @@ export const skillsContent = {
     {
       title: 'Storybook',
       group: 'quality',
-      icon: { type: 'lucide', name: 'storybook' },
+      icon: { type: 'image', src: '/images/skills/storybook.svg' },
       description:
         'Isolated component development and documentation that makes interface states easier to review, reuse, and maintain.',
       highlights: ['Component stories', 'UI documentation', 'Visual states']
@@ -83,7 +91,7 @@ export const skillsContent = {
     {
       title: 'Vitest',
       group: 'quality',
-      icon: { type: 'lucide', name: 'test' },
+      icon: { type: 'image', src: '/images/skills/vitest.svg' },
       description:
         'Fast unit and component tests for composables, content models, and interface behaviour, helping prevent regressions during change.',
       highlights: ['Unit tests', 'Component tests', 'Regression coverage']
@@ -91,7 +99,7 @@ export const skillsContent = {
     {
       title: 'Git',
       group: 'delivery',
-      icon: { type: 'image', src: '/images/skills/git.png' },
+      icon: { type: 'image', src: '/images/skills/git.svg' },
       description:
         'Branching, review-friendly commits, and careful change management across production projects and portfolio iterations.',
       highlights: ['Version control', 'Reviewable changes', 'Release hygiene']

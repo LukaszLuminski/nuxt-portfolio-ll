@@ -1,6 +1,4 @@
-export type SkillIcon =
-  | { type: 'image'; src: string }
-  | { type: 'lucide'; name: 'code' | 'store' | 'storybook' | 'test' }
+export type SkillIcon = { type: 'image'; src: string; displaySize?: 'large' }
 
 export type SkillGroup = 'foundations' | 'ecosystem' | 'quality' | 'delivery'
 

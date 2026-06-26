@@ -1,22 +1,10 @@
 <script setup lang="ts">
-import { BookOpen, Braces, FlaskConical, Store } from '@lucide/vue'
-import type { Component } from 'vue'
-import type { Skill, SkillIcon } from './types'
+import type { Skill } from './types'
 
 const { skill } = defineProps<{
   skill: Skill
 }>()
 
-const lucideIcons = {
-  code: Braces,
-  store: Store,
-  storybook: BookOpen,
-  test: FlaskConical
-} satisfies Record<Extract<SkillIcon, { type: 'lucide' }>['name'], Component>
-
-const lucideIcon = computed(() =>
-  skill.icon.type === 'lucide' ? lucideIcons[skill.icon.name] : null
-)
 const { setCardGlow } = useCardGlow()
 </script>
 
@@ -31,20 +19,14 @@ const { setCardGlow } = useCardGlow()
           class="bg-black/24 flex size-14 shrink-0 items-center justify-center rounded border border-white/10"
         >
           <img
-            v-if="skill.icon.type === 'image'"
             :src="skill.icon.src"
             :alt="`${skill.title} logo`"
             width="36"
             height="36"
-            class="size-9 object-contain"
+            class="object-contain"
+            :class="skill.icon.displaySize === 'large' ? 'h-11 w-auto' : 'size-9'"
             loading="lazy"
             decoding="async"
-          />
-          <component
-            :is="lucideIcon"
-            v-else
-            class="text-sky-100/82 size-7"
-            :stroke-width="1.6"
           />
         </div>
 
