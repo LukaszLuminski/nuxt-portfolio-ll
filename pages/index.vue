@@ -35,7 +35,7 @@ const canonicalSiteUrl = siteUrl.replace(/\/$/, '')
 const homeOgImage = `${canonicalSiteUrl}/images/legacy-hero-bg.jpg`
 const sameAs = heroContent.social.map(({ href }) => href)
 const homeTitle = `${heroContent.name} | Portfolio`
-const homeDescription = `Portfolio of ${heroContent.name}, also written as ${heroContent.accentedName}. Frontend Developer specialising in Vue, Nuxt, and accessible TypeScript interfaces.`
+const homeDescription = `Portfolio of ${heroContent.name}, Frontend Developer specialising in Vue, Nuxt, and accessible TypeScript interfaces.`
 const personSearchNames = [heroContent.name, heroContent.accentedName]
 
 function finishIntro() {

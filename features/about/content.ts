@@ -8,6 +8,7 @@ export const aboutContent = {
   image: '/images/about/lukasz.webp',
   imageAlt: 'Lukasz Luminski portrait',
   paragraphs: [
+    'I publish my work as Lukasz Luminski; in Polish, my name is written \u0141ukasz \u0141umi\u0144ski.',
     'I have always been interested in IT and art, although for years I treated both as hobbies. Professionally, I started as an English teacher in Poland, then began looking for a more sustainable path where technical problem-solving and creativity could meet.',
     'At first I studied laptop troubleshooting with the idea of moving into technical support. Later, after moving to the UK, I spent time learning small-network installation and maintenance. It helped me understand infrastructure, but it also made something obvious: I wanted a role where I could use more of my eye for detail and interface craft.',
     'Coding quickly became that place. Since 2019 I have worked on projects alongside full-time work, then in June 2020 I started professionally as a Front End Web Developer. Vue became the framework I kept returning to because it lets me build expressive interfaces without losing clarity.',
