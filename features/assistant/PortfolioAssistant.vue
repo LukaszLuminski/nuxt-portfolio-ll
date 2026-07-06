@@ -33,6 +33,7 @@ const starterQuestions = [
 const sessionKey = 'portfolio-assistant-messages-v2'
 const isOpen = ref(false)
 const isSending = ref(false)
+const isTriggerExpanded = ref(true)
 const draft = ref('')
 const messages = ref<ChatMessage[]>([])
 const trigger = ref<HTMLButtonElement>()
@@ -40,6 +41,7 @@ const dialog = ref<HTMLElement>()
 const input = ref<HTMLTextAreaElement>()
 const messageList = ref<HTMLElement>()
 let messageSequence = 0
+let triggerCollapseTimer: ReturnType<typeof setTimeout> | undefined
 
 function createMessageId() {
   messageSequence += 1
@@ -244,10 +246,16 @@ function handleDialogKeydown(event: KeyboardEvent) {
   }
 }
 
-onMounted(restoreMessages)
+onMounted(() => {
+  restoreMessages()
+  triggerCollapseTimer = setTimeout(() => {
+    isTriggerExpanded.value = false
+  }, 3000)
+})
 
 onBeforeUnmount(() => {
   document.body.style.overflow = ''
+  clearTimeout(triggerCollapseTimer)
 })
 </script>
 
@@ -256,12 +264,20 @@ onBeforeUnmount(() => {
     v-if="!isOpen"
     ref="trigger"
     type="button"
-    class="fixed bottom-4 right-4 z-[80] inline-flex h-12 items-center gap-2.5 rounded border border-sky-100/25 bg-[#081018]/95 px-4 text-sm font-semibold text-white shadow-[0_18px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl transition duration-300 hover:border-sky-100/45 hover:bg-[#0b1722] sm:bottom-6 sm:right-6"
+    class="group fixed bottom-4 right-0 z-[80] inline-flex h-12 items-center justify-start overflow-hidden rounded-l border border-r-0 border-sky-100/25 bg-[#081018]/95 px-[15px] text-sm font-semibold text-white shadow-[0_18px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-[width,background-color,border-color] duration-300 hover:w-[190px] hover:border-sky-100/45 hover:bg-[#0b1722] focus-visible:w-[190px] sm:bottom-6 sm:right-6 sm:rounded sm:border"
+    :class="isTriggerExpanded ? 'w-[190px]' : 'w-12'"
     aria-haspopup="dialog"
     @click="openAssistant"
   >
-    <Sparkles class="size-4 text-sky-200" aria-hidden="true" />
-    Ask about my work
+    <Sparkles class="size-4 shrink-0 text-sky-200" aria-hidden="true" />
+    <span
+      class="ml-2.5 overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-300 group-hover:max-w-[150px] group-hover:opacity-100 group-focus-visible:max-w-[150px] group-focus-visible:opacity-100"
+      :class="
+        isTriggerExpanded ? 'max-w-[150px] opacity-100' : 'max-w-0 opacity-0'
+      "
+    >
+      Ask about my work
+    </span>
   </button>
 
   <Teleport to="body">
