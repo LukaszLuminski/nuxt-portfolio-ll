@@ -15,6 +15,7 @@ describe('portfolio content contracts', () => {
     ).toBe(true)
     expect(new Set(sectionIds).size).toBe(sectionIds.length)
     expect(new Set(socialTypes).size).toBe(socialTypes.length)
+    expect(heroContent.resumeHref).toMatch(/\.pdf$/)
     expect(heroContent.technologies).toEqual(
       expect.arrayContaining([
         'TypeScript',

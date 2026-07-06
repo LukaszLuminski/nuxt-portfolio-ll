@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Download } from '@lucide/vue'
 import BrandIcon from '~/components/icons/BrandIcon.vue'
 import type { HeroContent } from './types'
 
@@ -98,6 +99,15 @@ function scrollToSection(sectionId: string) {
             >
               {{ label }}
             </button>
+
+            <a
+              :href="content.resumeHref"
+              download="lukasz_luminski_resume.pdf"
+              class="inline-flex h-[54px] w-full items-center justify-center gap-3 rounded border border-white/50 bg-black/20 px-8 text-sm font-medium uppercase tracking-[0.18em] text-white transition duration-300 hover:border-white/80 hover:bg-black/35"
+            >
+              <Download class="size-4 shrink-0" aria-hidden="true" />
+              {{ content.resumeCta }}
+            </a>
           </div>
         </div>
       </div>

@@ -24,6 +24,8 @@ export interface HeroContent {
   positioning: string
   primaryCta: string
   secondaryCta: string
+  resumeCta: string
+  resumeHref: string
   metrics: readonly HeroMetric[]
   technologies: readonly string[]
 }

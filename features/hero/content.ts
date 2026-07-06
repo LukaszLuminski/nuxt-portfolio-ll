@@ -31,6 +31,8 @@ export const heroContent = {
     'Frontend Developer specialising in Vue and Nuxt, building responsive, accessible web interfaces with TypeScript and a careful eye for usability and detail.',
   primaryCta: 'See my projects',
   secondaryCta: 'Read more about me',
+  resumeCta: 'Download my resume',
+  resumeHref: '/lukasz_luminski_resume.pdf',
   metrics: [
     { value: '2020', label: 'working professionally in frontend development' },
     { value: 'Vue', label: 'core framework and component expertise' },
