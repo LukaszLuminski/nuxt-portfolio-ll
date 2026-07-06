@@ -16,6 +16,20 @@ const { data: projects } = await useProjects()
 const project = computed(() =>
   projects.value.find(({ slug: projectSlug }) => projectSlug === slug.value)
 )
+const caseStudySections = computed(() => {
+  const caseStudy = project.value?.caseStudy
+
+  if (!caseStudy) {
+    return []
+  }
+
+  return [
+    { title: 'The challenge', items: caseStudy.challenge },
+    { title: 'My approach', items: caseStudy.approach },
+    { title: 'The outcome', items: caseStudy.outcomes },
+    { title: 'What I learned', items: caseStudy.lessons }
+  ]
+})
 const isEnteringFromProjectCard = ref(
   import.meta.client && Boolean(getProjectReturnState())
 )
@@ -162,6 +176,20 @@ useHead(() => ({
                 <dt class="font-semibold text-white">Database</dt>
                 <dd class="text-white/62 mt-1">{{ project.database }}</dd>
               </div>
+              <template v-if="project.caseStudy">
+                <div>
+                  <dt class="font-semibold text-white">Timeline</dt>
+                  <dd class="text-white/62 mt-1">
+                    {{ project.caseStudy.timeline }}
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-white">Status</dt>
+                  <dd class="text-white/62 mt-1">
+                    {{ project.caseStudy.status }}
+                  </dd>
+                </div>
+              </template>
             </dl>
           </aside>
 
@@ -180,9 +208,24 @@ useHead(() => ({
             </div>
 
             <div>
-              <h2 class="text-2xl font-semibold text-white">Notes</h2>
+              <h2 class="text-2xl font-semibold text-white">Overview</h2>
               <div class="text-white/68 mt-5 space-y-4 text-base leading-8">
                 <p v-for="item in project.details" :key="item">
+                  {{ item }}
+                </p>
+              </div>
+            </div>
+
+            <div
+              v-for="section in caseStudySections"
+              :key="section.title"
+              class="border-t border-white/10 pt-8"
+            >
+              <h2 class="text-2xl font-semibold text-white">
+                {{ section.title }}
+              </h2>
+              <div class="text-white/68 mt-5 space-y-4 text-base leading-8">
+                <p v-for="item in section.items" :key="item">
                   {{ item }}
                 </p>
               </div>

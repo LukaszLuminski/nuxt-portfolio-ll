@@ -6,6 +6,15 @@ export interface ProjectLink {
   type: 'live' | 'code'
 }
 
+export interface ProjectCaseStudy {
+  timeline: string
+  status: string
+  challenge: readonly string[]
+  approach: readonly string[]
+  outcomes: readonly string[]
+  lessons: readonly string[]
+}
+
 export interface Project {
   title: string
   slug: string
@@ -20,6 +29,7 @@ export interface Project {
   frontEnd: string | null
   backEnd: string | null
   database: string | null
+  caseStudy: ProjectCaseStudy | null
   links: readonly ProjectLink[]
 }
 

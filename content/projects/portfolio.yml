@@ -1,25 +1,50 @@
-title: Portfolio
+title: My Portfolio
 slug: portfolio
-order: 50
+order: 25
 group: technical
-summary: The previous portfolio website, built with Nuxt.js and Vuetify.
-image: /images/projects/portfolio.webp
-imageAlt: Previous portfolio website interface
+summary: My current portfolio, built with Nuxt, TypeScript, and a file-based content system.
+image: /images/projects/portfolio-homepage-3cta.png
+imageAlt: Current portfolio homepage
 stack:
-  - Nuxt.js
-  - Vuetify
+  - Nuxt 4
+  - Vue 3
+  - TypeScript
+  - Tailwind CSS
+  - Nuxt Content
+  - Vitest
 highlights:
-  - Previous personal portfolio
-  - Nuxt and Vuetify build
-  - Netlify deployment
+  - Typed file-based content
+  - Responsive and keyboard-friendly UI
+  - Metadata and server routes
 details:
-  - The previous personal portfolio was built in 2020 with Nuxt.js and Vuetify.
-  - It was deployed to Netlify and used a serverless contact form.
-  - This new portfolio keeps the original visual spirit while presenting a clearer focus on frontend development with Vue and Nuxt.
-frontEnd: Nuxt.js, Vuetify, SCSS
-backEnd: Netlify Functions
+  - This site replaces the Nuxt and Vuetify portfolio I built in 2020. The old version no longer reflected the tools I use or the kind of frontend work I do now.
+  - Project entries are stored in YAML and checked by a runtime parser before they are displayed. This keeps them easy to edit without adding an external CMS.
+  - Nuxt handles the project pages, metadata, and contact endpoint. Vitest covers the content parser, contact validation, and navigation utilities.
+frontEnd: Nuxt 4, Vue 3, TypeScript, Tailwind CSS
+backEnd: Nuxt server routes, Nitro
 database:
+caseStudy:
+  timeline: 2026 - ongoing
+  status: In active development
+  challenge:
+    - My previous portfolio was built around an older stack and said very little about the work behind each project.
+    - I wanted the replacement to make projects easier to browse and explain, while keeping the content simple enough to edit directly in the repository.
+  approach:
+    - I rebuilt the site with Nuxt 4, Vue 3, and TypeScript. Each main section has its own feature folder, with shared components used for repeated layout and navigation patterns.
+    - Project content lives in YAML files and is converted into typed application data. The parser reports malformed fields rather than allowing incomplete content through silently.
+    - I used semantic HTML, keyboard-friendly controls, responsive layouts, and scroll restoration between the project grid and detail pages.
+    - Contact submissions are checked on the server, including honeypot and timing checks for basic spam filtering. Tests cover the content parser, contact validation, navigation utilities, and shared components.
+  outcomes:
+    - Projects can be reordered or updated by editing one YAML file, including their stack, links, summary, and longer notes.
+    - Each project has its own detail page. The optional case study fields allow some projects to include more context without requiring the older entries to use the same format.
+    - Automated tests check project parsing and ordering alongside the contact and navigation behaviour.
+  lessons:
+    - Deciding how the project content should be structured was as important as building the page that displays it.
+    - At the current size, files are enough for managing the content. A dashboard would make more sense if updates became frequent or other people needed to edit the site.
 links:
+  - label: Live
+    href: https://lukaszluminski.dev
+    type: live
   - label: Code
-    href: https://github.com/LukaszLuminski/NuxtPortfolio
+    href: https://github.com/LukaszLuminski/nuxt-portfolio-ll
     type: code

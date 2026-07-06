@@ -1,6 +1,7 @@
 import { parse } from 'yaml'
 import type {
   Project,
+  ProjectCaseStudy,
   ProjectGroup,
   ProjectLink
 } from '~/features/projects/types'
@@ -102,6 +103,40 @@ function optionalString(
   return invalidProject(filename, `${field} must be a string or null.`)
 }
 
+function requireNonEmptyStringArray(
+  source: UnknownRecord,
+  field: string,
+  filename: string
+) {
+  const value = requireStringArray(source, field, filename)
+
+  if (value.length > 0) {
+    return value
+  }
+
+  return invalidProject(filename, `${field} must contain at least one item.`)
+}
+
+function optionalCaseStudy(
+  source: UnknownRecord,
+  filename: string
+): ProjectCaseStudy | null {
+  if (source.caseStudy === null || source.caseStudy === undefined) {
+    return null
+  }
+
+  const caseStudy = requireRecord(source.caseStudy, filename, 'caseStudy')
+
+  return {
+    timeline: requireString(caseStudy, 'timeline', filename),
+    status: requireString(caseStudy, 'status', filename),
+    challenge: requireNonEmptyStringArray(caseStudy, 'challenge', filename),
+    approach: requireNonEmptyStringArray(caseStudy, 'approach', filename),
+    outcomes: requireNonEmptyStringArray(caseStudy, 'outcomes', filename),
+    lessons: requireNonEmptyStringArray(caseStudy, 'lessons', filename)
+  }
+}
+
 function requireGroup(source: UnknownRecord, filename: string): ProjectGroup {
   const group = requireString(source, 'group', filename)
 
@@ -161,6 +196,7 @@ export function parseProject(
     frontEnd: optionalString(source, 'frontEnd', filename),
     backEnd: optionalString(source, 'backEnd', filename),
     database: optionalString(source, 'database', filename),
+    caseStudy: optionalCaseStudy(source, filename),
     links: requireLinks(source, filename)
   }
 }

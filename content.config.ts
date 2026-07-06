@@ -9,6 +9,15 @@ const imageSchema = z.object({
   alt: z.string().min(1)
 })
 
+const projectCaseStudySchema = z.object({
+  timeline: z.string().min(1),
+  status: z.string().min(1),
+  challenge: z.array(z.string().min(1)).min(1),
+  approach: z.array(z.string().min(1)).min(1),
+  outcomes: z.array(z.string().min(1)).min(1),
+  lessons: z.array(z.string().min(1)).min(1)
+})
+
 export default defineContentConfig({
   collections: {
     projects: defineCollection({
@@ -28,6 +37,7 @@ export default defineContentConfig({
         frontEnd: z.string().nullable().optional(),
         backEnd: z.string().nullable().optional(),
         database: z.string().nullable().optional(),
+        caseStudy: projectCaseStudySchema.nullable().optional(),
         links: z.array(
           z.object({
             label: z.string().min(1),

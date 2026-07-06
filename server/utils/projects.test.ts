@@ -19,6 +19,7 @@ const validProject = {
   frontEnd: 'Vue',
   backEnd: null,
   database: null,
+  caseStudy: null,
   links: [{ label: 'Code', href: 'https://example.com', type: 'code' }]
 }
 
@@ -52,8 +53,12 @@ describe('project content', () => {
     )
     const orders = projects.map(({ order }) => order)
     const slugs = projects.map(({ slug }) => slug)
+    const technicalSlugs = projects
+      .filter(({ group }) => group === 'technical')
+      .map(({ slug }) => slug)
 
     expect(orders).toEqual(orders.toSorted((previous, next) => previous - next))
     expect(new Set(slugs).size).toBe(slugs.length)
+    expect(technicalSlugs[0]).toBe('portfolio')
   })
 })
