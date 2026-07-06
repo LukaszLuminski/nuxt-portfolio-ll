@@ -21,7 +21,7 @@ function scrollToSection(sectionId: string) {
 
 <template>
   <section
-    class="relative min-h-screen overflow-hidden bg-[#060708] text-white"
+    class="relative min-h-[100svh] min-h-screen overflow-hidden bg-[#060708] text-white"
   >
     <picture>
       <source
@@ -44,33 +44,35 @@ function scrollToSection(sectionId: string) {
       class="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,6,8,0.05)_0%,rgba(4,6,8,0.16)_44%,rgba(4,6,8,0.58)_100%)]"
     />
 
-    <div class="container relative flex min-h-screen flex-col pt-20">
+    <div
+      class="container relative flex min-h-[100svh] min-h-screen flex-col pt-14 sm:pt-20"
+    >
       <div
-        class="flex flex-1 items-center justify-center pb-20 pt-2 text-center sm:pb-16 sm:pt-8"
+        class="flex flex-1 items-center justify-center pb-20 text-center sm:pb-16 sm:pt-4"
       >
         <div
           class="mx-auto flex w-full min-w-0 max-w-3xl flex-col items-center"
         >
           <h1
-            class="w-full max-w-[620px] text-[2rem] font-normal leading-[1.08] tracking-normal text-white sm:text-[3.25rem]"
+            class="w-full max-w-[620px] text-[1.75rem] font-normal leading-[1.08] tracking-normal text-white sm:text-[3.25rem]"
           >
             {{ content.introLabel }}
           </h1>
 
           <div
-            class="mt-3 w-full max-w-[620px] text-[1.75rem] font-normal leading-[1.12] text-white sm:text-[2.77rem]"
+            class="mt-2 w-full max-w-[620px] text-[1.55rem] font-normal leading-[1.12] text-white sm:mt-3 sm:text-[2.77rem]"
           >
             {{ content.headline }}
           </div>
 
           <p
-            class="mt-6 max-w-[420px] text-balance text-center text-[0.95rem] font-medium leading-6 text-white/80 sm:max-w-[620px] sm:text-lg sm:leading-7"
+            class="mt-5 max-w-[420px] text-balance text-center text-sm font-medium leading-5 text-white/80 sm:mt-6 sm:max-w-[620px] sm:text-lg sm:leading-7"
           >
             {{ content.subheadline }}
           </p>
 
           <div
-            class="mt-10 flex flex-wrap items-center justify-center gap-12 text-white/70 sm:mt-12"
+            class="mt-6 flex flex-wrap items-center justify-center gap-10 text-white/70 sm:mt-10 sm:gap-12"
           >
             <a
               v-for="{ href, label, type } in content.social"
@@ -83,18 +85,20 @@ function scrollToSection(sectionId: string) {
             >
               <BrandIcon
                 :type="type"
-                class="size-12 sm:size-14"
+                class="size-10 sm:size-14"
                 :stroke-width="1.5"
               />
             </a>
           </div>
 
-          <div class="mt-10 flex w-full max-w-[382px] flex-col gap-4 sm:mt-12">
+          <div
+            class="mt-6 flex w-full max-w-[360px] flex-col gap-2.5 sm:mt-10 sm:max-w-[382px] sm:gap-3"
+          >
             <button
               v-for="{ label, sectionId } in ctaLinks"
               :key="sectionId"
               type="button"
-              class="inline-flex h-[54px] w-full items-center justify-center rounded bg-white/70 px-8 text-sm font-medium uppercase tracking-[0.18em] text-slate-950 transition duration-300 hover:bg-white/90"
+              class="inline-flex h-12 w-full items-center justify-center rounded bg-white/70 px-4 text-xs font-medium uppercase tracking-[0.14em] text-slate-950 transition duration-300 hover:bg-white/90 sm:px-6 sm:text-sm sm:tracking-[0.18em]"
               @click="scrollToSection(sectionId)"
             >
               {{ label }}
@@ -103,7 +107,7 @@ function scrollToSection(sectionId: string) {
             <a
               :href="content.resumeHref"
               download="lukasz_luminski_resume.pdf"
-              class="inline-flex h-[54px] w-full items-center justify-center gap-3 rounded border border-white/50 bg-black/20 px-8 text-sm font-medium uppercase tracking-[0.18em] text-white transition duration-300 hover:border-white/80 hover:bg-black/35"
+              class="inline-flex h-12 w-full items-center justify-center gap-2.5 rounded border border-white/50 bg-black/20 px-4 text-xs font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:border-white/80 hover:bg-black/35 sm:gap-3 sm:px-6 sm:text-sm sm:tracking-[0.18em]"
             >
               <Download class="size-4 shrink-0" aria-hidden="true" />
               {{ content.resumeCta }}

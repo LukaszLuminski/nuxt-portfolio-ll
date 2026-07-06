@@ -15,6 +15,10 @@ import {
   type AssistantResponse,
   type AssistantSource
 } from '~/shared/assistant'
+import {
+  clearTargetSection,
+  storeTargetSection
+} from '~/utils/portfolioNavigation'
 
 interface ChatMessage {
   id: string
@@ -31,15 +35,30 @@ const starterQuestions = [
 ] as const
 
 const sessionKey = 'portfolio-assistant-messages-v2'
+const route = useRoute()
 const isOpen = ref(false)
 const isSending = ref(false)
+const isAtPageTop = ref(false)
 const draft = ref('')
 const messages = ref<ChatMessage[]>([])
 const trigger = ref<HTMLButtonElement>()
 const dialog = ref<HTMLElement>()
+const closeButton = ref<HTMLButtonElement>()
 const input = ref<HTMLTextAreaElement>()
 const messageList = ref<HTMLElement>()
 let messageSequence = 0
+
+function updateTriggerMode() {
+  isAtPageTop.value = route.path === '/' && window.scrollY <= 16
+}
+
+function focusComposer(desktopOnly = false) {
+  if (desktopOnly && !window.matchMedia('(min-width: 640px)').matches) {
+    return
+  }
+
+  input.value?.focus({ preventScroll: true })
+}
 
 function createMessageId() {
   messageSequence += 1
@@ -96,7 +115,11 @@ async function openAssistant() {
   isOpen.value = true
   document.body.style.overflow = 'hidden'
   await nextTick()
-  input.value?.focus()
+  if (window.matchMedia('(min-width: 640px)').matches) {
+    focusComposer()
+  } else {
+    closeButton.value?.focus({ preventScroll: true })
+  }
   await scrollToLatestMessage()
 }
 
@@ -114,17 +137,24 @@ function isDownloadSource({ href }: AssistantSource) {
 async function navigateToSource({ href }: AssistantSource) {
   isOpen.value = false
   document.body.style.overflow = ''
-  await navigateTo(href)
-
   const sectionId = href.split('#')[1]
 
   if (!sectionId) {
+    await navigateTo(href)
+    return
+  }
+
+  storeTargetSection(sectionId)
+
+  if (route.path !== '/') {
+    await navigateTo('/')
     return
   }
 
   await nextTick()
   requestAnimationFrame(() => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+    clearTargetSection()
   })
 }
 
@@ -132,7 +162,7 @@ function resetConversation() {
   messages.value = []
   draft.value = ''
   sessionStorage.removeItem(sessionKey)
-  nextTick(() => input.value?.focus())
+  nextTick(() => focusComposer(true))
 }
 
 function conversationHistory(): AssistantHistoryItem[] {
@@ -208,7 +238,6 @@ async function sendMessage(question = draft.value) {
     isSending.value = false
     persistMessages()
     await scrollToLatestMessage()
-    input.value?.focus()
   }
 }
 
@@ -244,10 +273,26 @@ function handleDialogKeydown(event: KeyboardEvent) {
   }
 }
 
-onMounted(restoreMessages)
+onMounted(async () => {
+  restoreMessages()
+  await nextTick()
+  updateTriggerMode()
+  window.addEventListener('scroll', updateTriggerMode, { passive: true })
+  window.addEventListener('resize', updateTriggerMode, { passive: true })
+})
+
+watch(
+  () => route.path,
+  async () => {
+    await nextTick()
+    requestAnimationFrame(updateTriggerMode)
+  }
+)
 
 onBeforeUnmount(() => {
   document.body.style.overflow = ''
+  window.removeEventListener('scroll', updateTriggerMode)
+  window.removeEventListener('resize', updateTriggerMode)
 })
 </script>
 
@@ -256,13 +301,14 @@ onBeforeUnmount(() => {
     v-if="!isOpen"
     ref="trigger"
     type="button"
-    class="group fixed bottom-4 right-0 z-[80] inline-flex h-12 w-12 items-center justify-start overflow-hidden rounded-l border border-r-0 border-sky-100/25 bg-[#081018]/95 px-[15px] text-sm font-semibold text-white shadow-[0_18px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-[width,background-color,border-color] duration-300 hover:w-[190px] hover:border-sky-100/45 hover:bg-[#0b1722] focus-visible:w-[190px] sm:bottom-6 sm:right-6 sm:rounded sm:border"
+    class="assistant-trigger group fixed bottom-4 right-0 z-[80] inline-flex h-12 items-center justify-start overflow-hidden rounded-l border border-r-0 border-sky-100/25 bg-[#081018]/95 px-[15px] text-sm font-semibold text-white shadow-[0_18px_60px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-[width,background-color,border-color] duration-300 hover:border-sky-100/45 hover:bg-[#0b1722] sm:bottom-6 sm:right-6 sm:rounded sm:border"
+    :class="isAtPageTop ? 'assistant-trigger--expanded border-sky-100/35' : ''"
     aria-haspopup="dialog"
     @click="openAssistant"
   >
     <Sparkles class="size-4 shrink-0 text-sky-200" aria-hidden="true" />
     <span
-      class="ml-2.5 max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity] duration-300 group-hover:max-w-[150px] group-hover:opacity-100 group-focus-visible:max-w-[150px] group-focus-visible:opacity-100"
+      class="assistant-trigger__label ml-2.5 overflow-hidden whitespace-nowrap transition-[max-width,opacity] duration-300"
     >
       Ask about my work
     </span>
@@ -282,7 +328,7 @@ onBeforeUnmount(() => {
         role="dialog"
         aria-modal="true"
         aria-labelledby="portfolio-assistant-title"
-        class="sm:border-white/12 absolute inset-0 flex min-h-0 flex-col overflow-hidden bg-[#070a0f] text-white sm:inset-auto sm:bottom-4 sm:right-4 sm:h-[min(680px,calc(100dvh-2rem))] sm:w-[420px] sm:rounded sm:border sm:shadow-[0_30px_100px_rgba(0,0,0,0.68)]"
+        class="sm:border-white/12 absolute inset-x-0 top-0 flex h-[100dvh] max-h-[100dvh] min-h-0 flex-col overflow-hidden bg-[#070a0f] text-white sm:inset-auto sm:bottom-4 sm:right-4 sm:h-[min(680px,calc(100dvh-2rem))] sm:w-[420px] sm:rounded sm:border sm:shadow-[0_30px_100px_rgba(0,0,0,0.68)]"
         @keydown="handleDialogKeydown"
       >
         <header
@@ -319,6 +365,7 @@ onBeforeUnmount(() => {
               <RotateCcw class="size-4" />
             </button>
             <button
+              ref="closeButton"
               type="button"
               class="inline-flex size-9 items-center justify-center rounded text-white/60 transition hover:bg-white/[0.07] hover:text-white"
               title="Close assistant"
@@ -452,3 +499,27 @@ onBeforeUnmount(() => {
     </div>
   </Teleport>
 </template>
+
+<style scoped>
+.assistant-trigger {
+  width: 48px;
+}
+
+.assistant-trigger__label {
+  max-width: 0;
+  opacity: 0;
+}
+
+.assistant-trigger--expanded,
+.assistant-trigger:hover,
+.assistant-trigger:focus-visible {
+  width: 190px;
+}
+
+.assistant-trigger--expanded .assistant-trigger__label,
+.assistant-trigger:hover .assistant-trigger__label,
+.assistant-trigger:focus-visible .assistant-trigger__label {
+  max-width: 150px;
+  opacity: 1;
+}
+</style>
