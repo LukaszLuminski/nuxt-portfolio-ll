@@ -97,6 +97,8 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
+    openaiApiKey: process.env.OPENAI_API_KEY ?? '',
+    openaiModel: process.env.OPENAI_MODEL ?? 'gpt-5.4-mini',
     contactToEmail: process.env.CONTACT_TO_EMAIL ?? '',
     contactFromEmail: process.env.CONTACT_FROM_EMAIL ?? '',
     resendApiKey: process.env.RESEND_API_KEY ?? '',

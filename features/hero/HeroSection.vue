@@ -46,7 +46,7 @@ function scrollToSection(sectionId: string) {
 
     <div class="container relative flex min-h-screen flex-col pt-20">
       <div
-        class="flex flex-1 items-center justify-center pb-10 pt-6 text-center sm:pb-16 sm:pt-8"
+        class="flex flex-1 items-center justify-center pb-20 pt-2 text-center sm:pb-16 sm:pt-8"
       >
         <div
           class="mx-auto flex w-full min-w-0 max-w-3xl flex-col items-center"

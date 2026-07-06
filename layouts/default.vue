@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SiteHeader from '~/features/navigation/SiteHeader.vue'
 import SiteFooter from '~/features/navigation/SiteFooter.vue'
+import PortfolioAssistant from '~/features/assistant/PortfolioAssistant.vue'
 import { heroContent } from '~/features/hero/content'
 </script>
 
@@ -9,5 +10,6 @@ import { heroContent } from '~/features/hero/content'
     <SiteHeader :content="heroContent" />
     <slot />
     <SiteFooter :name="heroContent.name" />
+    <PortfolioAssistant />
   </div>
 </template>
