@@ -2,12 +2,7 @@ import {
   clearTargetSection,
   getTargetSection
 } from '~/utils/portfolioNavigation'
-
-function scrollToTargetSection(sectionId: string) {
-  document
-    .getElementById(sectionId)
-    ?.scrollIntoView({ behavior: 'auto', block: 'start' })
-}
+import { scrollToSectionWhenAvailable } from '~/utils/sectionNavigation'
 
 export function useTargetSectionNavigation() {
   onMounted(async () => {
@@ -18,12 +13,9 @@ export function useTargetSectionNavigation() {
     }
 
     await nextTick()
-    requestAnimationFrame(() => {
-      scrollToTargetSection(targetSection)
-      requestAnimationFrame(() => {
-        scrollToTargetSection(targetSection)
-        clearTargetSection()
-      })
-    })
+
+     if (!(await scrollToSectionWhenAvailable(targetSection))) return;
+
+      clearTargetSection()
   })
 }

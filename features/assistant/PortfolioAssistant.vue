@@ -19,6 +19,7 @@ import {
   clearTargetSection,
   storeTargetSection
 } from '~/utils/portfolioNavigation'
+import { scrollToSectionWhenAvailable } from '~/utils/sectionNavigation'
 
 interface ChatMessage {
   id: string
@@ -38,7 +39,7 @@ const sessionKey = 'portfolio-assistant-messages-v2'
 const route = useRoute()
 const isOpen = ref(false)
 const isSending = ref(false)
-const isAtPageTop = ref(false)
+const isAtPageTop = ref(route.path === '/')
 const draft = ref('')
 const messages = ref<ChatMessage[]>([])
 const trigger = ref<HTMLButtonElement>()
@@ -144,18 +145,18 @@ async function navigateToSource({ href }: AssistantSource) {
     return
   }
 
-  storeTargetSection(sectionId)
-
   if (route.path !== '/') {
+    storeTargetSection(sectionId)
     await navigateTo('/')
-    return
+  } else {
+    clearTargetSection()
   }
 
   await nextTick()
-  requestAnimationFrame(() => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+
+  if (await scrollToSectionWhenAvailable(sectionId, 'smooth')) {
     clearTargetSection()
-  })
+  }
 }
 
 function resetConversation() {
@@ -439,15 +440,15 @@ onBeforeUnmount(() => {
                     {{ source.label }}
                     <Download class="size-3" />
                   </a>
-                  <NuxtLink
+                  <a
                     v-else
-                    :to="source.href"
+                    :href="source.href"
                     class="inline-flex items-center gap-1.5 rounded border border-white/10 bg-white/[0.035] px-2.5 py-1.5 text-xs font-medium text-sky-100/70 transition hover:border-sky-100/30 hover:text-sky-50"
                     @click.prevent="navigateToSource(source)"
                   >
                     {{ source.label }}
                     <ArrowUpRight class="size-3" />
-                  </NuxtLink>
+                  </a>
                 </template>
               </div>
             </article>

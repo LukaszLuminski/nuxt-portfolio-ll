@@ -92,13 +92,13 @@ function scrollToSection(sectionId: string) {
           </div>
 
           <div
-            class="mt-6 flex w-full max-w-[360px] flex-col gap-2.5 sm:mt-10 sm:max-w-[382px] sm:gap-3"
+            class="mt-6 flex w-full max-w-[360px] flex-col gap-2.5 sm:mt-12 sm:max-w-[382px] sm:gap-4"
           >
             <button
               v-for="{ label, sectionId } in ctaLinks"
               :key="sectionId"
               type="button"
-              class="inline-flex h-12 w-full items-center justify-center rounded bg-white/70 px-4 text-xs font-medium uppercase tracking-[0.14em] text-slate-950 transition duration-300 hover:bg-white/90 sm:px-6 sm:text-sm sm:tracking-[0.18em]"
+              class="inline-flex h-12 w-full items-center justify-center rounded bg-white/70 px-4 text-xs font-medium uppercase tracking-[0.14em] text-slate-950 transition duration-300 hover:bg-white/90 sm:h-[54px] sm:px-8 sm:text-sm sm:tracking-[0.18em]"
               @click="scrollToSection(sectionId)"
             >
               {{ label }}
@@ -107,7 +107,7 @@ function scrollToSection(sectionId: string) {
             <a
               :href="content.resumeHref"
               download="lukasz_luminski_resume.pdf"
-              class="inline-flex h-12 w-full items-center justify-center gap-2.5 rounded border border-white/50 bg-black/20 px-4 text-xs font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:border-white/80 hover:bg-black/35 sm:gap-3 sm:px-6 sm:text-sm sm:tracking-[0.18em]"
+              class="inline-flex h-12 w-full items-center justify-center gap-2.5 rounded border border-white/50 bg-black/20 px-4 text-xs font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:border-white/80 hover:bg-black/35 sm:h-[54px] sm:gap-3 sm:px-8 sm:text-sm sm:tracking-[0.18em]"
             >
               <Download class="size-4 shrink-0" aria-hidden="true" />
               {{ content.resumeCta }}

@@ -39,6 +39,7 @@
 
   html {
     background: #05070c;
+    scrollbar-gutter: stable;
   }
 
   body {
