@@ -54,7 +54,7 @@ function scrollToSection(sectionId: string) {
           class="mx-auto flex w-full min-w-0 max-w-3xl flex-col items-center"
         >
           <h1
-            class="w-full max-w-[620px] text-[1.75rem] font-normal leading-[1.08] tracking-normal text-white sm:text-[3.25rem]"
+            class="w-full max-w-[620px] text-[1.82rem] font-normal leading-[1.08] tracking-normal text-white sm:text-[3.25rem]"
           >
             {{ content.introLabel }}
           </h1>

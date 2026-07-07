@@ -84,7 +84,7 @@ useHead(() => ({
     class="min-h-screen bg-[#07090d] text-white"
     :class="isEnteringFromProjectCard ? 'invisible' : ''"
   >
-    <section class="relative overflow-hidden pb-20 pt-28 sm:pb-28">
+    <section class="relative overflow-x-clip pb-20 pt-28 sm:pb-28">
       <div
         class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.032)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.032)_1px,transparent_1px)] bg-[size:44px_44px]"
       />
@@ -148,49 +148,51 @@ useHead(() => ({
 
         <div class="mt-14 grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
           <aside class="rounded border border-white/10 bg-white/[0.035] p-5">
-            <h2
-              class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-100/55"
-            >
-              Stack
-            </h2>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span
-                v-for="item in project.stack"
-                :key="item"
-                class="border-sky-100/12 text-sky-50/68 rounded border bg-sky-100/[0.035] px-2.5 py-1 text-xs font-medium"
+            <div class="lg:sticky lg:top-28">
+              <h2
+                class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-100/55"
               >
-                {{ item }}
-              </span>
-            </div>
+                Stack
+              </h2>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span
+                  v-for="item in project.stack"
+                  :key="item"
+                  class="border-sky-100/12 text-sky-50/68 rounded border bg-sky-100/[0.035] px-2.5 py-1 text-xs font-medium"
+                >
+                  {{ item }}
+                </span>
+              </div>
 
-            <dl class="mt-8 space-y-5 text-sm">
-              <div v-if="project.frontEnd">
-                <dt class="font-semibold text-white">Front end</dt>
-                <dd class="text-white/62 mt-1">{{ project.frontEnd }}</dd>
-              </div>
-              <div v-if="project.backEnd">
-                <dt class="font-semibold text-white">Back end</dt>
-                <dd class="text-white/62 mt-1">{{ project.backEnd }}</dd>
-              </div>
-              <div v-if="project.database">
-                <dt class="font-semibold text-white">Database</dt>
-                <dd class="text-white/62 mt-1">{{ project.database }}</dd>
-              </div>
-              <template v-if="project.caseStudy">
-                <div>
-                  <dt class="font-semibold text-white">Timeline</dt>
-                  <dd class="text-white/62 mt-1">
-                    {{ project.caseStudy.timeline }}
-                  </dd>
+              <dl class="mt-8 space-y-5 text-sm">
+                <div v-if="project.frontEnd">
+                  <dt class="font-semibold text-white">Front end</dt>
+                  <dd class="text-white/62 mt-1">{{ project.frontEnd }}</dd>
                 </div>
-                <div>
-                  <dt class="font-semibold text-white">Status</dt>
-                  <dd class="text-white/62 mt-1">
-                    {{ project.caseStudy.status }}
-                  </dd>
+                <div v-if="project.backEnd">
+                  <dt class="font-semibold text-white">Back end</dt>
+                  <dd class="text-white/62 mt-1">{{ project.backEnd }}</dd>
                 </div>
-              </template>
-            </dl>
+                <div v-if="project.database">
+                  <dt class="font-semibold text-white">Database</dt>
+                  <dd class="text-white/62 mt-1">{{ project.database }}</dd>
+                </div>
+                <template v-if="project.caseStudy">
+                  <div>
+                    <dt class="font-semibold text-white">Timeline</dt>
+                    <dd class="text-white/62 mt-1">
+                      {{ project.caseStudy.timeline }}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-white">Status</dt>
+                    <dd class="text-white/62 mt-1">
+                      {{ project.caseStudy.status }}
+                    </dd>
+                  </div>
+                </template>
+              </dl>
+            </div>
           </aside>
 
           <section class="space-y-8">
