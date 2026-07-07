@@ -8,8 +8,16 @@ const { content } = defineProps<{
 }>()
 
 const ctaLinks = [
-  { label: content.primaryCta, sectionId: 'work' },
-  { label: content.secondaryCta, sectionId: 'about' }
+  {
+    label: content.primaryCta,
+    sectionId: 'work',
+    className: 'bg-white/70 hover:bg-white/90'
+  },
+  {
+    label: content.secondaryCta,
+    sectionId: 'about',
+    className: 'bg-white/[0.38] hover:bg-white/55'
+  }
 ]
 
 function scrollToSection(sectionId: string) {
@@ -95,10 +103,11 @@ function scrollToSection(sectionId: string) {
             class="mt-6 flex w-full max-w-[360px] flex-col gap-2.5 sm:mt-12 sm:max-w-[382px] sm:gap-4"
           >
             <button
-              v-for="{ label, sectionId } in ctaLinks"
+              v-for="{ label, sectionId, className } in ctaLinks"
               :key="sectionId"
               type="button"
-              class="inline-flex h-12 w-full items-center justify-center rounded bg-white/70 px-4 text-xs font-medium uppercase tracking-[0.14em] text-slate-950 transition duration-300 hover:bg-white/90 sm:h-[54px] sm:px-8 sm:text-sm sm:tracking-[0.18em]"
+              class="inline-flex h-12 w-full items-center justify-center rounded px-4 text-xs font-medium uppercase tracking-[0.14em] text-slate-950 transition duration-300 sm:h-[54px] sm:px-8 sm:text-sm sm:tracking-[0.18em]"
+              :class="className"
               @click="scrollToSection(sectionId)"
             >
               {{ label }}
